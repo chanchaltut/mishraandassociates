@@ -24,7 +24,7 @@ export default function NewsletterForm({ dark = false, stacked = false }) {
 
   return (
     <form onSubmit={onSubmit} className="w-full">
-      <div className={`flex flex-col gap-2 rounded-2xl p-1.5 ${stacked ? '' : 'sm:flex-row'} ${dark ? 'border border-white/15 bg-white/5' : 'border border-line bg-white'}`}>
+      <div className={`flex flex-col gap-2 rounded-sm p-1.5 ${stacked ? '' : 'sm:flex-row'} ${dark ? 'border border-white/15 bg-white/5' : 'border border-line bg-white'}`}>
         <label htmlFor={id} className="sr-only">Email address</label>
         <input
           id={id}
@@ -33,7 +33,7 @@ export default function NewsletterForm({ dark = false, stacked = false }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your work email"
-          className={`h-12 flex-1 rounded-xl bg-transparent px-4 text-sm outline-none ${dark ? 'text-white placeholder:text-white/40' : 'text-ink-900 placeholder:text-muted/70'}`}
+          className={`h-12 flex-1 rounded-sm bg-transparent px-4 text-sm outline-none ${dark ? 'text-white placeholder:text-white/40' : 'text-ink-900 placeholder:text-muted/70'}`}
         />
         <button type="submit" disabled={status === 'sending'} className={dark ? 'btn-brass' : 'btn-primary'}>
           {status === 'sending' ? 'Subscribing…' : 'Subscribe'}

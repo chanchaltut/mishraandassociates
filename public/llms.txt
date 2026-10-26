@@ -58,6 +58,7 @@
 - [News & updates](https://mishraandassociates.in/news)
 - [Notifications & circulars](https://mishraandassociates.in/notifications): CBDT, CBIC, MCA, RBI, SEBI, DGFT
 - [Compliance calendar](https://mishraandassociates.in/compliance-calendar): upcoming statutory due dates in India
+- [Frequently asked questions](https://mishraandassociates.in/faqs): income tax, GST, TDS, audit, ROC and global company registration
 
 ## Contact
 - [Contact page](https://mishraandassociates.in/contact)

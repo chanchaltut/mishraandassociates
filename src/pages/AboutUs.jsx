@@ -37,7 +37,7 @@ export default function AboutUs() {
             </ul>
           </div>
           <div>
-            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line">
+            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-line bg-line">
               {STATS.map((s) => (
                 <div key={s.label} className="flex flex-col-reverse bg-paper p-7">
                   <dt className="mt-1 text-sm font-semibold text-muted">{s.label}</dt>
@@ -45,7 +45,7 @@ export default function AboutUs() {
                 </div>
               ))}
             </dl>
-            <div className="mt-6 rounded-3xl border border-line p-7">
+            <div className="mt-6 rounded-sm border border-line p-7">
               <p className="eyebrow">Who we work with</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {ABOUT.clientTypes.map((c) => <span key={c} className="chip">{c}</span>)}
@@ -61,15 +61,15 @@ export default function AboutUs() {
           <SectionHeading eyebrow="Our people" title="The team behind" accent="your filings." />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {TEAM.map((m, i) => (
-              <article key={i} className="overflow-hidden rounded-3xl border border-line bg-white">
+              <article key={i} className="overflow-hidden rounded-sm border border-line bg-white">
                 <div className="relative grid aspect-[4/3] place-items-center bg-ink-900">
                   {m.image ? (
                     <img src={m.image} alt={m.name} className="h-full w-full object-cover" />
                   ) : (
-                    <span className="font-serif text-6xl italic text-brass-300/80">{initials(m.name)}</span>
+                    <span className="font-serif text-6xl text-brass-300/80">{initials(m.name)}</span>
                   )}
                   {!m.image && SITE.demoMode && (
-                    <span className="absolute bottom-3 left-3 rounded-full bg-white/90 px-2.5 py-1 text-2xs font-bold text-muted">Photo to be provided</span>
+                    <span className="absolute bottom-3 left-3 rounded-sm bg-white/90 px-2.5 py-1 text-2xs font-semibold text-muted">Photo to be provided</span>
                   )}
                 </div>
                 <div className="p-6">
@@ -88,11 +88,11 @@ export default function AboutUs() {
       <section className="bg-white py-16 sm:py-24">
         <div className="container-site">
           <SectionHeading eyebrow="Why clients choose us" title="How we" accent="practise." />
-          <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
             {WHY_US.map((w) => (
               <div key={w.title} className="bg-white p-8">
                 <i className={`${w.icon} text-3xl text-brand-600`} />
-                <p className="mt-5 text-lg font-bold text-ink-900">{w.title}</p>
+                <p className="mt-5 text-lg font-semibold text-ink-900">{w.title}</p>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{w.desc}</p>
               </div>
             ))}

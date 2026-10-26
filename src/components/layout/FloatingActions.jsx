@@ -32,7 +32,7 @@ export default function FloatingActions() {
       </button>
       <a
         href={`tel:${SITE.phone.tel}`}
-        className="grid h-11 w-11 place-items-center rounded-full bg-ink-900 text-brass-300 sm:h-12 sm:w-12 shadow-lift transition-transform hover:-translate-y-0.5"
+        className="grid h-11 w-11 place-items-center rounded-full bg-ink-900 text-brass-300 shadow-lift ring-1 ring-white/20 transition-colors hover:bg-brand-700 sm:h-12 sm:w-12"
         aria-label={`Call ${SITE.phone.display}`}
       >
         <i className="ri-phone-fill text-lg" />
@@ -41,11 +41,10 @@ export default function FloatingActions() {
         href={waLink()}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex h-12 items-center gap-2 rounded-full bg-whatsapp px-3.5 text-white sm:h-14 sm:pl-4 shadow-lift transition-transform hover:-translate-y-0.5 sm:pr-5"
+        className="grid h-12 w-12 place-items-center rounded-full bg-whatsapp text-white shadow-lift transition-[filter] hover:brightness-95 sm:h-[52px] sm:w-[52px]"
         aria-label="Chat on WhatsApp"
       >
         <i className="ri-whatsapp-line text-2xl" />
-        <span className="hidden text-sm font-bold sm:inline">Chat with us</span>
       </a>
     </div>
   );

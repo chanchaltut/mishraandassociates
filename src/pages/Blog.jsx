@@ -50,19 +50,19 @@ export default function Blog() {
             </div>
             <div className="relative lg:w-72">
               <i className="ri-search-line absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-              <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search articles" className="input !rounded-full !pl-10" aria-label="Search articles" />
+              <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search articles" className="input !rounded-sm !pl-10" aria-label="Search articles" />
             </div>
           </div>
 
           {posts.length === 0 && <p className="mt-16 text-center text-muted">No articles found.</p>}
 
           {featured && (
-            <Link to={`/blog/${featured.slug}`} className="group mt-10 grid overflow-hidden rounded-[28px] border border-line bg-white lg:grid-cols-2">
+            <Link to={`/blog/${featured.slug}`} className="group mt-10 grid overflow-hidden rounded-sm border border-line bg-white lg:grid-cols-2">
               <div className="aspect-[16/10] overflow-hidden bg-paper-2 lg:aspect-auto">
                 <img src={featured.image} alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="flex flex-col justify-center p-7 sm:p-10">
-                <p className="text-2xs font-bold uppercase tracking-wider text-brass-600">Featured · {featured.category}</p>
+                <p className="text-2xs font-semibold uppercase tracking-wider text-brass-600">Featured · {featured.category}</p>
                 <h2 className="mt-3 font-serif text-3xl leading-tight text-ink-900 group-hover:text-brand-700 sm:text-4xl">{featured.title}</h2>
                 <p className="mt-4 leading-relaxed text-muted">{featured.excerpt}</p>
                 <p className="mt-6 text-xs font-semibold text-muted">{formatDate(featured.date)} · {featured.readTime}</p>
@@ -72,12 +72,12 @@ export default function Blog() {
 
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((p) => (
-              <Link key={p.slug} to={`/blog/${p.slug}`} className="group flex flex-col overflow-hidden rounded-3xl border border-line bg-white transition-all hover:-translate-y-1 hover:shadow-lift">
+              <Link key={p.slug} to={`/blog/${p.slug}`} className="group flex flex-col overflow-hidden rounded-sm border border-line bg-white transition-all">
                 <div className="aspect-[16/10] overflow-hidden bg-paper-2">
                   <img src={p.image} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <p className="text-2xs font-bold uppercase tracking-wider text-brass-600">{p.category}</p>
+                  <p className="text-2xs font-semibold uppercase tracking-wider text-brass-600">{p.category}</p>
                   <h3 className="mt-2 font-serif text-xl leading-snug group-hover:text-brand-700">{p.title}</h3>
                   <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">{p.excerpt}</p>
                   <p className="mt-auto pt-5 text-xs font-semibold text-muted">{formatDate(p.date)} · {p.readTime}</p>

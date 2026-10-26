@@ -3,6 +3,7 @@ import { COUNTRIES } from '../data/countries';
 import { BLOG_POSTS } from '../data/blog';
 import { NEWS } from '../data/news';
 import { NOTIFICATIONS, authorityOf } from '../data/notifications';
+import { FAQ_GROUPS } from '../data/faqs';
 
 const categoryHref = (category) => `/services?category=${encodeURIComponent(category)}`;
 
@@ -32,6 +33,7 @@ export function getSearchIndex() {
       href: `/notifications?authority=${n.authority}`,
       icon: 'ri-notification-3-line',
     })),
+    ...FAQ_GROUPS.flatMap((g) => g.items.map((f) => ({ kind: 'FAQ', title: f.q, meta: g.title, href: `/faqs#${g.id}`, icon: 'ri-question-answer-line' }))),
     { kind: 'Page', title: 'Compliance calendar — upcoming due dates', meta: 'GST, TDS, ITR, ROC and payroll deadlines', href: '/compliance-calendar', icon: 'ri-calendar-check-line' },
     { kind: 'Page', title: 'Contact us', meta: 'Phone, email and enquiry form', href: '/contact', icon: 'ri-phone-line' },
     { kind: 'Page', title: 'About the firm', meta: 'Our practice, people and approach', href: '/about', icon: 'ri-building-line' },

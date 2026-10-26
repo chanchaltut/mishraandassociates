@@ -77,4 +77,5 @@ export const KNOWLEDGE_LINKS = [
   { name: 'Notifications & Circulars', href: '/notifications', icon: 'ri-notification-3-line', desc: 'CBDT, CBIC, MCA, RBI, SEBI & DGFT releases' },
   { name: 'Blog & Guides', href: '/blog', icon: 'ri-quill-pen-line', desc: 'Plain-English explainers by our team' },
   { name: 'Compliance Calendar', href: '/compliance-calendar', icon: 'ri-calendar-check-line', desc: 'Upcoming statutory due dates' },
+  { name: 'FAQs', href: '/faqs', icon: 'ri-question-answer-line', desc: 'Straight answers on tax, GST, ROC and global setup' },
 ];

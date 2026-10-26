@@ -14,7 +14,7 @@ export default function Logo({ tone = 'dark', compact = false, className = '' })
   return (
     <span className={`inline-flex items-center gap-3 ${className}`}>
       <span
-        className={`relative grid h-10 w-10 shrink-0 place-items-center rounded-[10px] ${
+        className={`relative grid h-10 w-10 shrink-0 place-items-center rounded-sm ${
           light ? 'bg-brass-400 text-ink-950' : 'bg-ink-900 text-brass-300'
         }`}
         aria-hidden="true"
@@ -26,9 +26,9 @@ export default function Logo({ tone = 'dark', compact = false, className = '' })
       {!compact && (
         <span className="flex flex-col leading-none">
           <span className={`font-serif text-[1.15rem] font-semibold tracking-tight ${light ? 'text-white' : 'text-ink-900'}`}>
-            Mishra <span className={`font-normal italic ${light ? 'text-brass-300' : 'text-brass-500'}`}>and</span> Associates
+            Mishra <span className={`font-normal ${light ? 'text-brass-300' : 'text-brass-500'}`}>and</span> Associates
           </span>
-          <span className={`mt-1 hidden text-[0.6rem] font-bold uppercase tracking-[0.22em] sm:block ${light ? 'text-white/55' : 'text-muted'}`}>
+          <span className={`mt-1 hidden text-[0.6rem] font-semibold uppercase tracking-[0.22em] sm:block ${light ? 'text-white/55' : 'text-muted'}`}>
             Tax · Compliance · Global Setup
           </span>
         </span>

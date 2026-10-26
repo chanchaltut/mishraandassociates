@@ -55,20 +55,20 @@ export default function Contact() {
                 key={c.label}
                 href={c.href}
                 {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                className="group flex items-center gap-4 rounded-3xl border border-line bg-white p-5 transition-all hover:border-brand-200 hover:shadow-soft"
+                className="group flex items-center gap-4 rounded-sm border border-line bg-white p-5 transition-all hover:border-brand-200"
               >
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-xl text-brand-700 group-hover:bg-brand-700 group-hover:text-white">
+                <span className="grid h-12 w-12 place-items-center rounded-sm border border-line text-xl text-brand-700 transition-colors group-hover:border-ink-900 group-hover:bg-ink-900 group-hover:text-white">
                   <i className={c.icon} />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-2xs font-bold uppercase tracking-wider text-muted">{c.label}</span>
+                  <span className="block text-2xs font-semibold uppercase tracking-wider text-muted">{c.label}</span>
                   <span className="block break-words font-semibold text-ink-900">{c.value}</span>
                 </span>
               </a>
             ))}
 
-            <div className="on-dark rounded-3xl bg-ink-900 p-6 text-white">
-              <p className="text-2xs font-bold uppercase tracking-[0.18em] text-brass-300">Office</p>
+            <div className="on-dark rounded-sm bg-ink-900 p-6 text-white">
+              <p className="text-2xs font-semibold uppercase tracking-[0.18em] text-brass-300">Office</p>
               <p className="mt-3 leading-relaxed text-white/85">
                 {SITE.legalName}<br />
                 <Ph>{SITE.address.street}</Ph><br />
@@ -77,7 +77,7 @@ export default function Contact() {
               <p className="mt-4 flex items-center gap-2 text-sm text-white/70"><i className="ri-time-line text-brass-300" /> <Ph>{SITE.hours}</Ph></p>
             </div>
 
-            <div className="grid aspect-[4/3] place-items-center overflow-hidden rounded-3xl border border-line bg-paper-2">
+            <div className="grid aspect-[4/3] place-items-center overflow-hidden rounded-sm border border-line bg-paper-2">
               {SITE.address.mapEmbedUrl ? (
                 <iframe title="Office location" src={SITE.address.mapEmbedUrl} className="h-full w-full" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
               ) : (
@@ -86,12 +86,12 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-line bg-white p-6 sm:p-10">
+          <div className="rounded-sm border border-line bg-white p-6 sm:p-10">
             <h2 className="h-display text-3xl">Send an enquiry</h2>
             <p className="mt-2 text-sm text-muted">Fields marked * are required.</p>
 
             {status === 'done' ? (
-              <div className="mt-8 rounded-3xl bg-brand-50 p-8 text-center">
+              <div className="mt-8 rounded-sm bg-brand-50 p-8 text-center">
                 <i className="ri-checkbox-circle-line text-5xl text-brand-600" />
                 <p className="mt-3 font-serif text-2xl text-ink-900">Thank you — we’ve received your enquiry.</p>
                 <p className="mt-2 text-muted">An adviser will get back to you within one working day.</p>

@@ -42,7 +42,8 @@ Admin panel ──► Express API ──► MongoDB
 | Collection | Source file today | Key fields |
 |---|---|---|
 | `settings` (single doc) | `data/site.js` | name, tagline, description, phone, whatsapp, email, address{}, hours, founded, registration, social{}, logo, favicon, ogImage, seo defaults, `demoMode` |
-| `blocks` (keyed docs) | `data/content.js` | `key` (hero, stats, about, whyUs, process, faqs, testimonials, privacy, terms) + `data` validated per key with zod |
+| `blocks` (keyed docs) | `data/content.js` | `key` (hero, stats, about, whyUs, process, testimonials, privacy, terms) + `data` validated per key with zod |
+| `faqs` | `data/faqs.js` + `data/content.js → FAQS` | question, answer, group (`general`, `global-setup` or a service slug), order, visible — feeds `/faqs`, service pages and FAQPage schema |
 | `team` | `data/content.js → TEAM` | name, role, qualification, bio, photo, linkedin, order, visible |
 | `serviceCategories` | `data/services.js → PARENT_SERVICES` | slug, title, shortTitle, icon, startingPrice, badge, shortDesc, order, visible, `subcategories[]` {name, price, href, popular, order} |
 | `servicePages` | `data/services.js → SERVICES` | slug, title, overview, services[], startingPrice, timeline, seo{} |
@@ -112,7 +113,8 @@ Login
 Dashboard              new enquiries · subscribers · upcoming due dates · quick actions · Publish button
 Website Management
   ├─ Site Settings     brand, logo/favicon, contact, address + map, hours, social links, SEO defaults, demo-mode toggle
-  ├─ Homepage          hero, stats, about, why-us, process, testimonials, FAQs
+  ├─ Homepage          hero, stats, about, why-us, process, testimonials
+  ├─ FAQs              grouped questions (general, global setup, per service), reorder, hide
   ├─ Services          practice areas + sub-services (drag to reorder, price, badge, show/hide)
   ├─ Service Pages     the 10 detailed service pages
   ├─ Global Setup      7 jurisdiction pages + comparison table

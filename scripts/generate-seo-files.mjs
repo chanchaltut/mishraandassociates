@@ -19,6 +19,7 @@ const pages = [
   ['/news', 'daily', '0.8'],
   ['/notifications', 'daily', '0.8'],
   ['/compliance-calendar', 'weekly', '0.7'],
+  ['/faqs', 'monthly', '0.7'],
   ['/blog', 'weekly', '0.7'],
   ...BLOG_POSTS.map((p) => [`/blog/${p.slug}`, 'monthly', '0.6', p.date]),
   ...NEWS.map((n) => [`/news/${n.slug}`, 'monthly', '0.5', n.date]),
@@ -60,6 +61,7 @@ ${BLOG_POSTS.map((p) => `- [${p.title}](${url(`/blog/${p.slug}`)}): ${p.excerpt}
 - [News & updates](${url('/news')})
 - [Notifications & circulars](${url('/notifications')}): CBDT, CBIC, MCA, RBI, SEBI, DGFT
 - [Compliance calendar](${url('/compliance-calendar')}): upcoming statutory due dates in India
+- [Frequently asked questions](${url('/faqs')}): income tax, GST, TDS, audit, ROC and global company registration
 
 ## Contact
 - [Contact page](${url('/contact')})

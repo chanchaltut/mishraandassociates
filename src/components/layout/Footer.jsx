@@ -18,7 +18,7 @@ const SOCIALS = [
 function Col({ title, children }) {
   return (
     <div>
-      <h3 className="text-2xs font-bold uppercase tracking-[0.18em] !text-brass-300">{title}</h3>
+      <h3 className="text-2xs font-semibold uppercase tracking-[0.18em] !text-brass-300">{title}</h3>
       <ul className="mt-5 space-y-2.5 text-sm">{children}</ul>
     </div>
   );
@@ -33,7 +33,6 @@ const FLink = ({ to, children }) => (
 export default function Footer() {
   return (
     <footer className="on-dark relative overflow-hidden bg-ink-950 text-white">
-      <div className="bg-grid-dark pointer-events-none absolute inset-0" />
 
       {/* Newsletter band */}
       <div className="relative border-b border-white/10">
@@ -41,7 +40,7 @@ export default function Footer() {
           <div>
             <p className="eyebrow eyebrow-light">The Weekly Brief</p>
             <p className="mt-3 font-serif text-2xl leading-snug sm:text-3xl">
-              Notifications, due dates and what they mean for you — <em className="italic text-brass-300">in five minutes a week.</em>
+              Notifications, due dates and what they mean for you — in five minutes a week.
             </p>
           </div>
           <NewsletterForm dark />
@@ -82,7 +81,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-brass-300 hover:text-brass-300"
+                className="grid h-9 w-9 place-items-center rounded-sm border border-white/15 text-white/70 transition-colors hover:border-brass-300 hover:text-brass-300"
               >
                 <i className={s.icon} />
               </a>

@@ -52,9 +52,9 @@ export default function Services() {
           <h2 className="h-display mt-3 text-3xl">In-depth service pages</h2>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {SERVICES.map((s) => (
-              <Link key={s.slug} to={`/services/${s.slug}`} className="group rounded-2xl border border-line p-5 transition-all hover:border-brand-200 hover:shadow-soft">
+              <Link key={s.slug} to={`/services/${s.slug}`} className="group rounded-sm border border-line p-5 transition-all hover:border-brand-200">
                 <i className={`${s.icon} text-2xl text-brand-600`} />
-                <p className="mt-3 text-sm font-bold leading-snug text-ink-900 group-hover:text-brand-700">{s.shortTitle}</p>
+                <p className="mt-3 text-sm font-semibold leading-snug text-ink-900 group-hover:text-brand-700">{s.shortTitle}</p>
                 <p className="mt-1 text-xs text-muted">From {s.startingPrice}</p>
               </Link>
             ))}

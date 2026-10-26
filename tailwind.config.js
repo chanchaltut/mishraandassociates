@@ -44,8 +44,8 @@ export default {
         whatsapp: '#1FAF54',
       },
       fontFamily: {
-        serif: ['Fraunces', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
-        sans: ['Manrope', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+        serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        sans: ['"IBM Plex Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       fontSize: {
         '2xs': ['0.6875rem', { lineHeight: '1rem' }],
@@ -54,8 +54,8 @@ export default {
         site: '80rem',
       },
       boxShadow: {
-        soft: '0 1px 2px rgb(13 35 29 / 0.04), 0 8px 24px -12px rgb(13 35 29 / 0.12)',
-        lift: '0 2px 4px rgb(13 35 29 / 0.05), 0 20px 40px -20px rgb(13 35 29 / 0.25)',
+        soft: '0 1px 2px rgb(13 35 29 / 0.05)',
+        lift: '0 12px 32px -16px rgb(13 35 29 / 0.28)',
       },
       keyframes: {
         ticker: {

@@ -32,8 +32,8 @@ export function SectionHeading({ eyebrow, title, accent, intro, align = 'left', 
   return (
     <div className={`${center ? 'mx-auto text-center' : ''} max-w-3xl ${className}`}>
       {eyebrow && <p className={`eyebrow ${light ? 'eyebrow-light' : ''}`}>{eyebrow}</p>}
-      <h2 className={`h-display mt-4 text-3xl leading-[1.12] sm:text-4xl lg:text-[2.75rem] ${light ? '!text-white' : ''}`}>
-        {title} {accent && <em className={`italic ${light ? 'text-brass-300' : 'text-brand-600'}`}>{accent}</em>}
+      <h2 className={`h-display mt-3 text-[1.9rem] leading-[1.15] sm:text-4xl lg:text-[2.6rem] ${light ? '!text-white' : ''}`}>
+        {title}{accent && <> {accent}</>}
       </h2>
       {intro && <p className={`mt-4 text-base leading-relaxed sm:text-lg ${light ? 'text-white/70' : 'text-muted'}`}>{intro}</p>}
     </div>
@@ -44,14 +44,13 @@ export function SectionHeading({ eyebrow, title, accent, intro, align = 'left', 
 export function PageHero({ eyebrow, title, accent, intro, crumbs = [], children, aside }) {
   return (
     <section className="relative overflow-hidden border-b border-line bg-paper">
-      <div className="bg-grid pointer-events-none absolute inset-0 opacity-60 [mask-image:linear-gradient(to_bottom,#000,transparent)]" />
-      <div className="container-site relative pb-12 pt-10 sm:pb-16 sm:pt-14">
+      <div className="container-site relative pb-12 pt-8 sm:pb-16 sm:pt-10">
         {crumbs.length > 0 && <Breadcrumbs items={crumbs} />}
-        <div className={`mt-6 grid gap-10 ${aside ? 'lg:grid-cols-[1fr_380px] lg:items-end' : ''}`}>
+        <div className={`mt-8 grid gap-10 border-t border-line pt-8 sm:mt-10 sm:pt-10 ${aside ? 'lg:grid-cols-[1fr_380px] lg:items-end' : ''}`}>
           <div className="max-w-3xl">
             {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-            <h1 className="h-display mt-4 text-4xl leading-[1.06] sm:text-5xl lg:text-6xl">
-              {title} {accent && <em className="italic text-brand-600">{accent}</em>}
+            <h1 className="h-display mt-3 text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[3.5rem]">
+              {title}{accent && <> {accent}</>}
             </h1>
             {intro && <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">{intro}</p>}
             {children}
@@ -90,7 +89,7 @@ export function Flag({ code, name, className = 'h-6 w-9' }) {
       srcSet={`${flagUrl(code, 160)} 2x`}
       alt={name ? `${name} flag` : ''}
       loading="lazy"
-      className={`rounded-[3px] object-cover shadow-[0_0_0_1px_rgb(0_0_0/0.08)] ${className}`}
+      className={`rounded-[2px] object-cover shadow-[0_0_0_1px_rgb(0_0_0/0.08)] ${className}`}
     />
   );
 }
@@ -110,18 +109,11 @@ export function Accordion({ items, defaultOpen = 0 }) {
               onClick={() => setOpen(isOpen ? -1 : i)}
               aria-expanded={isOpen}
             >
-              <span className="font-serif text-lg font-medium text-ink-900 sm:text-xl">{it.q}</span>
-              <span
-                className={`mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border transition-all ${
-                  isOpen ? 'rotate-45 border-brand-600 bg-brand-600 text-white' : 'border-line text-ink-800'
-                }`}
-                aria-hidden="true"
-              >
-                <i className="ri-add-line" />
-              </span>
+              <span className={`font-serif text-lg leading-snug sm:text-[1.3rem] ${isOpen ? 'text-brand-700' : 'text-ink-900'}`}>{it.q}</span>
+              <i className={`${isOpen ? 'ri-subtract-line text-brand-700' : 'ri-add-line text-ink-800'} mt-0.5 shrink-0 text-xl`} aria-hidden="true" />
             </button>
             <div className={`grid transition-all duration-300 ${isOpen ? 'grid-rows-[1fr] pb-5' : 'grid-rows-[0fr]'}`}>
-              <p className="overflow-hidden pr-12 leading-relaxed text-muted">{it.a}</p>
+              <p className="overflow-hidden leading-relaxed text-muted sm:pr-12">{it.a}</p>
             </div>
           </div>
         );

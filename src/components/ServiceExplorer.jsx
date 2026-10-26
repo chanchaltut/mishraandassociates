@@ -11,14 +11,14 @@ function CategoryCard({ service, defaultOpen }) {
   useEffect(() => setOpen(defaultOpen), [defaultOpen]);
 
   return (
-    <article id={service.id} className={`scroll-mt-32 rounded-3xl border bg-white transition-all ${open ? 'border-brand-200 shadow-soft' : 'border-line'}`}>
+    <article id={service.id} className={`scroll-mt-32 rounded-sm border bg-white transition-all ${open ? 'border-ink-900/40' : 'border-line'}`}>
       <button type="button" onClick={() => setOpen((o) => !o)} className="flex w-full items-center gap-4 p-5 text-left sm:p-6" aria-expanded={open}>
-        <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-xl transition-colors ${open ? 'bg-brand-700 text-white' : 'bg-brand-50 text-brand-700'}`}>
+        <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-sm border text-xl transition-colors ${open ? 'border-ink-900 bg-ink-900 text-white' : 'border-line text-brand-700'}`}>
           <i className={service.icon} />
         </span>
         <span className="min-w-0 flex-1">
           <span className="flex flex-wrap items-center gap-2">
-            <span className="text-base font-bold text-ink-900 sm:text-lg">{service.title}</span>
+            <span className="text-base font-semibold text-ink-900 sm:text-lg">{service.title}</span>
             {service.badge && <span className="tag bg-brass-100 text-brass-600">{service.badge}</span>}
           </span>
           <span className="mt-0.5 block text-sm text-muted">
@@ -32,7 +32,7 @@ function CategoryCard({ service, defaultOpen }) {
         <div className="overflow-hidden">
           <div className="border-t border-line px-5 pb-6 pt-4 sm:px-6">
             <p className="text-sm leading-relaxed text-muted">{service.shortDesc}</p>
-            <ul className="mt-4 divide-y divide-line rounded-2xl border border-line">
+            <ul className="mt-4 divide-y divide-line rounded-sm border border-line">
               {service.subcategories.map((sub) => (
                 <li key={sub.name} className="flex flex-col gap-2 p-3.5 sm:flex-row sm:items-center sm:gap-4">
                   <span className="flex flex-1 items-start gap-2.5 text-sm font-semibold text-ink-900">
@@ -41,11 +41,11 @@ function CategoryCard({ service, defaultOpen }) {
                     {sub.popular && <span className="tag bg-brand-50 text-brand-700">Popular</span>}
                   </span>
                   <span className="flex items-center gap-3 pl-6 sm:pl-0">
-                    <span className="text-xs font-bold text-brand-700"><Ph>{sub.price}</Ph></span>
+                    <span className="text-xs font-semibold text-brand-700"><Ph>{sub.price}</Ph></span>
                     {sub.href ? (
-                      <Link to={sub.href} className="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-ink-800 hover:border-brand-500 hover:text-brand-700">Details</Link>
+                      <Link to={sub.href} className="rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-ink-800 hover:border-brand-500 hover:text-brand-700">Details</Link>
                     ) : (
-                      <a href={enquiry(sub.name)} target="_blank" rel="noopener noreferrer" className="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-ink-800 hover:border-whatsapp hover:text-whatsapp">
+                      <a href={enquiry(sub.name)} target="_blank" rel="noopener noreferrer" className="rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-ink-800 hover:border-whatsapp hover:text-whatsapp">
                         Enquire
                       </a>
                     )}
@@ -100,7 +100,7 @@ export default function ServiceExplorer() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Search ${total}+ services`}
-            className="input !rounded-full !pl-10"
+            className="input !rounded-sm !pl-10"
             aria-label="Search services"
           />
         </div>
@@ -112,7 +112,7 @@ export default function ServiceExplorer() {
               <button
                 key={c}
                 onClick={() => setCategory(c)}
-                className={`flex shrink-0 items-center gap-2.5 rounded-full px-4 py-2 text-left text-sm font-semibold transition-colors lg:rounded-xl lg:py-2.5 ${
+                className={`flex shrink-0 items-center gap-2.5 rounded-sm px-4 py-2 text-left text-sm font-semibold transition-colors lg:py-2.5 ${
                   active ? 'bg-ink-900 text-white' : 'bg-white text-ink-800 hover:bg-white lg:bg-transparent lg:hover:bg-white'
                 }`}
               >
@@ -127,7 +127,7 @@ export default function ServiceExplorer() {
       {/* Cards */}
       <div className="space-y-3">
         {filtered.length === 0 && (
-          <div className="rounded-3xl border border-dashed border-line bg-white p-10 text-center">
+          <div className="rounded-sm border border-dashed border-line bg-white p-10 text-center">
             <p className="font-serif text-xl text-ink-900">No services match “{query}”.</p>
             <p className="mt-2 text-sm text-muted">We probably still do it — ask us directly.</p>
             <a href={enquiry(query)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp mt-5"><i className="ri-whatsapp-line" /> Ask on WhatsApp</a>

@@ -15,7 +15,10 @@ export function FAQBlock({ items = FAQS, title = 'Questions,', accent = 'answere
             accent={accent}
             intro={intro || 'Can’t find what you’re looking for? Our team usually replies within one working day.'}
           />
-          <Link to="/contact" className="btn-outline mt-8">Ask a question</Link>
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            <Link to="/contact" className="btn-outline">Ask a question</Link>
+            <Link to="/faqs" className="text-sm font-semibold text-brand-700 hover:underline">View all FAQs →</Link>
+          </div>
         </div>
         <Accordion items={items} />
       </div>
@@ -29,23 +32,19 @@ export function CTABand({
   text = 'Tell us what you need. We’ll confirm scope, timeline and a fixed fee — usually the same day.',
 }) {
   return (
-    <section className="bg-paper px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-      <div className="on-dark relative mx-auto max-w-site overflow-hidden rounded-[32px] bg-brand-800 px-6 py-14 text-white sm:px-12 lg:px-16 lg:py-20">
-        <div className="bg-grid-dark pointer-events-none absolute inset-0" />
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brass-400/20 blur-3xl" />
-        <div className="relative grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-center">
-          <div>
-            <h2 className="h-display text-3xl leading-tight !text-white sm:text-5xl">
-              {title} <em className="italic text-brass-300">{accent}</em>
-            </h2>
-            <p className="mt-4 max-w-xl text-white/75">{text}</p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-end">
-            <Link to="/contact" className="btn-brass !px-7 !py-4">Book a consultation <i className="ri-arrow-right-up-line" /></Link>
-            <div className="flex flex-wrap gap-3">
-              <a href={`tel:${SITE.phone.tel}`} className="btn-outline-light"><i className="ri-phone-line" /> {SITE.phone.display}</a>
-              <a href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-outline-light"><i className="ri-whatsapp-line" /> WhatsApp</a>
-            </div>
+    <section className="on-dark border-t-2 border-brass-400 bg-brand-800 text-white">
+      <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-[1.3fr_1fr] lg:items-center">
+        <div>
+          <h2 className="h-display text-3xl leading-tight !text-white sm:text-[2.6rem]">
+            {title} {accent}
+          </h2>
+          <p className="mt-4 max-w-xl text-white/70">{text}</p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-end">
+          <Link to="/contact" className="btn-brass !px-7 !py-3.5">Book a consultation <i className="ri-arrow-right-line" /></Link>
+          <div className="flex flex-wrap gap-3">
+            <a href={`tel:${SITE.phone.tel}`} className="btn-outline-light"><i className="ri-phone-line" /> {SITE.phone.display}</a>
+            <a href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-outline-light"><i className="ri-whatsapp-line" /> WhatsApp</a>
           </div>
         </div>
       </div>

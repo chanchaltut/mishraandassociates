@@ -14,6 +14,7 @@ const Article = lazy(() => import('./pages/Article'));
 const News = lazy(() => import('./pages/News'));
 const Notifications = lazy(() => import('./pages/Notifications'));
 const ComplianceCalendar = lazy(() => import('./pages/ComplianceCalendar'));
+const FAQ = lazy(() => import('./pages/FAQ'));
 const AboutUs = lazy(() => import('./pages/AboutUs'));
 const Contact = lazy(() => import('./pages/Contact'));
 const PrivacyPolicy = lazy(() => import('./pages/Legal').then((m) => ({ default: m.PrivacyPolicy })));
@@ -57,6 +58,8 @@ export default function App() {
             <Route path="/news/:slug" element={<Article kind="news" />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/compliance-calendar" element={<ComplianceCalendar />} />
+            <Route path="/faqs" element={<FAQ />} />
+            <Route path="/faq" element={<Navigate to="/faqs" replace />} />
 
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />

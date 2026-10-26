@@ -26,10 +26,10 @@ function DemoBar() {
         <p className="flex-1 font-semibold">
           Demo preview — <span className="ph">highlighted</span> fields are placeholders awaiting your details. News and notifications are sample entries.
         </p>
-        <button onClick={() => setHighlights((v) => !v)} className="hidden whitespace-nowrap font-bold underline underline-offset-2 sm:inline">
+        <button onClick={() => setHighlights((v) => !v)} className="hidden whitespace-nowrap font-semibold underline underline-offset-2 sm:inline">
           {highlights ? 'Hide highlights' : 'Show highlights'}
         </button>
-        <button onClick={() => setHidden(true)} aria-label="Dismiss demo notice" className="grid h-6 w-6 place-items-center rounded-full hover:bg-brass-300/40">
+        <button onClick={() => setHidden(true)} aria-label="Dismiss demo notice" className="grid h-6 w-6 place-items-center rounded-sm hover:bg-brass-300/40">
           <i className="ri-close-line" />
         </button>
       </div>
@@ -48,12 +48,9 @@ function TopBar() {
   return (
     <div className="no-print on-dark bg-ink-950 text-white/80">
       <div className="container-site flex h-10 items-center gap-4 text-xs">
-        <Link to="/notifications" className="flex shrink-0 items-center gap-2 font-bold uppercase tracking-[0.14em] text-brass-300">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brass-400 opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-brass-400" />
-          </span>
-          Updates
+        <Link to="/notifications" className="flex shrink-0 items-center gap-2 font-semibold uppercase tracking-[0.14em] text-brass-300 text-2xs">
+          Latest updates
+          <span className="h-3 w-px bg-white/20" aria-hidden="true" />
         </Link>
         <div className="mask-fade-x relative flex-1 overflow-hidden">
           <div className="flex w-max animate-ticker gap-10 hover:[animation-play-state:paused]">
@@ -82,35 +79,33 @@ function TopBar() {
 function ServicesPanel() {
   return (
     <div className="grid grid-cols-[1fr_300px] gap-8">
-      <div className="grid grid-cols-3 gap-x-6 gap-y-1">
+      <div className="grid grid-cols-3 gap-x-8">
         {PARENT_SERVICES.filter((p) => !p.isGlobal).map((p) => (
           <Link
             key={p.id}
             to={`/services?category=${encodeURIComponent(p.category)}`}
-            className="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-paper"
+            className="group flex items-start gap-3 border-b border-line px-1 py-3 transition-colors hover:bg-paper"
           >
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand-700 group-hover:text-white">
-              <i className={p.icon} />
-            </span>
+            <i className={`${p.icon} mt-0.5 text-lg text-brand-700`} aria-hidden="true" />
             <span>
-              <span className="block text-sm font-bold text-ink-900">{p.title}</span>
+              <span className="block text-sm font-semibold text-ink-900">{p.title}</span>
               <span className="mt-0.5 block text-xs text-muted">{p.subcategories.length} services · from {p.startingPrice}</span>
             </span>
           </Link>
         ))}
       </div>
-      <div className="on-dark flex flex-col rounded-2xl bg-ink-900 p-5 text-white">
+      <div className="on-dark flex flex-col rounded-sm bg-ink-900 p-5 text-white">
         <p className="eyebrow eyebrow-light">Company Registration</p>
         <p className="mt-3 font-serif text-xl leading-snug">India and six international jurisdictions.</p>
         <div className="mt-4 grid grid-cols-2 gap-2">
           {COUNTRIES.map((c) => (
-            <Link key={c.slug} to={`/company-registration/${c.slug}`} className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs font-semibold text-white/80 hover:bg-white/10 hover:text-white">
+            <Link key={c.slug} to={`/company-registration/${c.slug}`} className="flex items-center gap-2 rounded-sm px-2 py-1.5 text-xs font-semibold text-white/80 hover:bg-white/10 hover:text-white">
               <Flag code={c.flag} className="h-3.5 w-5" />
               {c.shortName || c.name}
             </Link>
           ))}
         </div>
-        <Link to="/services" className="mt-auto pt-4 text-xs font-bold text-brass-300 hover:text-brass-100">
+        <Link to="/services" className="mt-auto pt-4 text-xs font-semibold text-brass-300 hover:text-brass-100">
           View all services →
         </Link>
       </div>
@@ -123,16 +118,16 @@ function GlobalPanel() {
     <div className="grid grid-cols-[1fr_280px] gap-8">
       <div className="grid grid-cols-2 gap-2">
         {COUNTRIES.map((c) => (
-          <Link key={c.slug} to={`/company-registration/${c.slug}`} className="group flex items-center gap-4 rounded-xl border border-transparent p-3 transition-colors hover:border-line hover:bg-paper">
+          <Link key={c.slug} to={`/company-registration/${c.slug}`} className="group flex items-center gap-4 rounded-sm border border-transparent p-3 transition-colors hover:border-line hover:bg-paper">
             <Flag code={c.flag} name={c.name} className="h-8 w-12" />
             <span>
-              <span className="block text-sm font-bold text-ink-900">{c.headline}</span>
+              <span className="block text-sm font-semibold text-ink-900">{c.headline}</span>
               <span className="block text-xs text-muted">{c.facts[0].value}</span>
             </span>
           </Link>
         ))}
       </div>
-      <div className="rounded-2xl bg-paper p-5">
+      <div className="rounded-sm bg-paper p-5">
         <p className="eyebrow">Not sure where?</p>
         <p className="mt-3 font-serif text-xl leading-snug text-ink-900">Compare all seven jurisdictions side by side.</p>
         <Link to="/company-registration" className="btn-primary mt-5 w-full">Compare jurisdictions</Link>
@@ -143,11 +138,11 @@ function GlobalPanel() {
 
 function KnowledgePanel() {
   return (
-    <div className="grid grid-cols-4 gap-3">
+    <div className="grid grid-cols-5 gap-6">
       {KNOWLEDGE_LINKS.map((k) => (
-        <Link key={k.href} to={k.href} className="group rounded-2xl border border-line p-5 transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-soft">
-          <i className={`${k.icon} text-2xl text-brand-600`} />
-          <p className="mt-3 font-bold text-ink-900">{k.name}</p>
+        <Link key={k.href} to={k.href} className="group border-t-2 border-line pt-4 transition-colors hover:border-brand-700">
+          <i className={`${k.icon} text-xl text-brand-700`} />
+          <p className="mt-2 font-serif text-lg text-ink-900 group-hover:text-brand-700">{k.name}</p>
           <p className="mt-1 text-xs leading-relaxed text-muted">{k.desc}</p>
         </Link>
       ))}
@@ -181,10 +176,10 @@ function MobileDrawer({ open, onClose, onSearch }) {
         <div className="flex items-center justify-between border-b border-line p-4">
           <Logo compact />
           <div className="flex items-center gap-2">
-            <button onClick={onSearch} className="grid h-10 w-10 place-items-center rounded-full border border-line" aria-label="Search">
+            <button onClick={onSearch} className="grid h-10 w-10 place-items-center rounded-sm border border-line" aria-label="Search">
               <i className="ri-search-line" />
             </button>
-            <button onClick={onClose} className="grid h-10 w-10 place-items-center rounded-full border border-line" aria-label="Close menu">
+            <button onClick={onClose} className="grid h-10 w-10 place-items-center rounded-sm border border-line" aria-label="Close menu">
               <i className="ri-close-line text-lg" />
             </button>
           </div>
@@ -201,7 +196,7 @@ function MobileDrawer({ open, onClose, onSearch }) {
                   <ul className="pb-4">
                     {groups[item.menu].map((g) => (
                       <li key={g.href}>
-                        <Link to={g.href} onClick={onClose} className="flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-ink-800 hover:bg-white">
+                        <Link to={g.href} onClick={onClose} className="flex items-center gap-3 rounded-sm px-2 py-2.5 text-sm font-medium text-ink-800 hover:bg-white">
                           {g.flag && <Flag code={g.flag} className="h-3.5 w-5" />}
                           {g.name}
                         </Link>
@@ -270,7 +265,7 @@ export default function Header() {
       <TopBar />
       <header
         className={`sticky top-0 z-[100] border-b transition-all duration-300 ${
-          scrolled || menu ? 'border-line bg-white/95 shadow-soft backdrop-blur-md' : 'border-transparent bg-paper'
+          scrolled || menu ? 'border-line bg-white/95 backdrop-blur-md' : 'border-line bg-paper'
         }`}
         onMouseLeave={() => setMenu(null)}
       >
@@ -285,7 +280,7 @@ export default function Header() {
                 <li key={item.name} onMouseEnter={() => setMenu(item.menu || null)}>
                   {item.menu ? (
                     <button
-                      className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition-colors ${
+                      className={`flex items-center gap-1 whitespace-nowrap rounded-sm px-3 py-2 text-sm font-semibold transition-colors ${
                         menu === item.menu || isSection(item) ? 'text-brand-700' : 'text-ink-800 hover:text-brand-700'
                       }`}
                       onClick={() => setMenu(menu === item.menu ? null : item.menu)}
@@ -299,7 +294,7 @@ export default function Header() {
                       to={item.href}
                       end={item.href === '/'}
                       className={({ isActive }) =>
-                        `whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition-colors ${isActive ? 'text-brand-700' : 'text-ink-800 hover:text-brand-700'}`
+                        `whitespace-nowrap rounded-sm px-3 py-2 text-sm font-semibold transition-colors ${isActive ? 'text-brand-700' : 'text-ink-800 hover:text-brand-700'}`
                       }
                     >
                       {item.name}
@@ -313,7 +308,7 @@ export default function Header() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSearch(true)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white text-ink-800 transition-colors hover:border-brand-500 hover:text-brand-700"
+              className="grid h-10 w-10 place-items-center rounded-sm border border-line bg-white text-ink-800 transition-colors hover:border-brand-500 hover:text-brand-700"
               aria-label="Search the site (Ctrl+K)"
               title="Search (Ctrl+K)"
             >
@@ -322,7 +317,7 @@ export default function Header() {
             <Link to="/contact" className="btn-primary hidden whitespace-nowrap !py-2.5 sm:inline-flex lg:hidden xl:inline-flex">
               Book a consultation
             </Link>
-            <button onClick={() => setDrawer(true)} className="grid h-10 w-10 place-items-center rounded-full bg-ink-900 text-white lg:hidden" aria-label="Open menu">
+            <button onClick={() => setDrawer(true)} className="grid h-10 w-10 place-items-center rounded-sm bg-ink-900 text-white lg:hidden" aria-label="Open menu">
               <i className="ri-menu-4-line text-lg" />
             </button>
           </div>
@@ -330,7 +325,7 @@ export default function Header() {
 
         {/* Mega menu */}
         <div className={`absolute inset-x-0 top-full hidden lg:block ${Panel ? '' : 'pointer-events-none'}`}>
-          <div className={`border-b border-line bg-white shadow-lift transition-all duration-200 ${Panel ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'}`}>
+          <div className={`border-b border-t border-line bg-white shadow-lift transition-all duration-200 ${Panel ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'}`}>
             <div className="container-site py-7">{Panel && <Panel />}</div>
           </div>
         </div>

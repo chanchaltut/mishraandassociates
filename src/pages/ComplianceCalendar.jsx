@@ -55,7 +55,7 @@ export default function ComplianceCalendar() {
               {Object.entries(byMonth).map(([month, list]) => (
                 <div key={month}>
                   <h2 className="font-serif text-2xl text-ink-900">{month}</h2>
-                  <ul className="mt-4 divide-y divide-line overflow-hidden rounded-3xl border border-line bg-white">
+                  <ul className="mt-4 divide-y divide-line overflow-hidden rounded-sm border border-line bg-white">
                     {list.map((d) => {
                       const dm = dayMonth(d.date);
                       const left = daysUntil(d.date);
@@ -63,13 +63,13 @@ export default function ComplianceCalendar() {
                         <li key={`${d.title}-${d.date}`} className="flex items-center gap-4 px-5 py-4 sm:gap-6">
                           <span className="w-12 shrink-0 text-center">
                             <span className="block font-serif text-2xl leading-none text-ink-900">{dm.day}</span>
-                            <span className="text-2xs font-bold uppercase text-muted">{dm.weekday}</span>
+                            <span className="text-2xs font-semibold uppercase text-muted">{dm.weekday}</span>
                           </span>
                           <span className="flex-1">
                             <span className="block text-[15px] font-semibold text-ink-900">{d.title}</span>
                             <span className={`tag mt-1.5 ${CAT_STYLE[d.category]}`}>{d.category}</span>
                           </span>
-                          <span className={`shrink-0 text-xs font-bold ${left <= 5 ? 'text-brass-600' : 'text-muted'}`}>
+                          <span className={`shrink-0 text-xs font-semibold ${left <= 5 ? 'text-brass-600' : 'text-muted'}`}>
                             {left === 0 ? 'Today' : left === 1 ? 'Tomorrow' : `${left} days`}
                           </span>
                         </li>
@@ -86,7 +86,7 @@ export default function ComplianceCalendar() {
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="on-dark rounded-3xl bg-ink-900 p-6 text-white">
+            <div className="on-dark rounded-sm bg-ink-900 p-6 text-white">
               <i className="ri-notification-badge-line text-3xl text-brass-300" />
               <p className="mt-3 font-serif text-xl leading-snug">Never miss a due date</p>
               <p className="mt-2 text-sm text-white/70">Get reminders a few days before each deadline, with our weekly brief.</p>

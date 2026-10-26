@@ -57,15 +57,15 @@ export default function Notifications() {
             </div>
             <div className="relative lg:w-72">
               <i className="ri-search-line absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-              <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search subject or number" className="input !rounded-full !pl-10" aria-label="Search notifications" />
+              <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search subject or number" className="input !rounded-sm !pl-10" aria-label="Search notifications" />
             </div>
           </div>
 
           {/* Desktop table */}
-          <div className="mt-8 hidden overflow-hidden rounded-3xl border border-line bg-white md:block">
+          <div className="mt-8 hidden overflow-hidden rounded-sm border border-line bg-white md:block">
             <table className="w-full text-left text-sm">
               <thead className="border-b border-line bg-paper-2/60">
-                <tr className="text-2xs font-bold uppercase tracking-wider text-muted">
+                <tr className="text-2xs font-semibold uppercase tracking-wider text-muted">
                   <th className="px-5 py-4">Date</th>
                   <th className="px-5 py-4">Authority</th>
                   <th className="px-5 py-4">Number</th>
@@ -86,7 +86,7 @@ export default function Notifications() {
                       <span className="font-semibold leading-snug text-ink-900">{n.title}</span> <SampleBadge item={n} />
                     </td>
                     <td className="px-5 py-4 text-right">
-                      <a href={n.pdfUrl} className="inline-flex items-center gap-1 rounded-full border border-line px-3 py-1.5 text-xs font-bold text-ink-800 hover:border-brand-500 hover:text-brand-700">
+                      <a href={n.pdfUrl} className="inline-flex items-center gap-1 rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-ink-800 hover:border-brand-500 hover:text-brand-700">
                         <i className="ri-file-pdf-2-line" /> PDF
                       </a>
                     </td>
@@ -100,7 +100,7 @@ export default function Notifications() {
           {/* Mobile cards */}
           <ul className="mt-6 space-y-3 md:hidden">
             {rows.map((n) => (
-              <li key={n.id} className="rounded-2xl border border-line bg-white p-4">
+              <li key={n.id} className="rounded-sm border border-line bg-white p-4">
                 <div className="flex items-center justify-between gap-2">
                   <span className="tag bg-ink-900 text-white">{authorityOf(n.authority)?.name}</span>
                   <span className="text-xs text-muted">{formatDate(n.date)}</span>
@@ -109,7 +109,7 @@ export default function Notifications() {
                 <p className="mt-1 text-xs text-muted"><NumberCell value={n.number} /> · {n.type}</p>
                 <div className="mt-3 flex items-center justify-between">
                   <SampleBadge item={n} />
-                  <a href={n.pdfUrl} className="text-xs font-bold text-brand-700"><i className="ri-file-pdf-2-line" /> View PDF</a>
+                  <a href={n.pdfUrl} className="text-xs font-semibold text-brand-700"><i className="ri-file-pdf-2-line" /> View PDF</a>
                 </div>
               </li>
             ))}

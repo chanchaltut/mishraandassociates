@@ -53,7 +53,7 @@ export default function CountryPage() {
             <div className="flex items-center gap-4 border-b border-line bg-paper px-6 py-5">
               <Flag code={c.flag} name={c.name} className="h-10 w-14" />
               <div>
-                <p className="text-2xs font-bold uppercase tracking-wider text-muted">Professional fee</p>
+                <p className="text-2xs font-semibold uppercase tracking-wider text-muted">Professional fee</p>
                 <p className="font-serif text-2xl text-ink-900"><Ph>{c.startingPrice}</Ph></p>
               </div>
             </div>
@@ -69,10 +69,10 @@ export default function CountryPage() {
       {/* Key facts */}
       <section className="bg-white py-14">
         <div className="container-site">
-          <dl className="grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          <dl className="grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
             {c.facts.map((f) => (
               <div key={f.label} className="bg-white p-6">
-                <dt className="text-2xs font-bold uppercase tracking-wider text-muted">{f.label}</dt>
+                <dt className="text-2xs font-semibold uppercase tracking-wider text-muted">{f.label}</dt>
                 <dd className="mt-1 font-serif text-xl text-ink-900">{f.value}</dd>
               </div>
             ))}
@@ -99,8 +99,8 @@ export default function CountryPage() {
               <h2 className="h-display text-3xl">Entity options</h2>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {c.entities.map((e) => (
-                  <div key={e.name} className="rounded-2xl border border-line bg-paper p-5">
-                    <p className="font-bold text-ink-900">{e.name}</p>
+                  <div key={e.name} className="rounded-sm border border-line bg-paper p-5">
+                    <p className="font-semibold text-ink-900">{e.name}</p>
                     <p className="mt-1.5 text-sm leading-relaxed text-muted">{e.desc}</p>
                   </div>
                 ))}
@@ -109,11 +109,11 @@ export default function CountryPage() {
 
             <div>
               <h2 className="h-display text-3xl">The process</h2>
-              <ol className="mt-8 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2">
+              <ol className="mt-8 grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2">
                 {c.process.map((s, i) => (
                   <li key={s.title} className="bg-white p-6">
-                    <span className="font-serif text-3xl italic text-brass-500">0{i + 1}</span>
-                    <p className="mt-3 font-bold text-ink-900">{s.title}</p>
+                    <span className="font-serif text-3xl text-brass-500">0{i + 1}</span>
+                    <p className="mt-3 font-semibold text-ink-900">{s.title}</p>
                     <p className="mt-1 text-sm leading-relaxed text-muted">{s.desc}</p>
                   </li>
                 ))}
@@ -140,7 +140,7 @@ export default function CountryPage() {
             </div>
 
             {c.indiaNote && (
-              <div className="on-dark rounded-3xl bg-ink-900 p-8 text-white sm:p-10">
+              <div className="on-dark rounded-sm bg-ink-900 p-8 text-white sm:p-10">
                 <p className="eyebrow eyebrow-light">India-side compliance</p>
                 <h2 className="mt-3 font-serif text-2xl !text-white sm:text-3xl">{c.indiaNote.title}</h2>
                 <p className="mt-3 leading-relaxed text-white/75">{c.indiaNote.body}</p>
@@ -159,18 +159,18 @@ export default function CountryPage() {
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-3xl bg-paper p-6">
+            <div className="rounded-sm bg-paper p-6">
               <p className="eyebrow">Other jurisdictions</p>
               <ul className="mt-4 space-y-1">
                 {COUNTRIES.filter((x) => x.slug !== c.slug).map((x) => (
                   <li key={x.slug}>
-                    <Link to={`/company-registration/${x.slug}`} className="flex items-center gap-3 rounded-xl px-2 py-2.5 text-sm font-semibold text-ink-800 hover:bg-white hover:text-brand-700">
+                    <Link to={`/company-registration/${x.slug}`} className="flex items-center gap-3 rounded-sm px-2 py-2.5 text-sm font-semibold text-ink-800 hover:bg-white hover:text-brand-700">
                       <Flag code={x.flag} className="h-4 w-6" /> {x.name}
                     </Link>
                   </li>
                 ))}
               </ul>
-              <Link to="/company-registration" className="mt-3 block px-2 text-xs font-bold text-brand-700 hover:underline">Compare all →</Link>
+              <Link to="/company-registration" className="mt-3 block px-2 text-xs font-semibold text-brand-700 hover:underline">Compare all →</Link>
             </div>
           </aside>
         </div>
