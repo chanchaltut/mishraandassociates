@@ -1,0 +1,68 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Seo, { breadcrumbLd, ORG_ID, absUrl } from '../lib/seo';
+import { PARENT_SERVICES, SERVICES } from '../data/services';
+import { PageHero } from '../components/ui';
+import ServiceExplorer from '../components/ServiceExplorer';
+import { CTABand } from '../components/Blocks';
+
+export default function Services() {
+  const crumbs = [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }];
+  const total = PARENT_SERVICES.reduce((n, p) => n + p.subcategories.length, 0);
+
+  return (
+    <>
+      <Seo
+        title="Services — GST, ITR, TDS, ROC, Audit, Trademark & Company Registration"
+        description={`Explore ${total}+ tax, compliance and registration services from Mishra and Associates across ${PARENT_SERVICES.length} practice areas, with transparent starting fees.`}
+        path="/services"
+        jsonLd={[
+          breadcrumbLd(crumbs),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'OfferCatalog',
+            name: 'Mishra and Associates — Services',
+            url: absUrl('/services'),
+            provider: { '@id': ORG_ID },
+            itemListElement: PARENT_SERVICES.map((p) => ({
+              '@type': 'OfferCatalog',
+              name: p.title,
+              itemListElement: p.subcategories.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name } })),
+            })),
+          },
+        ]}
+      />
+      <PageHero
+        crumbs={crumbs}
+        eyebrow={`${PARENT_SERVICES.length} practice areas · ${total}+ services`}
+        title="Every filing, registration and"
+        accent="return — handled."
+        intro="Search or browse by practice area. Each service shows a starting professional fee; we confirm a fixed quote once we understand your scope."
+      />
+
+      <section className="bg-paper py-12 sm:py-16">
+        <div className="container-site">
+          <ServiceExplorer />
+        </div>
+      </section>
+
+      <section className="border-t border-line bg-white py-16 sm:py-20">
+        <div className="container-site">
+          <p className="eyebrow">Service guides</p>
+          <h2 className="h-display mt-3 text-3xl">In-depth service pages</h2>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {SERVICES.map((s) => (
+              <Link key={s.slug} to={`/services/${s.slug}`} className="group rounded-2xl border border-line p-5 transition-all hover:border-brand-200 hover:shadow-soft">
+                <i className={`${s.icon} text-2xl text-brand-600`} />
+                <p className="mt-3 text-sm font-bold leading-snug text-ink-900 group-hover:text-brand-700">{s.shortTitle}</p>
+                <p className="mt-1 text-xs text-muted">From {s.startingPrice}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTABand />
+    </>
+  );
+}
