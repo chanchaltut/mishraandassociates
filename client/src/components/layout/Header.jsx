@@ -8,16 +8,19 @@ import { NEWS } from '../../data/news';
 import Logo from '../ui/Logo';
 import { Flag } from '../ui';
 import SearchDialog from './SearchDialog';
+import { useNow } from '../../lib/clock';
 
 // ─── Announcement bar (admin → Site settings) ────────────────
-const inWindow = ({ startsAt, endsAt }) => {
-  const today = new Date().toISOString().slice(0, 10);
+const inWindow = ({ startsAt, endsAt }, now) => {
+  const d = new Date(now);
+  const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   return (!startsAt || startsAt.slice(0, 10) <= today) && (!endsAt || endsAt.slice(0, 10) >= today);
 };
 
 function AnnouncementBar() {
   const a = SITE.announcement;
-  if (!a?.enabled || !a.text || !inWindow(a)) return null;
+  const now = useNow();
+  if (!a?.enabled || !a.text || !inWindow(a, now)) return null;
   const external = /^https?:\/\//.test(a.href || '');
   const linkClass = 'ml-2 font-semibold underline underline-offset-2 hover:no-underline';
   return (

@@ -10,6 +10,12 @@
 import fs from 'node:fs';
 import { PAGES, EXTRA_PAGES } from './routes.mjs';
 
+// Render dates as visitors see them (India), at one fixed moment the browser reuses
+// when it takes over the page (src/lib/build-time.js).
+process.env.TZ = 'Asia/Kolkata';
+const builtAt = Date.now();
+globalThis.__PRERENDER_TIME__ = builtAt;
+
 const dist = new URL('../dist/', import.meta.url);
 const template = fs.readFileSync(new URL('index.html', dist), 'utf8');
 const { render } = await import(new URL('../dist-ssr/entry-server.js', import.meta.url).href);
@@ -35,7 +41,7 @@ for (const path of paths) {
     if (errors.length) throw errors[0];
     page = template
       .replace(/<!--seo:start-->[\s\S]*?<!--seo:end-->/, `<!--seo:start-->\n  ${headFrom(helmet)}\n  <!--seo:end-->`)
-      .replace('<div id="root"></div>', `<div id="root" data-path="${path}">${html}</div>`);
+      .replace('<div id="root"></div>', `<div id="root" data-path="${path}" data-time="${builtAt}">${html}</div>`);
     ok += 1;
   } catch (err) {
     // The page still works: the browser renders it as before

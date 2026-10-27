@@ -10,6 +10,7 @@ import { SITE } from '../../data/site';
 import { img, srcSetFor } from '../../lib/images';
 import { Flag, SampleBadge } from '../ui';
 import SafeSection from '../SafeSection';
+import { useNow } from '../../lib/clock';
 
 function HeroSearch() {
   const [q, setQ] = useState('');
@@ -67,7 +68,8 @@ const TABS = ['Notifications', 'News', 'Due dates'];
 
 function UpdatesDesk() {
   const [tab, setTab] = useState(0);
-  const due = getDueDates(new Date(), 2).slice(0, 5);
+  const now = useNow();
+  const due = getDueDates(new Date(now), 2).slice(0, 5);
 
   return (
     <div className="overflow-hidden rounded-panel border border-ink-900 bg-white">
@@ -76,7 +78,7 @@ function UpdatesDesk() {
           <p className="text-sm font-semibold text-ink-900">The Updates Desk</p>
           <p className="mt-1 font-serif text-[1.75rem] leading-[1.1] tracking-[-0.02em] text-ink-900">This week in tax &amp; regulation</p>
         </div>
-        <p className="label hidden shrink-0 pt-0.5 sm:block">{formatDate(new Date())}</p>
+        <p className="label hidden shrink-0 pt-0.5 sm:block">{formatDate(now)}</p>
       </div>
 
       <div className="mx-6 mt-5 inline-flex gap-1 rounded-full bg-paper p-1 sm:mx-7" role="tablist">
@@ -121,7 +123,7 @@ function UpdatesDesk() {
         {tab === 2 &&
           due.map((d) => {
             const dm = dayMonth(d.date);
-            const left = daysUntil(d.date);
+            const left = daysUntil(d.date, new Date(now));
             return (
               <li key={`${d.title}-${d.date}`} className="flex items-center gap-4 py-3">
                 <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-cream text-center">

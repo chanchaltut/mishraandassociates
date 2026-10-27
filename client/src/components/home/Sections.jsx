@@ -13,6 +13,7 @@ import { img } from '../../lib/images';
 import { SectionHeading, Flag, SampleBadge, useReveal } from '../ui';
 import Ph, { ready, shown } from '../ui/Ph';
 import NewsletterForm from '../NewsletterForm';
+import { useNow } from '../../lib/clock';
 
 const NUMBER_WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'];
 const inWords = (n) => NUMBER_WORDS[n] || String(n);
@@ -267,7 +268,8 @@ export function KnowledgeDesk() {
 // ─── Due dates + newsletter ───────────────────────────────────
 export function DueDates() {
   const ref = useReveal();
-  const items = getDueDates(new Date(), 2).slice(0, 6);
+  const now = useNow();
+  const items = getDueDates(new Date(now), 2).slice(0, 6);
   return (
     <section ref={ref} className="bg-cream py-20 sm:py-28">
       <div className="container-site grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
@@ -291,7 +293,7 @@ export function DueDates() {
           <ul className="divide-y divide-line">
             {items.map((d) => {
               const dm = dayMonth(d.date);
-              const left = daysUntil(d.date);
+              const left = daysUntil(d.date, new Date(now));
               return (
                 <li key={`${d.title}-${d.date}`} className="flex items-center gap-5 px-6 py-4 sm:px-7">
                   <span className="w-14 shrink-0 text-center">

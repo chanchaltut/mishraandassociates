@@ -12,6 +12,7 @@ import { PageHero, SectionHeading, SampleBadge } from '../components/ui';
 import Ph from '../components/ui/Ph';
 import Modal from '../components/ui/Modal';
 import { FAQBlock, CTABand } from '../components/Blocks';
+import { useNow } from '../lib/clock';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -23,7 +24,8 @@ function Highlight({ text, query }) {
 }
 
 function ClosingBadge({ due }) {
-  const left = daysLeft(due);
+  const now = useNow();
+  const left = daysLeft(due, now);
   if (left <= 0) return <span className="tag bg-rose text-ink-900">Closing today</span>;
   if (left === 1) return <span className="tag bg-peach text-ink-900">Closes tomorrow</span>;
   return <span className={`tag ${left <= 3 ? 'bg-peach' : 'bg-paper'} text-ink-900`}>{left} days left</span>;
@@ -191,6 +193,7 @@ function SubscribeModal({ open, onClose }) {
 const SORTS = { closing: 'Closing soonest', newest: 'Newest first' };
 
 export default function Tenders() {
+  const now = useNow();
   const [tab, setTab] = useState('tenders');
   const [query, setQuery] = useState('');
   const [state, setState] = useState('all');
@@ -208,11 +211,11 @@ export default function Tenders() {
       if (state !== 'all' && t.state !== state) return false;
       if (sector !== 'all' && t.sector !== sector) return false;
       if (band !== 'all' && (t.value == null || (range.min && t.value < range.min) || (range.max && t.value >= range.max))) return false;
-      return daysLeft(t.due) >= 0;
+      return daysLeft(t.due, now) >= 0;
     }).sort((a, b) => (sort === 'closing' ? new Date(a.due) - new Date(b.due) : new Date(b.published) - new Date(a.published)));
-  }, [query, state, sector, band, sort]);
+  }, [query, state, sector, band, sort, now]);
 
-  const closingToday = TENDERS.filter((t) => daysLeft(t.due) === 0).length;
+  const closingToday = TENDERS.filter((t) => daysLeft(t.due, now) === 0).length;
   const reset = () => { setQuery(''); setState('all'); setSector('all'); setBand('all'); };
   const filtered = query || state !== 'all' || sector !== 'all' || band !== 'all';
   const crumbs = [{ name: 'Home', path: '/' }, { name: 'Tenders', path: '/tenders' }];

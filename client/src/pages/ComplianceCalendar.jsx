@@ -5,6 +5,7 @@ import { dayMonth } from '../lib/format';
 import { PageHero } from '../components/ui';
 import NewsletterForm from '../components/NewsletterForm';
 import { CTABand } from '../components/Blocks';
+import { useNow } from '../lib/clock';
 
 const CAT_STYLE = {
   'Income Tax': 'bg-cornflower text-ink-900',
@@ -15,7 +16,8 @@ const CAT_STYLE = {
 
 export default function ComplianceCalendar() {
   const [category, setCategory] = useState('All');
-  const all = useMemo(() => getDueDates(new Date(), 4), []);
+  const now = useNow();
+  const all = useMemo(() => getDueDates(new Date(now), 4), [now]);
   const items = all.filter((d) => category === 'All' || d.category === category);
 
   const byMonth = items.reduce((acc, d) => {
@@ -58,7 +60,7 @@ export default function ComplianceCalendar() {
                   <ul className="mt-4 divide-y divide-line overflow-hidden rounded-card border border-ink-900 bg-white">
                     {list.map((d) => {
                       const dm = dayMonth(d.date);
-                      const left = daysUntil(d.date);
+                      const left = daysUntil(d.date, new Date(now));
                       return (
                         <li key={`${d.title}-${d.date}`} className="flex items-center gap-4 px-5 py-4 sm:gap-6">
                           <span className="w-12 shrink-0 text-center">

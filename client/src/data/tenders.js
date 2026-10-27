@@ -10,6 +10,7 @@
 // ═══════════════════════════════════════════════════════════
 
 import { fromContent } from '../lib/content.js';
+import { initialNow } from '../lib/build-time.js';
 
 export const TENDER_PLAN_DEFAULT = {
   name: 'Tender Alerts — Annual',
@@ -55,7 +56,7 @@ export const VALUE_BANDS = [
 const day = 24 * 60 * 60 * 1000;
 // Sample dates are relative to today (YYYY-MM-DD, local time)
 const fromToday = (n) => {
-  const d = new Date(Date.now() + n * day);
+  const d = new Date(initialNow() + n * day);
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 };
 
@@ -100,9 +101,9 @@ export const TENDER_RESULTS = fromContent('tenders', 'results', TENDER_RESULTS_D
 // Date-only values ("2026-10-30") are read as local dates
 const toLocalDate = (v) => (/^\d{4}-\d{2}-\d{2}$/.test(v) ? new Date(`${v}T00:00:00`) : new Date(v));
 
-export const daysLeft = (iso) => {
+export const daysLeft = (iso, from = Date.now()) => {
   const end = toLocalDate(iso);
-  const now = new Date();
+  const now = new Date(from);
   end.setHours(0, 0, 0, 0);
   now.setHours(0, 0, 0, 0);
   return Math.round((end - now) / day);

@@ -7,6 +7,7 @@ import { SITE, waLink } from '../data/site';
 import { submitForm } from '../lib/api';
 import { PageHero, SectionHeading, SampleBadge } from '../components/ui';
 import { FAQBlock, CTABand } from '../components/Blocks';
+import { useNow } from '../lib/clock';
 
 const statusTone = (name) => TM_STATUSES.find((s) => s.name === name)?.tone || 'bg-paper';
 const classLabel = (n) => (n === 'all' ? 'all classes' : `class ${n}`);
@@ -88,6 +89,7 @@ function ReportRequest({ search, onReset }) {
 }
 
 export default function TrademarkSearch() {
+  const now = useNow();
   const [mode, setMode] = useState('name');
   const [query, setQuery] = useState('');
   const [cls, setCls] = useState('all');
@@ -189,7 +191,7 @@ export default function TrademarkSearch() {
                       <SampleBadge item={f} />
                     </div>
                   </div>
-                  <span className="hidden shrink-0 text-xs text-muted sm:block">{timeAgo(f.filed)}</span>
+                  <span className="hidden shrink-0 text-xs text-muted sm:block">{timeAgo(f.filed, now)}</span>
                 </li>
               ))}
             </ul>

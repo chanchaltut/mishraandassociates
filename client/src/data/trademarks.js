@@ -5,6 +5,7 @@
 // ═══════════════════════════════════════════════════════════
 
 import { fromContent } from '../lib/content.js';
+import { initialNow } from '../lib/build-time.js';
 
 export const IP_INDIA_SEARCH_URL = 'https://tmrsearch.ipindia.gov.in/tmrpublicsearch/';
 
@@ -32,7 +33,7 @@ export const TM_STATUSES = [
   { name: 'Registered', tone: 'bg-sun', desc: 'Registered for 10 years — you may now use the ® symbol.' },
 ];
 
-const hoursAgo = (h) => new Date(Date.now() - h * 3600 * 1000).toISOString();
+const hoursAgo = (h) => new Date(initialNow() - h * 3600 * 1000).toISOString();
 
 export const RECENT_FILINGS_DEFAULT = [
   { mark: 'Saffron Loom', applicant: 'Saffron Loom Textiles', state: 'Gujarat', cls: 24, status: 'Formalities Chk Pass', filed: hoursAgo(5) },
@@ -48,8 +49,8 @@ export const RECENT_FILINGS_DEFAULT = [
 export const SHOW_RECENT_FILINGS = fromContent('trademarks', 'showRecent', true);
 export const RECENT_FILINGS = fromContent('trademarks', 'recent', RECENT_FILINGS_DEFAULT).map((f, i) => ({ ...f, id: i + 1 }));
 
-export const timeAgo = (iso) => {
-  const h = Math.max(1, Math.round((Date.now() - new Date(iso)) / 3600000));
+export const timeAgo = (iso, now = Date.now()) => {
+  const h = Math.max(1, Math.round((now - new Date(iso)) / 3600000));
   if (h < 24) return `about ${h} hour${h === 1 ? '' : 's'} ago`;
   const d = Math.round(h / 24);
   return `about ${d} day${d === 1 ? '' : 's'} ago`;

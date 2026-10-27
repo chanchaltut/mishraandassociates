@@ -6,6 +6,7 @@ import { COUNTRIES } from '../../data/countries';
 import Logo from '../ui/Logo';
 import { shown } from '../ui/Ph';
 import NewsletterForm from '../NewsletterForm';
+import { useNow } from '../../lib/clock';
 
 const SOCIALS = [
   { key: 'linkedin', icon: 'ri-linkedin-fill', label: 'LinkedIn' },
@@ -31,6 +32,7 @@ const FLink = ({ to, children }) => (
 );
 
 export default function Footer() {
+  const now = useNow();
   return (
     <footer className="relative bg-paper-2 text-ink-900">
 
@@ -126,7 +128,7 @@ export default function Footer() {
           {SITE.footerDisclaimer && <p className="max-w-4xl leading-relaxed">{SITE.footerDisclaimer}</p>}
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p>
-              © {new Date().getFullYear()} {SITE.legalName}. All rights reserved. <span className="hidden sm:inline">·</span>{' '}
+              © {new Date(now).getFullYear()} {SITE.legalName}. All rights reserved. <span className="hidden sm:inline">·</span>{' '}
               {SITE.gstin && `GSTIN ${SITE.gstin}`}
             </p>
             <p>
