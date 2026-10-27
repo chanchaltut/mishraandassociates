@@ -32,27 +32,30 @@ export function SectionHeading({ eyebrow, title, accent, intro, align = 'left', 
   return (
     <div className={`${center ? 'mx-auto text-center' : ''} max-w-3xl ${className}`}>
       {eyebrow && <p className={`eyebrow ${light ? 'eyebrow-light' : ''}`}>{eyebrow}</p>}
-      <h2 className={`h-display mt-3 text-[1.9rem] leading-[1.15] sm:text-4xl lg:text-[2.6rem] ${light ? '!text-white' : ''}`}>
-        {title}{accent && <> {accent}</>}
+      <h2 className={`h-display mt-4 text-[2.25rem] leading-[1.04] sm:text-[2.875rem] lg:text-[3.5rem] ${light ? '!text-white' : ''}`}>
+        {title}{accent && <> <em className="italic">{accent}</em></>}
       </h2>
-      {intro && <p className={`mt-4 text-base leading-relaxed sm:text-lg ${light ? 'text-white/70' : 'text-muted'}`}>{intro}</p>}
+      {intro && <p className={`mt-5 text-[1.0625rem] leading-relaxed sm:text-lg ${center ? 'mx-auto max-w-2xl' : 'max-w-2xl'} ${light ? 'text-white/75' : 'text-ink-800'}`}>{intro}</p>}
     </div>
   );
 }
 
 // ─── Inner page hero ──────────────────────────────────────────
-export function PageHero({ eyebrow, title, accent, intro, crumbs = [], children, aside }) {
+// Full-bleed colour block. tone: 'sun' (yellow), 'cream' or 'white'.
+const HERO_TONES = { sun: 'bg-sun', cream: 'bg-cream', white: 'bg-white border-b border-line' };
+
+export function PageHero({ eyebrow, title, accent, intro, crumbs = [], children, aside, tone = 'sun' }) {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-paper">
-      <div className="container-site relative pb-12 pt-8 sm:pb-16 sm:pt-10">
+    <section className={`relative overflow-hidden ${HERO_TONES[tone]}`}>
+      <div className="container-site relative pb-14 pt-6 sm:pb-20 sm:pt-8 lg:pb-24">
         {crumbs.length > 0 && <Breadcrumbs items={crumbs} />}
-        <div className={`mt-8 grid gap-10 border-t border-line pt-8 sm:mt-10 sm:pt-10 ${aside ? 'lg:grid-cols-[1fr_380px] lg:items-end' : ''}`}>
-          <div className="max-w-3xl">
+        <div className={`mt-10 grid gap-10 sm:mt-14 ${aside ? 'lg:grid-cols-[1fr_380px] lg:items-end lg:gap-16' : ''}`}>
+          <div className="max-w-4xl">
             {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-            <h1 className="h-display mt-3 text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[3.5rem]">
-              {title}{accent && <> {accent}</>}
+            <h1 className="h-display mt-4 text-[2.75rem] leading-[1.02] sm:text-[3.75rem] lg:text-[4.5rem]">
+              {title}{accent && <> <em className="italic">{accent}</em></>}
             </h1>
-            {intro && <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">{intro}</p>}
+            {intro && <p className="mt-6 max-w-2xl text-[1.0625rem] leading-relaxed text-ink-800 sm:text-xl">{intro}</p>}
             {children}
           </div>
           {aside}
@@ -65,14 +68,14 @@ export function PageHero({ eyebrow, title, accent, intro, crumbs = [], children,
 export function Breadcrumbs({ items }) {
   return (
     <nav aria-label="Breadcrumb">
-      <ol className="flex flex-wrap items-center gap-1.5 text-xs font-medium text-muted">
+      <ol className="flex flex-wrap items-center gap-1.5 text-[0.8125rem] text-ink-800">
         {items.map((it, i) => (
           <li key={it.path} className="flex items-center gap-1.5">
-            {i > 0 && <i className="ri-arrow-right-s-line text-muted/60" aria-hidden="true" />}
+            {i > 0 && <span className="text-ink-900/40" aria-hidden="true">/</span>}
             {i < items.length - 1 ? (
-              <Link to={it.path} className="hover:text-brand-700">{it.name}</Link>
+              <Link to={it.path} className="underline decoration-ink-900/30 underline-offset-[3px] hover:decoration-ink-900">{it.name}</Link>
             ) : (
-              <span className="text-ink-900" aria-current="page">{it.name}</span>
+              <span className="font-medium text-ink-900" aria-current="page">{it.name}</span>
             )}
           </li>
         ))}
@@ -89,7 +92,7 @@ export function Flag({ code, name, className = 'h-6 w-9' }) {
       srcSet={`${flagUrl(code, 160)} 2x`}
       alt={name ? `${name} flag` : ''}
       loading="lazy"
-      className={`rounded-[2px] object-cover shadow-[0_0_0_1px_rgb(0_0_0/0.08)] ${className}`}
+      className={`rounded-[3px] object-cover shadow-[0_0_0_1px_rgb(0_0_0/0.08)] ${className}`}
     />
   );
 }
@@ -98,22 +101,27 @@ export function Flag({ code, name, className = 'h-6 w-9' }) {
 export function Accordion({ items, defaultOpen = 0 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="divide-y divide-line border-y border-line">
+    <div className="border-t border-ink-900">
       {items.map((it, i) => {
         const isOpen = open === i;
         return (
-          <div key={it.q}>
+          <div key={it.q} className="border-b border-ink-900/20">
             <button
               type="button"
-              className="flex w-full items-start justify-between gap-6 py-5 text-left"
+              className="group flex w-full items-start justify-between gap-6 py-6 text-left"
               onClick={() => setOpen(isOpen ? -1 : i)}
               aria-expanded={isOpen}
             >
-              <span className={`font-serif text-lg leading-snug sm:text-[1.3rem] ${isOpen ? 'text-brand-700' : 'text-ink-900'}`}>{it.q}</span>
-              <i className={`${isOpen ? 'ri-subtract-line text-brand-700' : 'ri-add-line text-ink-800'} mt-0.5 shrink-0 text-xl`} aria-hidden="true" />
+              <span className="font-serif text-[1.3rem] leading-snug tracking-[-0.01em] text-ink-900 sm:text-[1.5rem]">{it.q}</span>
+              <span
+                className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-900 text-lg transition-colors ${isOpen ? 'bg-ink-900 text-white' : 'text-ink-900 group-hover:bg-sun'}`}
+                aria-hidden="true"
+              >
+                <i className={isOpen ? 'ri-subtract-line' : 'ri-add-line'} />
+              </span>
             </button>
-            <div className={`grid transition-all duration-300 ${isOpen ? 'grid-rows-[1fr] pb-5' : 'grid-rows-[0fr]'}`}>
-              <p className="overflow-hidden leading-relaxed text-muted sm:pr-12">{it.a}</p>
+            <div className={`grid transition-all duration-300 ${isOpen ? 'grid-rows-[1fr] pb-6' : 'grid-rows-[0fr]'}`}>
+              <p className="overflow-hidden text-[1.0625rem] leading-relaxed text-ink-800 sm:pr-16">{it.a}</p>
             </div>
           </div>
         );
@@ -151,5 +159,5 @@ export function RichText({ paragraphs }) {
 // ─── Small "sample" badge used on demo news / notifications ───
 export function SampleBadge({ item }) {
   if (!SITE.demoMode || !item?.sample) return null;
-  return <span className="tag bg-brass-100 text-brass-600" title="Demo entry — will be replaced from the admin panel">Sample</span>;
+  return <span className="tag bg-sun-light text-ink-900" title="Demo entry — will be replaced from the admin panel">Sample</span>;
 }

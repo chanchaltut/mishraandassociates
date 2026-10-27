@@ -23,7 +23,7 @@ export default function FloatingActions() {
     >
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className={`grid h-11 w-11 place-items-center rounded-full border border-line bg-white text-ink-900 shadow-soft transition-all hover:border-brand-500 ${
+        className={`grid h-11 w-11 place-items-center rounded-full border border-ink-900 bg-white text-ink-900 transition-all hover:bg-sun ${
           showTop ? 'opacity-100' : 'pointer-events-none translate-y-2 opacity-0'
         }`}
         aria-label="Back to top"
@@ -32,7 +32,7 @@ export default function FloatingActions() {
       </button>
       <a
         href={`tel:${SITE.phone.tel}`}
-        className="grid h-11 w-11 place-items-center rounded-full bg-ink-900 text-brass-300 shadow-lift ring-1 ring-white/20 transition-colors hover:bg-brand-700 sm:h-12 sm:w-12"
+        className="grid h-11 w-11 place-items-center rounded-full bg-sun text-ink-900 shadow-lift ring-1 ring-ink-900 transition-colors hover:bg-sun-deep sm:h-12 sm:w-12"
         aria-label={`Call ${SITE.phone.display}`}
       >
         <i className="ri-phone-fill text-lg" />

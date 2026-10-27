@@ -4,8 +4,8 @@
   "description": "Tax, compliance and global company formation — GST, ITR, TDS, ROC and company registration in India, USA, UAE, Singapore, Hong Kong, China and the UK.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F7F5EF",
-  "theme_color": "#0D231D",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFE01B",
   "icons": [
     { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },

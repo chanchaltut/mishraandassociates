@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 // Colours are defined as RGB channels in src/index.css (:root).
-// To re-theme the whole site (e.g. to match the final logo), edit those variables only.
+// To re-theme the whole site, edit those variables only.
 const v = (name) => `rgb(var(--${name}) / <alpha-value>)`;
 
 export default {
@@ -12,12 +12,14 @@ export default {
         xs: '475px',
       },
       colors: {
+        // Warm near-black used for text, dark sections and outlines
         ink: {
           950: v('ink-950'),
           900: v('ink-900'),
           800: v('ink-800'),
           700: v('ink-700'),
         },
+        // Teal accent: links, icons, focus
         brand: {
           50: v('brand-50'),
           100: v('brand-100'),
@@ -26,14 +28,20 @@ export default {
           600: v('brand-600'),
           700: v('brand-700'),
           800: v('brand-800'),
+          900: v('brand-900'),
         },
-        brass: {
-          100: v('brass-100'),
-          300: v('brass-300'),
-          400: v('brass-400'),
-          500: v('brass-500'),
-          600: v('brass-600'),
+        // Signature yellow
+        sun: {
+          DEFAULT: v('sun'),
+          light: v('sun-light'),
+          deep: v('sun-deep'),
         },
+        // Soft section and card fills
+        cream: v('cream'),
+        cornflower: v('cornflower'),
+        mint: v('mint'),
+        rose: v('rose'),
+        peach: v('peach'),
         paper: {
           DEFAULT: v('paper'),
           2: v('paper-2'),
@@ -44,8 +52,8 @@ export default {
         whatsapp: '#1FAF54',
       },
       fontFamily: {
-        serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
-        sans: ['"IBM Plex Sans"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+        serif: ['Newsreader', 'Georgia', 'Times', '"Times New Roman"', 'serif'],
+        sans: ['"Hanken Grotesk"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
       },
       fontSize: {
         '2xs': ['0.6875rem', { lineHeight: '1rem' }],
@@ -53,9 +61,14 @@ export default {
       maxWidth: {
         site: '80rem',
       },
+      borderRadius: {
+        card: '1rem',
+        panel: '1.625rem',
+      },
       boxShadow: {
-        soft: '0 1px 2px rgb(13 35 29 / 0.05)',
-        lift: '0 12px 32px -16px rgb(13 35 29 / 0.28)',
+        soft: '0 1px 2px rgb(35 30 21 / 0.05)',
+        lift: '0 16px 40px -20px rgb(35 30 21 / 0.35)',
+        edge: '0 0 0 1px rgb(35 30 21)',
       },
       keyframes: {
         ticker: {

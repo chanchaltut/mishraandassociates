@@ -46,9 +46,9 @@ export default function SearchDialog({ open, onClose }) {
   return (
     <div className="fixed inset-0 z-[120] flex items-start justify-center px-4 pt-[10vh]" role="dialog" aria-modal="true" aria-label="Search the site">
       <div className="absolute inset-0 bg-ink-950/60 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
-      <div className="relative w-full max-w-2xl overflow-hidden rounded-sm border border-line bg-white shadow-lift">
+      <div className="relative w-full max-w-2xl overflow-hidden rounded-panel border border-ink-900 bg-white shadow-lift">
         <div className="flex items-center gap-3 border-b border-line px-5">
-          <i className="ri-search-line text-xl text-muted" aria-hidden="true" />
+          <i className="ri-search-line text-xl text-ink-900" aria-hidden="true" />
           <input
             ref={inputRef}
             autoFocus
@@ -59,10 +59,10 @@ export default function SearchDialog({ open, onClose }) {
             }}
             onKeyDown={onKeyDown}
             placeholder="Search services, countries, articles, notifications…"
-            className="h-16 w-full bg-transparent text-base text-ink-900 outline-none placeholder:text-muted/70"
+            className="h-16 w-full bg-transparent text-[1.0625rem] text-ink-900 outline-none placeholder:text-muted"
             aria-label="Search"
           />
-          <button onClick={onClose} className="rounded-md border border-line px-2 py-1 text-2xs font-semibold text-muted hover:text-ink-900">
+          <button onClick={onClose} className="rounded-full border border-ink-900 px-2.5 py-1 text-2xs font-semibold text-ink-900 hover:bg-sun">
             ESC
           </button>
         </div>
@@ -70,7 +70,7 @@ export default function SearchDialog({ open, onClose }) {
         <div className="max-h-[60vh] overflow-y-auto p-2">
           {!query && (
             <div className="p-3">
-              <p className="mb-3 text-2xs font-semibold uppercase tracking-[0.16em] text-muted">Popular searches</p>
+              <p className="mb-3 text-sm font-semibold text-ink-900">Popular searches</p>
               <div className="flex flex-wrap gap-2">
                 {SUGGESTIONS.map((s) => (
                   <button key={s} className="chip" onClick={() => setQuery(s)}>
@@ -94,18 +94,18 @@ export default function SearchDialog({ open, onClose }) {
                 <button
                   onClick={() => go(r.href)}
                   onMouseEnter={() => setActive(i)}
-                  className={`flex w-full items-start gap-3 rounded-sm px-3 py-3 text-left transition-colors ${
-                    i === active ? 'bg-brand-50' : ''
+                  className={`flex w-full items-start gap-3 rounded-lg px-3 py-3 text-left transition-colors ${
+                    i === active ? 'bg-sun-light' : ''
                   }`}
                 >
-                  <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-sm bg-paper-2 text-brand-700">
+                  <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-cream text-ink-900">
                     {r.flag ? <Flag code={r.flag} className="h-4 w-6" /> : <i className={r.icon} />}
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-semibold text-ink-900">{r.title}</span>
+                    <span className="block truncate text-[0.9375rem] font-medium text-ink-900">{r.title}</span>
                     <span className="block truncate text-xs text-muted">{r.meta}</span>
                   </span>
-                  <span className="tag mt-1 shrink-0 bg-paper-2 text-muted">{r.kind}</span>
+                  <span className="tag mt-1 shrink-0 bg-paper text-ink-800">{r.kind}</span>
                 </button>
               </li>
             ))}

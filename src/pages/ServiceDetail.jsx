@@ -56,19 +56,19 @@ export default function ServiceDetail() {
         title={service.title}
         intro={service.overview}
         aside={
-          <div className="card p-6 shadow-soft">
+          <div className="rounded-panel border border-ink-900 bg-white p-7">
             <dl className="grid grid-cols-2 gap-5">
               <div>
-                <dt className="text-2xs font-semibold uppercase tracking-wider text-muted">Starting from</dt>
-                <dd className="mt-1 font-serif text-2xl text-ink-900">{service.startingPrice}</dd>
+                <dt className="label">Starting from</dt>
+                <dd className="mt-1 font-serif text-[1.75rem] leading-tight tracking-[-0.02em] text-ink-900">{service.startingPrice}</dd>
               </div>
               <div>
-                <dt className="text-2xs font-semibold uppercase tracking-wider text-muted">Timeline</dt>
-                <dd className="mt-1 font-serif text-2xl text-ink-900">{service.timeline}</dd>
+                <dt className="label">Timeline</dt>
+                <dd className="mt-1 font-serif text-[1.75rem] leading-tight tracking-[-0.02em] text-ink-900">{service.timeline}</dd>
               </div>
             </dl>
-            <p className="mt-4 text-xs text-muted">Professional fee. Government fees at actuals.</p>
-            <div className="mt-5 grid gap-2">
+            <p className="mt-4 text-xs text-ink-800">Professional fee. Government fees at actuals.</p>
+            <div className="mt-6 grid gap-3">
               <Link to={`/contact?service=${encodeURIComponent(service.title)}`} className="btn-primary">Request a quote</Link>
               <a href={waLink(msg)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp"><i className="ri-whatsapp-line" /> WhatsApp us</a>
             </div>
@@ -76,47 +76,48 @@ export default function ServiceDetail() {
         }
       />
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-white py-20 sm:py-24">
         <div className="container-site grid gap-12 lg:grid-cols-[1fr_340px]">
           <div>
-            <h2 className="h-display text-3xl">What’s included</h2>
+            <h2 className="h-display text-[2.25rem] leading-[1.05] sm:text-[2.75rem]">What’s <em className="italic">included</em></h2>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {service.services.map((item) => (
-                <li key={item} className="flex items-start gap-3 rounded-sm border border-line bg-paper p-4">
-                  <i className="ri-check-line mt-0.5 text-lg text-brand-700" />
-                  <span className="text-[15px] font-medium text-ink-900">{item}</span>
+                <li key={item} className="flex items-start gap-3 rounded-card bg-paper p-5">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sun text-sm text-ink-900"><i className="ri-check-line" /></span>
+                  <span className="text-[0.9375rem] font-medium text-ink-900">{item}</span>
                 </li>
               ))}
             </ul>
 
-            <h2 className="h-display mt-16 text-3xl">How it works</h2>
-            <ol className="mt-8 space-y-6 border-l border-line pl-8">
+            <h2 className="h-display mt-20 text-[2.25rem] leading-[1.05] sm:text-[2.75rem]">How it <em className="italic">works</em></h2>
+            <ol className="mt-8 space-y-7 border-l border-ink-900 pl-9">
               {PROCESS_STEPS.map((s, i) => (
                 <li key={s.title} className="relative">
-                  <span className="absolute -left-[45px] grid h-8 w-8 place-items-center rounded-sm border border-line bg-white font-serif text-sm text-brass-600">{i + 1}</span>
-                  <p className="font-semibold text-ink-900">{s.title}</p>
-                  <p className="mt-1 text-sm text-muted">{s.desc}</p>
+                  <span className="absolute -left-[53px] grid h-9 w-9 place-items-center rounded-full border border-ink-900 bg-white font-serif text-lg text-ink-900">{i + 1}</span>
+                  <p className="font-serif text-[1.375rem] leading-tight tracking-[-0.015em] text-ink-900">{s.title}</p>
+                  <p className="mt-1 text-[0.9375rem] leading-relaxed text-ink-800">{s.desc}</p>
                 </li>
               ))}
             </ol>
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-sm bg-paper p-6">
+            <div className="rounded-card bg-cream p-6">
               <p className="eyebrow">Related services</p>
               <ul className="mt-4 space-y-1">
                 {related.map((r) => (
                   <li key={r.slug}>
-                    <Link to={`/services/${r.slug}`} className="flex items-center gap-3 rounded-sm px-2 py-2.5 text-sm font-semibold text-ink-800 hover:bg-white hover:text-brand-700">
-                      <i className={`${r.icon} text-brand-600`} /> {r.shortTitle}
+                    <Link to={`/services/${r.slug}`} className="flex items-center gap-3 rounded-lg px-2 py-2.5 text-[0.9375rem] font-medium text-ink-900 hover:bg-white hover:underline">
+                      <i className={`${r.icon} text-ink-900`} /> {r.shortTitle}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
-            <Link to="/company-registration" className="on-dark block rounded-sm bg-ink-900 p-6 text-white">
-              <p className="text-2xs font-semibold uppercase tracking-[0.18em] text-brass-300">Expanding abroad?</p>
-              <p className="mt-2 font-serif text-xl leading-snug">Company registration in 7 jurisdictions →</p>
+            <Link to="/company-registration" className="on-dark block rounded-panel bg-ink-900 p-7 text-white">
+              <p className="text-sm font-semibold text-sun">Expanding abroad?</p>
+              <p className="mt-2 font-serif text-[1.5rem] leading-tight tracking-[-0.015em]">Company registration in 7 jurisdictions</p>
+              <span className="btn-primary btn-sm mt-5">Compare jurisdictions</span>
             </Link>
           </aside>
         </div>

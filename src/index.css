@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    Mishra and Associates — Global styles
-   Palette: deep evergreen ink + brass on warm paper.
+   Palette: warm peppercorn ink + signature yellow on white,
+   with teal for links/icons and soft cream/pastel fills.
    Re-theme by editing the RGB channels in :root.
 ═══════════════════════════════════════════════════════════ */
 
@@ -9,30 +10,35 @@
 @tailwind utilities;
 
 :root {
-  --ink-950: 8 24 20;      /* #081814 */
-  --ink-900: 13 35 29;     /* #0D231D */
-  --ink-800: 20 50 42;     /* #14322A */
-  --ink-700: 31 69 58;     /* #1F453A */
+  --ink-950: 26 22 15;      /* #1A160F */
+  --ink-900: 35 30 21;      /* #231E15 peppercorn */
+  --ink-800: 57 53 44;      /* #39352C */
+  --ink-700: 87 83 74;      /* #57534A */
 
-  --brand-50: 238 245 241;  /* #EEF5F1 */
-  --brand-100: 219 234 226; /* #DBEAE2 */
-  --brand-200: 182 211 197; /* #B6D3C5 */
-  --brand-500: 24 122 96;   /* #187A60 */
-  --brand-600: 15 98 77;    /* #0F624D */
-  --brand-700: 11 78 62;    /* #0B4E3E */
-  --brand-800: 9 60 48;     /* #093C30 */
+  --brand-50: 230 244 245;  /* #E6F4F5 */
+  --brand-100: 207 234 236; /* #CFEAEC */
+  --brand-200: 163 215 219; /* #A3D7DB */
+  --brand-500: 75 196 194;  /* #4BC4C2 focus cyan */
+  --brand-600: 0 124 137;   /* #007C89 teal */
+  --brand-700: 0 107 119;   /* #006B77 */
+  --brand-800: 0 78 86;     /* #004E56 */
+  --brand-900: 0 32 35;     /* #002023 */
 
-  --brass-100: 245 236 216; /* #F5ECD8 */
-  --brass-300: 222 192 132; /* #DEC084 */
-  --brass-400: 207 165 92;  /* #CFA55C */
-  --brass-500: 184 138 62;  /* #B88A3E */
-  --brass-600: 133 97 31;   /* #85611F */
+  --sun: 255 224 27;        /* #FFE01B */
+  --sun-light: 255 247 193; /* #FFF7C1 */
+  --sun-deep: 230 199 0;    /* #E6C700 */
 
-  --paper: 248 247 243;     /* #F8F7F3 */
-  --paper-2: 239 237 230;   /* #EFEDE6 */
-  --line: 224 221 211;      /* #E0DDD3 */
-  --muted: 92 106 100;      /* #5C6A64 */
-  --body: 20 32 28;         /* #14201C */
+  --cream: 251 238 202;     /* #FBEECA */
+  --cornflower: 210 235 255;/* #D2EBFF */
+  --mint: 237 255 204;      /* #EDFFCC */
+  --rose: 255 204 216;      /* #FFCCD8 */
+  --peach: 255 219 204;     /* #FFDBCC */
+
+  --paper: 246 246 244;     /* #F6F6F4 */
+  --paper-2: 239 238 234;   /* #EFEEEA */
+  --line: 219 217 210;      /* #DBD9D2 */
+  --muted: 107 103 95;      /* #6B675F */
+  --body: 35 30 21;         /* #231E15 */
 }
 
 @layer base {
@@ -42,19 +48,20 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-paper font-sans text-body antialiased;
+    @apply bg-white font-sans text-[1rem] text-body antialiased;
     overflow-x: hidden;
+    font-feature-settings: 'ss01' off;
   }
   h1, h2, h3, h4 {
     @apply text-ink-900;
   }
   ::selection {
-    background: rgb(var(--brass-300) / 0.55);
-    color: rgb(var(--ink-950));
+    background: rgb(var(--sun) / 0.8);
+    color: rgb(var(--ink-900));
   }
   :focus-visible {
     outline: 2px solid rgb(var(--brand-500));
-    outline-offset: 2px;
+    outline-offset: 3px;
   }
   img {
     max-width: 100%;
@@ -72,70 +79,139 @@
     @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-8;
   }
 
-  /* Small uppercase label above section headings */
+  /* Short label above section headings */
   .eyebrow {
-    @apply inline-block text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-brass-600;
+    @apply inline-block text-sm font-semibold text-ink-900;
   }
   .eyebrow-light {
-    @apply text-brass-300;
+    @apply text-sun;
+  }
+
+  /* Small meta text: dates, categories, counts */
+  .label {
+    @apply text-xs font-medium text-muted;
   }
 
   .h-display {
-    @apply font-serif font-normal tracking-[-0.015em] text-ink-900;
+    @apply font-serif font-normal tracking-[-0.025em] text-ink-900;
+    font-variant-ligatures: none;
     text-wrap: balance;
   }
 
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold tracking-[0.01em] transition-colors duration-200 disabled:opacity-60;
+  /* ── Buttons: pill, 1px outline, lifts onto a solid edge on hover ──
+     Use one variant class per button (btn-primary, btn-dark, …). */
+  :is(.btn, .btn-primary, .btn-dark, .btn-light, .btn-outline, .btn-outline-light, .btn-whatsapp) {
+    --btn-bg: transparent;
+    --btn-fg: rgb(var(--ink-900));
+    --btn-stroke: rgb(var(--ink-900));
+    --btn-stroke-w: 1px;
+    --btn-depth: rgb(var(--ink-900));
+    @apply relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-[0.9375rem] font-medium leading-5;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    box-shadow: 0 0 0 var(--btn-stroke-w) var(--btn-stroke);
+    transition:
+      transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+      background-color 0.2s,
+      color 0.2s;
   }
+  :is(.btn, .btn-primary, .btn-dark, .btn-light, .btn-outline, .btn-outline-light, .btn-whatsapp):hover {
+    transform: translateY(-0.1875rem);
+    box-shadow:
+      0 0 0 var(--btn-stroke-w) var(--btn-stroke),
+      0 0.1875rem 0 0 var(--btn-depth);
+  }
+  :is(.btn, .btn-primary, .btn-dark, .btn-light, .btn-outline, .btn-outline-light, .btn-whatsapp):active {
+    transform: translateY(0);
+    box-shadow: 0 0 0 var(--btn-stroke-w) var(--btn-stroke);
+    transition-duration: 0.1s;
+  }
+  :is(.btn, .btn-primary, .btn-dark, .btn-light, .btn-outline, .btn-outline-light, .btn-whatsapp):disabled {
+    @apply pointer-events-none opacity-60;
+  }
+
+  /* On dark sections buttons drop the outline and lift onto a white edge */
+  .on-dark :is(.btn, .btn-primary, .btn-dark, .btn-light, .btn-outline, .btn-whatsapp) {
+    --btn-stroke-w: 0px;
+    --btn-depth: #fff;
+  }
+
   .btn-primary {
-    @apply btn bg-ink-900 text-white hover:bg-brand-700;
+    --btn-bg: rgb(var(--sun));
   }
-  .btn-brass {
-    @apply btn bg-brass-400 text-ink-950 hover:bg-brass-300;
+  .btn-dark {
+    --btn-bg: rgb(var(--ink-900));
+    --btn-fg: #fff;
+    --btn-depth: rgb(var(--ink-700));
   }
-  .btn-outline {
-    @apply btn border border-ink-900/25 bg-transparent text-ink-900 hover:border-ink-900 hover:bg-ink-900 hover:text-white;
-  }
-  .btn-outline-light {
-    @apply btn border border-white/30 text-white hover:border-white hover:bg-white hover:text-ink-900;
+  .btn-light {
+    --btn-bg: #fff;
   }
   .btn-whatsapp {
-    @apply btn bg-whatsapp text-white hover:brightness-95;
+    --btn-bg: theme('colors.whatsapp');
+    --btn-fg: #fff;
+  }
+  .btn-outline-light {
+    --btn-fg: #fff;
+    --btn-stroke: #fff;
+    --btn-depth: #fff;
+  }
+  .btn-sm {
+    @apply px-4 py-2 text-[0.8125rem];
   }
 
   .card {
-    @apply rounded-sm border border-line bg-white;
+    @apply rounded-card border border-line bg-white;
   }
 
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-sm border border-line bg-white px-3 py-1.5 text-xs font-medium text-ink-800 transition-colors hover:border-brand-500 hover:text-brand-700;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3.5 py-1.5 text-[0.8125rem] font-medium text-ink-900 transition-colors hover:border-ink-900;
   }
   .chip-active {
-    @apply border-ink-900 bg-ink-900 text-white hover:border-ink-900 hover:text-white;
+    @apply border-ink-900 bg-ink-900 text-white hover:border-ink-900;
   }
 
   .tag {
-    @apply inline-flex items-center rounded-sm px-1.5 py-0.5 text-2xs font-semibold uppercase tracking-wider;
+    @apply inline-flex items-center rounded-full px-2 py-0.5 text-2xs font-semibold;
   }
 
   .input {
-    @apply w-full rounded-sm border border-line bg-white px-4 py-3 text-sm text-ink-900 outline-none transition placeholder:text-muted/70 focus:border-ink-900 focus:ring-1 focus:ring-ink-900;
+    @apply w-full rounded-lg border border-ink-900/35 bg-white px-4 py-3 text-[0.9375rem] text-ink-900 outline-none transition placeholder:text-muted/80 hover:border-ink-900 focus:border-ink-900 focus:ring-2 focus:ring-brand-500;
   }
 
+  /* Text link: underlined, highlighted in yellow on hover */
+  .text-link,
   .link-underline {
-    @apply underline decoration-brass-400 decoration-2 underline-offset-4 transition-colors hover:text-brand-700;
+    @apply font-medium text-ink-900 underline decoration-1 underline-offset-[3px];
+    transition: background-color 0.15s, box-shadow 0.15s;
+  }
+  .text-link:hover,
+  .link-underline:hover {
+    background-color: rgb(var(--sun) / 0.65);
+    box-shadow: 0 0 0 0.2rem rgb(var(--sun) / 0.65);
+  }
+  .on-dark .text-link {
+    @apply text-white;
+  }
+  .on-dark .text-link:hover {
+    @apply text-ink-900;
+  }
+
+  /* Rounded media frame used for photography */
+  .media {
+    @apply overflow-hidden rounded-panel bg-paper-2;
   }
 
   /* Article body typography */
   .prose-article {
-    @apply text-[1.0625rem] leading-[1.8] text-ink-800;
+    @apply text-[1.0625rem] leading-[1.75] text-ink-800;
   }
   .prose-article p {
     @apply mb-5;
   }
   .prose-article h2 {
-    @apply mb-3 mt-10 font-serif text-[1.65rem] font-medium leading-snug text-ink-900;
+    @apply mb-3 mt-10 font-serif text-[1.75rem] font-normal leading-tight tracking-[-0.02em] text-ink-900;
   }
   .prose-article strong {
     @apply font-semibold text-ink-900;
@@ -143,18 +219,6 @@
 }
 
 @layer utilities {
-  .bg-grid {
-    background-image:
-      linear-gradient(rgb(var(--line) / 0.55) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--line) / 0.55) 1px, transparent 1px);
-    background-size: 56px 56px;
-  }
-  .bg-grid-dark {
-    background-image:
-      linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px);
-    background-size: 56px 56px;
-  }
   .scrollbar-none {
     scrollbar-width: none;
   }
@@ -168,17 +232,17 @@
 
 /* ─── Placeholder highlighting (demo mode) ───────────────── */
 .ph {
-  background: rgb(var(--brass-100));
-  color: rgb(var(--brass-600));
-  outline: 1px dashed rgb(var(--brass-500));
+  background: rgb(var(--sun-light));
+  color: rgb(var(--ink-900));
+  outline: 1px dashed rgb(var(--sun-deep));
   outline-offset: 1px;
   border-radius: 4px;
   padding: 0 0.25em;
   font-style: normal;
 }
 .on-dark .ph {
-  background: rgb(var(--brass-400) / 0.15);
-  color: rgb(var(--brass-300));
+  background: rgb(var(--sun) / 0.15);
+  color: rgb(var(--sun));
 }
 .ph-hidden .ph {
   background: none;
@@ -201,6 +265,7 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  :is(.btn, .btn-primary, .btn-dark, .btn-light, .btn-outline, .btn-outline-light, .btn-whatsapp) { transform: none !important; transition: none; }
   .animate-ticker, .animate-rise { animation: none !important; }
 }
 

@@ -49,43 +49,43 @@ export default function CountryPage() {
         title={c.headline}
         intro={c.tagline}
         aside={
-          <div className="card overflow-hidden shadow-soft">
-            <div className="flex items-center gap-4 border-b border-line bg-paper px-6 py-5">
+          <div className="overflow-hidden rounded-panel border border-ink-900 bg-white">
+            <div className="flex items-center gap-4 border-b border-line px-7 py-6">
               <Flag code={c.flag} name={c.name} className="h-10 w-14" />
               <div>
-                <p className="text-2xs font-semibold uppercase tracking-wider text-muted">Professional fee</p>
-                <p className="font-serif text-2xl text-ink-900"><Ph>{c.startingPrice}</Ph></p>
+                <p className="label">Professional fee</p>
+                <p className="font-serif text-[1.75rem] leading-tight tracking-[-0.02em] text-ink-900"><Ph>{c.startingPrice}</Ph></p>
               </div>
             </div>
-            <div className="grid gap-2 p-6">
+            <div className="grid gap-3 p-7">
               <Link to={`/contact?service=${encodeURIComponent(c.headline)}`} className="btn-primary">Start incorporation</Link>
               <a href={waLink(msg)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp"><i className="ri-whatsapp-line" /> Discuss on WhatsApp</a>
-              <p className="mt-1 text-center text-xs text-muted">Government / registry fees at actuals.</p>
+              <p className="mt-1 text-center text-xs text-ink-800">Government / registry fees at actuals.</p>
             </div>
           </div>
         }
       />
 
       {/* Key facts */}
-      <section className="bg-white py-14">
+      <section className="bg-white pb-6 pt-16 sm:pt-20">
         <div className="container-site">
-          <dl className="grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          <dl className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
             {c.facts.map((f) => (
-              <div key={f.label} className="bg-white p-6">
-                <dt className="text-2xs font-semibold uppercase tracking-wider text-muted">{f.label}</dt>
-                <dd className="mt-1 font-serif text-xl text-ink-900">{f.value}</dd>
+              <div key={f.label} className="border-t border-ink-900 pt-4">
+                <dt className="text-[0.8125rem] text-ink-800">{f.label}</dt>
+                <dd className="mt-1 font-serif text-[1.5rem] leading-tight tracking-[-0.015em] text-ink-900">{f.value}</dd>
               </div>
             ))}
           </dl>
         </div>
       </section>
 
-      <section className="bg-white pb-20">
+      <section className="bg-white py-16 sm:pb-24">
         <div className="container-site grid gap-14 lg:grid-cols-[1fr_340px]">
           <div className="space-y-16">
             <div>
-              <h2 className="h-display text-3xl">Overview</h2>
-              <p className="mt-4 text-[17px] leading-relaxed text-ink-800">{c.intro}</p>
+              <h2 className="h-display text-[2.25rem] leading-[1.05] sm:text-[2.75rem]">Overview</h2>
+              <p className="mt-5 text-[1.0625rem] leading-relaxed text-ink-800">{c.intro}</p>
               <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                 {c.why.map((w) => (
                   <li key={w} className="flex gap-3 text-[15px] text-ink-800">
@@ -96,25 +96,25 @@ export default function CountryPage() {
             </div>
 
             <div>
-              <h2 className="h-display text-3xl">Entity options</h2>
+              <h2 className="h-display text-[2.25rem] leading-[1.05] sm:text-[2.75rem]">Entity <em className="italic">options</em></h2>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {c.entities.map((e) => (
-                  <div key={e.name} className="rounded-sm border border-line bg-paper p-5">
-                    <p className="font-semibold text-ink-900">{e.name}</p>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted">{e.desc}</p>
+                  <div key={e.name} className="rounded-card bg-paper p-6">
+                    <p className="font-serif text-[1.375rem] leading-tight tracking-[-0.015em] text-ink-900">{e.name}</p>
+                    <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-800">{e.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             <div>
-              <h2 className="h-display text-3xl">The process</h2>
-              <ol className="mt-8 grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2">
+              <h2 className="h-display text-[2.25rem] leading-[1.05] sm:text-[2.75rem]">The <em className="italic">process</em></h2>
+              <ol className="mt-8 grid gap-3 sm:grid-cols-2">
                 {c.process.map((s, i) => (
-                  <li key={s.title} className="bg-white p-6">
-                    <span className="font-serif text-3xl text-brass-500">0{i + 1}</span>
-                    <p className="mt-3 font-semibold text-ink-900">{s.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted">{s.desc}</p>
+                  <li key={s.title} className={`rounded-card p-6 ${['bg-cornflower', 'bg-mint', 'bg-rose', 'bg-peach'][i % 4]}`}>
+                    <span className="font-serif text-[2.5rem] leading-none text-ink-900">{i + 1}</span>
+                    <p className="mt-6 font-serif text-[1.375rem] leading-tight tracking-[-0.015em] text-ink-900">{s.title}</p>
+                    <p className="mt-1.5 text-[0.9375rem] leading-relaxed text-ink-800">{s.desc}</p>
                   </li>
                 ))}
               </ol>
@@ -122,55 +122,55 @@ export default function CountryPage() {
 
             <div className="grid gap-10 sm:grid-cols-2">
               <div>
-                <h2 className="h-display text-2xl">Documents required</h2>
+                <h2 className="h-display text-[1.75rem] leading-tight">Documents required</h2>
                 <ul className="mt-5 space-y-3">
                   {c.documents.map((d) => (
-                    <li key={d} className="flex gap-3 text-[15px] text-ink-800"><i className="ri-file-text-line mt-0.5 text-brand-600" /> {d}</li>
+                    <li key={d} className="flex gap-3 text-[15px] text-ink-800"><i className="ri-file-text-line mt-0.5 text-ink-900" /> {d}</li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h2 className="h-display text-2xl">After incorporation</h2>
+                <h2 className="h-display text-[1.75rem] leading-tight">After incorporation</h2>
                 <ul className="mt-5 space-y-3">
                   {c.compliance.map((d) => (
-                    <li key={d} className="flex gap-3 text-[15px] text-ink-800"><i className="ri-calendar-check-line mt-0.5 text-brand-600" /> {d}</li>
+                    <li key={d} className="flex gap-3 text-[15px] text-ink-800"><i className="ri-calendar-check-line mt-0.5 text-ink-900" /> {d}</li>
                   ))}
                 </ul>
               </div>
             </div>
 
             {c.indiaNote && (
-              <div className="on-dark rounded-sm bg-ink-900 p-8 text-white sm:p-10">
+              <div className="on-dark rounded-panel bg-brand-800 p-8 text-white sm:p-12">
                 <p className="eyebrow eyebrow-light">India-side compliance</p>
-                <h2 className="mt-3 font-serif text-2xl !text-white sm:text-3xl">{c.indiaNote.title}</h2>
+                <h2 className="mt-3 font-serif text-[2rem] leading-[1.05] tracking-[-0.025em] !text-white sm:text-[2.5rem]">{c.indiaNote.title}</h2>
                 <p className="mt-3 leading-relaxed text-white/75">{c.indiaNote.body}</p>
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                   {c.indiaNote.points.map((p) => (
-                    <li key={p} className="flex gap-3 text-sm text-white/85"><i className="ri-check-line text-brass-300" /> {p}</li>
+                    <li key={p} className="flex gap-3 text-sm text-white/85"><i className="ri-check-line text-sun" /> {p}</li>
                   ))}
                 </ul>
               </div>
             )}
 
-            <p className="text-xs leading-relaxed text-muted">
+            <p className="text-xs leading-relaxed text-ink-800">
               Information on this page is indicative and based on generally applicable rules. Requirements, fees and processing times vary by
               activity and change from time to time — we confirm the current position before you proceed.
             </p>
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-sm bg-paper p-6">
+            <div className="rounded-card bg-cream p-6">
               <p className="eyebrow">Other jurisdictions</p>
               <ul className="mt-4 space-y-1">
                 {COUNTRIES.filter((x) => x.slug !== c.slug).map((x) => (
                   <li key={x.slug}>
-                    <Link to={`/company-registration/${x.slug}`} className="flex items-center gap-3 rounded-sm px-2 py-2.5 text-sm font-semibold text-ink-800 hover:bg-white hover:text-brand-700">
+                    <Link to={`/company-registration/${x.slug}`} className="flex items-center gap-3 rounded-lg px-2 py-2.5 text-[0.9375rem] font-medium text-ink-900 hover:bg-white hover:underline">
                       <Flag code={x.flag} className="h-4 w-6" /> {x.name}
                     </Link>
                   </li>
                 ))}
               </ul>
-              <Link to="/company-registration" className="mt-3 block px-2 text-xs font-semibold text-brand-700 hover:underline">Compare all →</Link>
+              <Link to="/company-registration" className="text-link mx-2 mt-3 inline-block text-sm">Compare all</Link>
             </div>
           </aside>
         </div>

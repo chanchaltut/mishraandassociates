@@ -29,7 +29,7 @@ export default function GlobalIncorporation() {
       >
         <div className="mt-8 flex flex-wrap gap-2">
           {COUNTRIES.map((c) => (
-            <Link key={c.slug} to={`/company-registration/${c.slug}`} className="chip !py-2">
+            <Link key={c.slug} to={`/company-registration/${c.slug}`} className="chip !border-ink-900/30 !py-2 hover:!border-ink-900">
               <Flag code={c.flag} className="h-3.5 w-5" /> {c.shortName || c.name}
             </Link>
           ))}
@@ -37,19 +37,21 @@ export default function GlobalIncorporation() {
       </PageHero>
 
       {/* Country cards */}
-      <section className="bg-paper py-16 sm:py-20">
+      <section className="bg-white py-20 sm:py-24">
         <div className="container-site grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {COUNTRIES.map((c) => (
-            <Link key={c.slug} to={`/company-registration/${c.slug}`} className="group flex flex-col rounded-sm border border-line bg-white p-7 transition-all">
+          {COUNTRIES.map((c, i) => (
+            <Link key={c.slug} to={`/company-registration/${c.slug}`} className={`group flex flex-col rounded-panel p-7 sm:p-8 ${['bg-cream', 'bg-cornflower', 'bg-mint', 'bg-rose', 'bg-peach', 'bg-paper'][i % 6]}`}>
               <div className="flex items-center justify-between">
                 <Flag code={c.flag} name={c.name} className="h-9 w-14" />
-                <i className="ri-arrow-right-line text-xl text-muted transition-colors group-hover:text-brand-600" />
+                <span className="grid h-10 w-10 place-items-center rounded-full border border-ink-900 text-ink-900 transition-colors group-hover:bg-ink-900 group-hover:text-white">
+                  <i className="ri-arrow-right-line" />
+                </span>
               </div>
-              <h2 className="mt-6 font-serif text-2xl text-ink-900">{c.name}</h2>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{c.tagline}</p>
-              <div className="mt-6 flex items-center justify-between border-t border-line pt-4 text-sm">
-                <span className="text-muted">{c.facts[0].value}</span>
-                <span className="font-semibold text-brand-700"><Ph>{c.startingPrice}</Ph></span>
+              <h2 className="mt-10 font-serif text-[2rem] leading-none tracking-[-0.025em] text-ink-900 group-hover:underline">{c.name}</h2>
+              <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-ink-800">{c.tagline}</p>
+              <div className="mt-7 flex items-center justify-between border-t border-ink-900/20 pt-4 text-sm">
+                <span className="text-ink-800">{c.facts[0].value}</span>
+                <span className="font-semibold text-ink-900"><Ph>{c.startingPrice}</Ph></span>
               </div>
             </Link>
           ))}
@@ -57,15 +59,15 @@ export default function GlobalIncorporation() {
       </section>
 
       {/* Comparison table */}
-      <section className="bg-white py-16 sm:py-24">
+      <section className="bg-paper py-20 sm:py-28">
         <div className="container-site">
           <SectionHeading eyebrow="At a glance" title="Compare jurisdictions" accent="side by side." intro="Indicative information for the most common entity in each country. Requirements and rates change — we confirm the current position during consultation." />
-          <div className="mt-10 overflow-x-auto rounded-sm border border-line">
+          <div className="mt-12 overflow-x-auto rounded-panel border border-ink-900 bg-white">
             <table className="w-full min-w-[820px] text-left text-sm">
-              <thead className="bg-ink-900 text-white">
+              <thead className="border-b border-ink-900 bg-sun text-ink-900">
                 <tr>
                   {['Jurisdiction', 'Common entity', 'Typical timeline', 'Local director', 'Headline tax', 'Minimum capital'].map((h) => (
-                    <th key={h} className="px-5 py-4 text-2xs font-semibold uppercase tracking-wider">{h}</th>
+                    <th key={h} className="px-5 py-4 text-[0.8125rem] font-semibold">{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -73,9 +75,9 @@ export default function GlobalIncorporation() {
                 {COMPARISON.map((row) => {
                   const c = getCountry(row.slug);
                   return (
-                    <tr key={row.slug} className="transition-colors hover:bg-paper">
+                    <tr key={row.slug} className="transition-colors hover:bg-sun-light">
                       <td className="px-5 py-4">
-                        <Link to={`/company-registration/${row.slug}`} className="flex items-center gap-3 font-semibold text-ink-900 hover:text-brand-700">
+                        <Link to={`/company-registration/${row.slug}`} className="flex items-center gap-3 font-serif text-[1.125rem] text-ink-900 hover:underline">
                           <Flag code={c.flag} className="h-4 w-6" /> {c.name}
                         </Link>
                       </td>
@@ -90,12 +92,12 @@ export default function GlobalIncorporation() {
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-xs text-muted">Tax rates are headline corporate rates before surcharges, cess, exemptions or local taxes.</p>
+          <p className="mt-4 text-xs text-ink-800">Tax rates are headline corporate rates before surcharges, cess, exemptions or local taxes.</p>
         </div>
       </section>
 
       {/* India outbound */}
-      <section className="on-dark bg-ink-950 py-16 text-white sm:py-24">
+      <section className="on-dark bg-ink-900 py-20 text-white sm:py-28">
         <div className="container-site grid gap-10 lg:grid-cols-2 lg:items-center">
           <SectionHeading
             light
@@ -106,9 +108,9 @@ export default function GlobalIncorporation() {
           />
           <ol className="grid gap-3 sm:grid-cols-2">
             {['Eligibility & structure review', 'ODI filing & UIN allotment', 'Remittance & valuation documents', 'Annual Performance Report'].map((t, i) => (
-              <li key={t} className="rounded-sm border border-white/10 bg-white/[0.04] p-5">
-                <span className="font-serif text-3xl text-brass-300">0{i + 1}</span>
-                <p className="mt-3 font-semibold">{t}</p>
+              <li key={t} className="rounded-card border border-white/20 p-6">
+                <span className="font-serif text-[2.5rem] leading-none text-sun">{i + 1}</span>
+                <p className="mt-6 font-serif text-[1.25rem] leading-tight tracking-[-0.01em]">{t}</p>
               </li>
             ))}
           </ol>

@@ -30,8 +30,8 @@ function ScrollToTop() {
 }
 
 const PageLoader = () => (
-  <div className="grid min-h-[60vh] place-items-center bg-paper">
-    <div className="h-10 w-10 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" />
+  <div className="grid min-h-[60vh] place-items-center bg-white">
+    <div className="h-10 w-10 animate-spin rounded-full border-2 border-ink-900 border-t-sun" />
   </div>
 );
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Seo, { breadcrumbLd, ORG_ID, absUrl } from '../lib/seo';
 import { PARENT_SERVICES, SERVICES } from '../data/services';
-import { PageHero } from '../components/ui';
+import { PageHero, SectionHeading } from '../components/ui';
 import ServiceExplorer from '../components/ServiceExplorer';
 import { CTABand } from '../components/Blocks';
 
@@ -46,16 +46,15 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-white py-16 sm:py-20">
+      <section className="bg-white py-20 sm:py-24">
         <div className="container-site">
-          <p className="eyebrow">Service guides</p>
-          <h2 className="h-display mt-3 text-3xl">In-depth service pages</h2>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <SectionHeading eyebrow="Service guides" title="In-depth" accent="service pages." />
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {SERVICES.map((s) => (
-              <Link key={s.slug} to={`/services/${s.slug}`} className="group rounded-sm border border-line p-5 transition-all hover:border-brand-200">
-                <i className={`${s.icon} text-2xl text-brand-600`} />
-                <p className="mt-3 text-sm font-semibold leading-snug text-ink-900 group-hover:text-brand-700">{s.shortTitle}</p>
-                <p className="mt-1 text-xs text-muted">From {s.startingPrice}</p>
+              <Link key={s.slug} to={`/services/${s.slug}`} className="group flex flex-col rounded-card bg-paper p-5 transition-colors hover:bg-sun-light">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-white text-xl text-ink-900"><i className={s.icon} /></span>
+                <p className="mt-6 font-serif text-[1.25rem] leading-tight tracking-[-0.015em] text-ink-900 group-hover:underline">{s.shortTitle}</p>
+                <p className="mt-auto pt-3 text-[0.8125rem] text-ink-800">From <span className="font-semibold text-ink-900">{s.startingPrice}</span></p>
               </Link>
             ))}
           </div>

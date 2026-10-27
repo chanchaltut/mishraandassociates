@@ -29,12 +29,12 @@ function Share({ url, title }) {
   return (
     <div className="flex items-center gap-2">
       {links.map((l) => (
-        <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${l.label}`} className="grid h-9 w-9 place-items-center rounded-sm border border-line text-ink-800 hover:border-brand-500 hover:text-brand-700">
+        <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${l.label}`} className="grid h-10 w-10 place-items-center rounded-full border border-ink-900 text-ink-900 transition-colors hover:bg-white">
           <i className={l.icon} />
         </a>
       ))}
-      <button onClick={copy} className="grid h-9 w-9 place-items-center rounded-sm border border-line text-ink-800 hover:border-brand-500 hover:text-brand-700" aria-label="Copy link">
-        <i className={copied ? 'ri-check-line text-brand-600' : 'ri-link'} />
+      <button onClick={copy} className="grid h-10 w-10 place-items-center rounded-full border border-ink-900 text-ink-900 transition-colors hover:bg-white" aria-label="Copy link">
+        <i className={copied ? 'ri-check-line' : 'ri-link'} />
       </button>
     </div>
   );
@@ -84,20 +84,20 @@ export default function Article({ kind }) {
       />
 
       <article className="bg-white">
-        <header className="border-b border-line bg-paper">
-          <div className="container-site max-w-4xl pb-12 pt-10 sm:pt-14">
+        <header className="bg-cream">
+          <div className="container-site max-w-4xl pb-14 pt-6 sm:pb-20 sm:pt-8">
             <Breadcrumbs items={crumbs} />
-            <p className="mt-8 flex items-center gap-2 text-2xs font-semibold uppercase tracking-[0.18em] text-brass-600">
+            <p className="mt-10 flex items-center gap-2 text-sm font-semibold text-ink-900 sm:mt-14">
               {item.category} <SampleBadge item={item} />
             </p>
-            <h1 className="h-display mt-4 text-3xl leading-[1.12] sm:text-5xl">{item.title}</h1>
-            <p className="mt-5 text-lg leading-relaxed text-muted">{description}</p>
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+            <h1 className="h-display mt-4 text-[2.5rem] leading-[1.04] sm:text-[3.75rem]">{item.title}</h1>
+            <p className="mt-6 text-lg leading-relaxed text-ink-800 sm:text-xl">{description}</p>
+            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-ink-900/25 pt-6">
               <div className="flex items-center gap-3 text-sm">
-                <span className="grid h-10 w-10 place-items-center rounded-sm bg-ink-900 font-serif text-brass-300">MA</span>
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-sun font-serif italic text-ink-900 shadow-edge">m&amp;a</span>
                 <span>
                   <span className="block font-semibold text-ink-900">{item.author || `${SITE.name} Desk`}</span>
-                  <span className="text-muted">{formatDate(item.date, { day: 'numeric', month: 'long', year: 'numeric' })}{item.readTime ? ` · ${item.readTime}` : ''}</span>
+                  <span className="text-ink-800">{formatDate(item.date, { day: 'numeric', month: 'long', year: 'numeric' })}{item.readTime ? ` · ${item.readTime}` : ''}</span>
                 </span>
               </div>
               <Share url={absUrl(path)} title={item.title} />
@@ -107,45 +107,45 @@ export default function Article({ kind }) {
 
         {item.image && (
           <div className="container-site max-w-5xl">
-            <img src={item.image.replace('w=800', 'w=1400')} alt="" className="-mt-px aspect-[21/9] w-full rounded-b-[28px] object-cover" />
+            <img src={item.image.replace('w=800', 'w=1400')} alt="" className="mt-10 aspect-[21/9] w-full rounded-panel object-cover sm:mt-14" />
           </div>
         )}
 
         <div className="container-site grid max-w-5xl gap-12 py-12 sm:py-16 lg:grid-cols-[1fr_260px]">
           <div className="max-w-2xl">
             <RichText paragraphs={paragraphs} />
-            <div className="mt-12 rounded-sm border border-line bg-paper p-6 text-sm text-muted">
+            <div className="mt-12 rounded-card bg-paper p-6 text-sm leading-relaxed text-ink-800">
               This article is for general information and does not constitute professional advice. Laws and rates may have changed since publication.
-              <Link to="/contact" className="ml-1 font-semibold text-brand-700 hover:underline">Speak to us</Link> about your specific situation.
+              <Link to="/contact" className="text-link ml-1">Speak to us</Link> about your specific situation.
             </div>
           </div>
           <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="on-dark rounded-sm bg-ink-900 p-6 text-white">
-              <p className="font-serif text-xl leading-snug">Need help with this?</p>
-              <p className="mt-2 text-sm text-white/70">Talk to an adviser — usually same-day response.</p>
-              <a href={waLink(`Hello ${SITE.name}, I read “${item.title}” and have a question.`)} target="_blank" rel="noopener noreferrer" className="btn-brass mt-5 w-full">
+            <div className="on-dark rounded-panel bg-ink-900 p-7 text-white">
+              <p className="font-serif text-[1.625rem] leading-tight tracking-[-0.02em]">Need help with <em className="italic">this?</em></p>
+              <p className="mt-2 text-sm text-white/75">Talk to an adviser — usually same-day response.</p>
+              <a href={waLink(`Hello ${SITE.name}, I read “${item.title}” and have a question.`)} target="_blank" rel="noopener noreferrer" className="btn-primary mt-5 w-full">
                 <i className="ri-whatsapp-line" /> Ask on WhatsApp
               </a>
             </div>
-            <div className="rounded-sm border border-line p-6">
-              <p className="font-semibold text-ink-900">Get the weekly brief</p>
+            <div className="rounded-panel bg-cream p-7">
+              <p className="font-serif text-[1.375rem] tracking-[-0.015em] text-ink-900">Get the weekly brief</p>
               <div className="mt-3"><NewsletterForm stacked /></div>
             </div>
           </aside>
         </div>
       </article>
 
-      <section className="border-t border-line bg-paper py-16">
+      <section className="bg-paper py-20 sm:py-24">
         <div className="container-site">
           <div className="flex items-end justify-between">
-            <h2 className="h-display text-3xl">{isNews ? 'More news' : 'Keep reading'}</h2>
-            <Link to={base} className="text-sm font-semibold text-brand-700 hover:underline">View all →</Link>
+            <h2 className="h-display text-[2.25rem] leading-[1.05] sm:text-[2.75rem]">{isNews ? 'More news' : 'Keep reading'}</h2>
+            <Link to={base} className="text-link text-sm">View all</Link>
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {more.map((m) => (
-              <Link key={m.slug} to={`${base}/${m.slug}`} className="group rounded-sm border border-line bg-white p-6 transition-all">
-                <p className="text-2xs font-semibold uppercase tracking-wider text-brass-600">{m.category} · {formatDate(m.date)}</p>
-                <p className="mt-3 font-serif text-xl leading-snug text-ink-900 group-hover:text-brand-700">{m.title}</p>
+              <Link key={m.slug} to={`${base}/${m.slug}`} className="group rounded-card bg-white p-7 transition-colors hover:bg-sun-light">
+                <p className="label font-semibold text-ink-900">{m.category} · {formatDate(m.date)}</p>
+                <p className="mt-3 font-serif text-[1.5rem] leading-[1.15] tracking-[-0.015em] text-ink-900 group-hover:underline">{m.title}</p>
               </Link>
             ))}
           </div>

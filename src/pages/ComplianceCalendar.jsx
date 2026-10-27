@@ -7,10 +7,10 @@ import NewsletterForm from '../components/NewsletterForm';
 import { CTABand } from '../components/Blocks';
 
 const CAT_STYLE = {
-  'Income Tax': 'bg-brand-50 text-brand-700',
-  GST: 'bg-brass-100 text-brass-600',
-  Payroll: 'bg-sky-50 text-sky-800',
-  Corporate: 'bg-paper-2 text-ink-800',
+  'Income Tax': 'bg-cornflower text-ink-900',
+  GST: 'bg-sun-light text-ink-900',
+  Payroll: 'bg-mint text-ink-900',
+  Corporate: 'bg-peach text-ink-900',
 };
 
 export default function ComplianceCalendar() {
@@ -40,10 +40,11 @@ export default function ComplianceCalendar() {
         title="Compliance"
         accent="calendar."
         intro="Statutory due dates for the next four months. Dates shown are the default due dates — government extensions, when notified, will be reflected here."
+        tone="cream"
       />
 
-      <section className="bg-paper py-12 sm:py-16">
-        <div className="container-site grid gap-12 lg:grid-cols-[1fr_320px]">
+      <section className="bg-white py-14 sm:py-20">
+        <div className="container-site grid gap-12 lg:grid-cols-[1fr_340px] lg:gap-16">
           <div>
             <div className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:px-0">
               {CALENDAR_CATEGORIES.map((c) => (
@@ -54,22 +55,22 @@ export default function ComplianceCalendar() {
             <div className="mt-8 space-y-10">
               {Object.entries(byMonth).map(([month, list]) => (
                 <div key={month}>
-                  <h2 className="font-serif text-2xl text-ink-900">{month}</h2>
-                  <ul className="mt-4 divide-y divide-line overflow-hidden rounded-sm border border-line bg-white">
+                  <h2 className="font-serif text-[2rem] leading-tight tracking-[-0.025em] text-ink-900">{month}</h2>
+                  <ul className="mt-4 divide-y divide-line overflow-hidden rounded-card border border-ink-900 bg-white">
                     {list.map((d) => {
                       const dm = dayMonth(d.date);
                       const left = daysUntil(d.date);
                       return (
                         <li key={`${d.title}-${d.date}`} className="flex items-center gap-4 px-5 py-4 sm:gap-6">
                           <span className="w-12 shrink-0 text-center">
-                            <span className="block font-serif text-2xl leading-none text-ink-900">{dm.day}</span>
-                            <span className="text-2xs font-semibold uppercase text-muted">{dm.weekday}</span>
+                            <span className="block font-serif text-[1.75rem] leading-none text-ink-900">{dm.day}</span>
+                            <span className="text-2xs font-medium text-muted">{dm.weekday}</span>
                           </span>
                           <span className="flex-1">
-                            <span className="block text-[15px] font-semibold text-ink-900">{d.title}</span>
+                            <span className="block text-[0.9375rem] font-medium text-ink-900">{d.title}</span>
                             <span className={`tag mt-1.5 ${CAT_STYLE[d.category]}`}>{d.category}</span>
                           </span>
-                          <span className={`shrink-0 text-xs font-semibold ${left <= 5 ? 'text-brass-600' : 'text-muted'}`}>
+                          <span className={`tag shrink-0 ${left <= 5 ? 'bg-sun text-ink-900' : 'bg-paper text-ink-800'}`}>
                             {left === 0 ? 'Today' : left === 1 ? 'Tomorrow' : `${left} days`}
                           </span>
                         </li>
@@ -79,17 +80,17 @@ export default function ComplianceCalendar() {
                 </div>
               ))}
             </div>
-            <p className="mt-8 text-xs leading-relaxed text-muted">
+            <p className="mt-8 text-xs leading-relaxed text-ink-800">
               Due dates are statutory defaults and may differ for specific taxpayers (e.g. QRMP filers by state) or be extended by CBDT, CBIC or MCA.
               Always confirm before filing.
             </p>
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="on-dark rounded-sm bg-ink-900 p-6 text-white">
-              <i className="ri-notification-badge-line text-3xl text-brass-300" />
-              <p className="mt-3 font-serif text-xl leading-snug">Never miss a due date</p>
-              <p className="mt-2 text-sm text-white/70">Get reminders a few days before each deadline, with our weekly brief.</p>
+            <div className="on-dark rounded-panel bg-ink-900 p-7 text-white">
+              <span className="grid h-12 w-12 place-items-center rounded-full bg-sun text-2xl text-ink-900"><i className="ri-notification-badge-line" /></span>
+              <p className="mt-5 font-serif text-[1.625rem] leading-tight tracking-[-0.02em]">Never miss a <em className="italic">due date</em></p>
+              <p className="mt-2 text-sm text-white/75">Get reminders a few days before each deadline, with our weekly brief.</p>
               <div className="mt-5"><NewsletterForm dark stacked /></div>
             </div>
           </aside>

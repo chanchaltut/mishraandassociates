@@ -11,41 +11,41 @@ function CategoryCard({ service, defaultOpen }) {
   useEffect(() => setOpen(defaultOpen), [defaultOpen]);
 
   return (
-    <article id={service.id} className={`scroll-mt-32 rounded-sm border bg-white transition-all ${open ? 'border-ink-900/40' : 'border-line'}`}>
+    <article id={service.id} className={`scroll-mt-32 rounded-card border bg-white transition-colors ${open ? 'border-ink-900' : 'border-line hover:border-ink-900/50'}`}>
       <button type="button" onClick={() => setOpen((o) => !o)} className="flex w-full items-center gap-4 p-5 text-left sm:p-6" aria-expanded={open}>
-        <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-sm border text-xl transition-colors ${open ? 'border-ink-900 bg-ink-900 text-white' : 'border-line text-brand-700'}`}>
+        <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-full border text-xl transition-colors ${open ? 'border-sun bg-sun text-ink-900' : 'border-transparent bg-paper text-ink-900'}`}>
           <i className={service.icon} />
         </span>
         <span className="min-w-0 flex-1">
           <span className="flex flex-wrap items-center gap-2">
-            <span className="text-base font-semibold text-ink-900 sm:text-lg">{service.title}</span>
-            {service.badge && <span className="tag bg-brass-100 text-brass-600">{service.badge}</span>}
+            <span className="font-serif text-[1.375rem] leading-tight tracking-[-0.015em] text-ink-900 sm:text-[1.5rem]">{service.title}</span>
+            {service.badge && <span className="tag bg-sun-light text-ink-900">{service.badge}</span>}
           </span>
-          <span className="mt-0.5 block text-sm text-muted">
-            {service.subcategories.length} services · from <strong className="text-brand-700"><Ph>{service.startingPrice}</Ph></strong>
+          <span className="mt-1 block text-sm text-ink-800">
+            {service.subcategories.length} services · from <strong className="font-semibold text-ink-900"><Ph>{service.startingPrice}</Ph></strong>
           </span>
         </span>
-        <i className={`ri-arrow-down-s-line text-2xl text-muted transition-transform ${open ? 'rotate-180' : ''}`} />
+        <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-900 text-xl text-ink-900 transition-transform ${open ? 'rotate-180' : ''}`}><i className="ri-arrow-down-s-line" /></span>
       </button>
 
       <div className={`grid transition-all duration-300 ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
         <div className="overflow-hidden">
           <div className="border-t border-line px-5 pb-6 pt-4 sm:px-6">
-            <p className="text-sm leading-relaxed text-muted">{service.shortDesc}</p>
-            <ul className="mt-4 divide-y divide-line rounded-sm border border-line">
+            <p className="text-[0.9375rem] leading-relaxed text-ink-800">{service.shortDesc}</p>
+            <ul className="mt-5 divide-y divide-line overflow-hidden rounded-xl border border-line">
               {service.subcategories.map((sub) => (
                 <li key={sub.name} className="flex flex-col gap-2 p-3.5 sm:flex-row sm:items-center sm:gap-4">
-                  <span className="flex flex-1 items-start gap-2.5 text-sm font-semibold text-ink-900">
+                  <span className="flex flex-1 items-start gap-2.5 text-[0.9375rem] font-medium text-ink-900">
                     <i className="ri-checkbox-circle-fill mt-0.5 text-brand-500" />
-                    {sub.href ? <Link to={sub.href} className="hover:text-brand-700 hover:underline">{sub.name}</Link> : sub.name}
-                    {sub.popular && <span className="tag bg-brand-50 text-brand-700">Popular</span>}
+                    {sub.href ? <Link to={sub.href} className="hover:underline">{sub.name}</Link> : sub.name}
+                    {sub.popular && <span className="tag bg-brand-50 text-brand-800">Popular</span>}
                   </span>
                   <span className="flex items-center gap-3 pl-6 sm:pl-0">
-                    <span className="text-xs font-semibold text-brand-700"><Ph>{sub.price}</Ph></span>
+                    <span className="text-[0.8125rem] font-semibold text-ink-900"><Ph>{sub.price}</Ph></span>
                     {sub.href ? (
-                      <Link to={sub.href} className="rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-ink-800 hover:border-brand-500 hover:text-brand-700">Details</Link>
+                      <Link to={sub.href} className="rounded-full border border-ink-900 px-3.5 py-1.5 text-xs font-medium text-ink-900 transition-colors hover:bg-sun">Details</Link>
                     ) : (
-                      <a href={enquiry(sub.name)} target="_blank" rel="noopener noreferrer" className="rounded-sm border border-line px-3 py-1.5 text-xs font-semibold text-ink-800 hover:border-whatsapp hover:text-whatsapp">
+                      <a href={enquiry(sub.name)} target="_blank" rel="noopener noreferrer" className="rounded-full border border-ink-900 px-3.5 py-1.5 text-xs font-medium text-ink-900 transition-colors hover:border-whatsapp hover:bg-whatsapp hover:text-white">
                         Enquire
                       </a>
                     )}
@@ -53,9 +53,9 @@ function CategoryCard({ service, defaultOpen }) {
                 </li>
               ))}
             </ul>
-            <div className="mt-5 flex flex-wrap gap-2">
-              <Link to={`/contact?service=${encodeURIComponent(service.title)}`} className="btn-primary !py-2.5">Request a quote</Link>
-              <a href={enquiry(service.title)} target="_blank" rel="noopener noreferrer" className="btn-outline !py-2.5"><i className="ri-whatsapp-line" /> WhatsApp</a>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link to={`/contact?service=${encodeURIComponent(service.title)}`} className="btn-primary btn-sm">Request a quote</Link>
+              <a href={enquiry(service.title)} target="_blank" rel="noopener noreferrer" className="btn-outline btn-sm"><i className="ri-whatsapp-line" /> WhatsApp</a>
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@ export default function ServiceExplorer() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Search ${total}+ services`}
-            className="input !rounded-sm !pl-10"
+            className="input !rounded-full !pl-10"
             aria-label="Search services"
           />
         </div>
@@ -112,11 +112,11 @@ export default function ServiceExplorer() {
               <button
                 key={c}
                 onClick={() => setCategory(c)}
-                className={`flex shrink-0 items-center gap-2.5 rounded-sm px-4 py-2 text-left text-sm font-semibold transition-colors lg:py-2.5 ${
-                  active ? 'bg-ink-900 text-white' : 'bg-white text-ink-800 hover:bg-white lg:bg-transparent lg:hover:bg-white'
+                className={`flex shrink-0 items-center gap-2.5 rounded-full px-4 py-2 text-left text-[0.9375rem] font-medium transition-colors lg:py-2.5 ${
+                  active ? 'bg-ink-900 text-white' : 'border border-line bg-white text-ink-900 hover:border-ink-900 lg:border-transparent lg:bg-transparent lg:hover:border-transparent lg:hover:bg-white'
                 }`}
               >
-                <i className={`${p?.icon || 'ri-apps-2-line'} ${active ? 'text-brass-300' : 'text-brand-600'}`} />
+                <i className={`${p?.icon || 'ri-apps-2-line'} ${active ? 'text-sun' : 'text-ink-900'}`} />
                 {c === 'All' ? 'All practice areas' : c}
               </button>
             );
@@ -127,8 +127,8 @@ export default function ServiceExplorer() {
       {/* Cards */}
       <div className="space-y-3">
         {filtered.length === 0 && (
-          <div className="rounded-sm border border-dashed border-line bg-white p-10 text-center">
-            <p className="font-serif text-xl text-ink-900">No services match “{query}”.</p>
+          <div className="rounded-card border border-dashed border-line bg-white p-10 text-center">
+            <p className="font-serif text-2xl tracking-[-0.015em] text-ink-900">No services match “{query}”.</p>
             <p className="mt-2 text-sm text-muted">We probably still do it — ask us directly.</p>
             <a href={enquiry(query)} target="_blank" rel="noopener noreferrer" className="btn-whatsapp mt-5"><i className="ri-whatsapp-line" /> Ask on WhatsApp</a>
           </div>
