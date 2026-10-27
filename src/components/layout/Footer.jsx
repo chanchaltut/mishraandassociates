@@ -4,7 +4,7 @@ import { SITE, KNOWLEDGE_LINKS, fullAddress, waLink } from '../../data/site';
 import { PARENT_SERVICES } from '../../data/services';
 import { COUNTRIES } from '../../data/countries';
 import Logo from '../ui/Logo';
-import Ph from '../ui/Ph';
+import { shown } from '../ui/Ph';
 import NewsletterForm from '../NewsletterForm';
 
 const SOCIALS = [
@@ -54,7 +54,9 @@ export default function Footer() {
           <ul className="mt-6 space-y-3 text-[0.9375rem] text-ink-800">
             <li className="flex gap-3">
               <i className="ri-map-pin-line mt-0.5 text-ink-900" />
-              <span><Ph>{SITE.address.street}</Ph>, {SITE.address.city} <Ph>{SITE.address.postalCode}</Ph></span>
+              <a href={SITE.address.mapUrl} target="_blank" rel="noopener noreferrer" className="hover:text-ink-900 hover:underline">
+                {SITE.address.street}, {SITE.address.city} {SITE.address.postalCode}
+              </a>
             </li>
             <li className="flex gap-3">
               <i className="ri-phone-line mt-0.5 text-ink-900" />
@@ -68,13 +70,15 @@ export default function Footer() {
               <i className="ri-mail-line mt-0.5 text-ink-900" />
               <a href={`mailto:${SITE.email}`} className="break-all hover:text-ink-900 hover:underline">{SITE.email}</a>
             </li>
-            <li className="flex gap-3">
-              <i className="ri-time-line mt-0.5 text-ink-900" />
-              <span><Ph>{SITE.hours}</Ph></span>
-            </li>
+            {shown(SITE.hours) && (
+              <li className="flex gap-3">
+                <i className="ri-time-line mt-0.5 text-ink-900" />
+                <span>{SITE.hours}</span>
+              </li>
+            )}
           </ul>
           <div className="mt-7 flex gap-2">
-            {SOCIALS.map((s) => (
+            {SOCIALS.filter((s) => SITE.social?.[s.key] && SITE.social[s.key] !== '#').map((s) => (
               <a
                 key={s.key}
                 href={SITE.social[s.key]}
@@ -119,14 +123,11 @@ export default function Footer() {
 
       <div className="border-t border-ink-900/15">
         <div className="container-site space-y-4 py-7 text-xs text-ink-800">
-          <p className="max-w-4xl leading-relaxed">
-            Disclaimer: Information on this website is for general guidance only and does not constitute professional advice. Laws, rates and due dates change;
-            please consult us before acting on any information. Government and statutory fees are charged at actuals.
-          </p>
+          {SITE.footerDisclaimer && <p className="max-w-4xl leading-relaxed">{SITE.footerDisclaimer}</p>}
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p>
               © {new Date().getFullYear()} {SITE.legalName}. All rights reserved. <span className="hidden sm:inline">·</span>{' '}
-              <Ph>{SITE.registration}</Ph>
+              {SITE.gstin && `GSTIN ${SITE.gstin}`}
             </p>
             <p>
               Designed &amp; developed by{' '}

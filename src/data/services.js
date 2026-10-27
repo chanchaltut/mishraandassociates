@@ -1,12 +1,15 @@
 // ═══════════════════════════════════════════════════════════
 //  Services — practice areas (parent categories with sub-services)
-//  and detailed service pages. Admin collection: "services".
+//  and detailed service pages. Defaults for admin → "Services & prices"
+//  and "Service pages".
 //
 //  Prices are "starting from" professional fees; government fees
-//  are charged at actuals. [Bracketed] values are placeholders.
+//  are charged at actuals. A blank price hides the fee (quote on request).
 // ═══════════════════════════════════════════════════════════
 
-export const PARENT_SERVICES = [
+import { fromContent } from '../lib/content.js';
+
+export const PARENT_SERVICES_DEFAULT = [
   {
     id: 'company-registration',
     title: 'Company Registration — India & Global',
@@ -20,12 +23,12 @@ export const PARENT_SERVICES = [
       'Incorporate in India, the USA, UAE, Singapore, Hong Kong, China or the UK — entity selection, filings, banking support and FEMA/ODI compliance for Indian promoters.',
     subcategories: [
       { name: 'Company Registration in India — Pvt Ltd, LLP, OPC', price: 'Starting from ₹999 + Govt Fee', href: '/company-registration/india', popular: true },
-      { name: 'Company Registration in USA — LLC / C-Corp', price: '[Fee on request]', href: '/company-registration/usa' },
-      { name: 'Company Registration in UAE — Free Zone / Mainland', price: '[Fee on request]', href: '/company-registration/uae' },
-      { name: 'Company Registration in Singapore — Pte Ltd', price: '[Fee on request]', href: '/company-registration/singapore' },
-      { name: 'Company Registration in Hong Kong — Private Ltd', price: '[Fee on request]', href: '/company-registration/hong-kong' },
-      { name: 'Company Registration in China — WFOE', price: '[Fee on request]', href: '/company-registration/china' },
-      { name: 'Company Registration in UK — Private Ltd', price: '[Fee on request]', href: '/company-registration/uk' },
+      { name: 'Company Registration in USA — LLC / C-Corp', price: 'Fee on request', href: '/company-registration/usa' },
+      { name: 'Company Registration in UAE — Free Zone / Mainland', price: 'Fee on request', href: '/company-registration/uae' },
+      { name: 'Company Registration in Singapore — Pte Ltd', price: 'Fee on request', href: '/company-registration/singapore' },
+      { name: 'Company Registration in Hong Kong — Private Ltd', price: 'Fee on request', href: '/company-registration/hong-kong' },
+      { name: 'Company Registration in China — WFOE', price: 'Fee on request', href: '/company-registration/china' },
+      { name: 'Company Registration in UK — Private Ltd', price: 'Fee on request', href: '/company-registration/uk' },
     ],
   },
   {
@@ -186,21 +189,21 @@ export const PARENT_SERVICES = [
     title: 'MCA / ROC Compliance',
     shortTitle: 'ROC',
     icon: 'ri-government-line',
-    startingPrice: '₹499',
+    startingPrice: null,
     badge: null,
     category: 'ROC / MCA',
     shortDesc: 'Annual filings, board minutes, director changes and all MCA / ROC compliance for companies and LLPs.',
     subcategories: [
-      { name: 'AOC-4 — Annual Financial Statement Filing', price: 'Starting from ₹499', popular: true },
-      { name: 'MGT-7 / MGT-7A — Annual Return Filing', price: 'Starting from ₹499' },
-      { name: 'LLP Form 8 — Statement of Accounts', price: 'Starting from ₹499' },
-      { name: 'LLP Form 11 — Annual Return', price: 'Starting from ₹499' },
-      { name: 'Director Appointment / Resignation (DIR-12)', price: 'Starting from ₹999' },
-      { name: 'Change of Registered Office (INC-22)', price: 'Starting from ₹1,499' },
-      { name: 'Share Allotment / Transfer (PAS-3 / SH-4)', price: 'Starting from ₹1,499' },
-      { name: 'Increase in Authorised Capital (SH-7)', price: 'Starting from ₹1,499' },
-      { name: 'Board Meeting Minutes & Resolutions', price: 'Starting from ₹999' },
-      { name: 'Company Name Change (INC-24)', price: 'Starting from ₹2,499' },
+      { name: 'AOC-4 — Annual Financial Statement Filing', popular: true },
+      { name: 'MGT-7 / MGT-7A — Annual Return Filing' },
+      { name: 'LLP Form 8 — Statement of Accounts' },
+      { name: 'LLP Form 11 — Annual Return' },
+      { name: 'Director Appointment / Resignation (DIR-12)' },
+      { name: 'Change of Registered Office (INC-22)' },
+      { name: 'Share Allotment / Transfer (PAS-3 / SH-4)' },
+      { name: 'Increase in Authorised Capital (SH-7)' },
+      { name: 'Board Meeting Minutes & Resolutions' },
+      { name: 'Company Name Change (INC-24)' },
     ],
   },
   {
@@ -332,10 +335,9 @@ export const PARENT_SERVICES = [
   },
 ];
 
-export const SERVICE_CATEGORIES = PARENT_SERVICES.map((s) => s.category);
 
 // ─── Detailed service pages (/services/:slug) ────────────────
-export const SERVICES = [
+export const SERVICES_DEFAULT = [
   {
     slug: 'income-tax',
     title: 'Income Tax Return Filing & Tax Planning',
@@ -458,7 +460,7 @@ export const SERVICES = [
       'Charge creation / satisfaction',
       'Statutory register maintenance',
     ],
-    startingPrice: '₹3,999',
+    startingPrice: null,
     timeline: '5–10 working days',
   },
   {
@@ -631,3 +633,7 @@ export const SERVICES = [
     timeline: 'Monthly, ongoing',
   },
 ];
+
+export const PARENT_SERVICES = fromContent('services', 'categories', PARENT_SERVICES_DEFAULT);
+export const SERVICE_CATEGORIES = PARENT_SERVICES.map((s) => s.category);
+export const SERVICES = fromContent('servicePages', 'pages', SERVICES_DEFAULT);

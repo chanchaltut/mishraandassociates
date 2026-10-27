@@ -1,5 +1,10 @@
 {
   "rewrites": [
+    { "source": "/api/:path*", "destination": "https://mishra-api.onrender.com/api/:path*" },
     { "source": "/(.*)", "destination": "/" }
+  ],
+  "headers": [
+    { "source": "/content-version.json", "headers": [{ "key": "Cache-Control", "value": "no-store" }] },
+    { "source": "/admin(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
   ]
 }

@@ -1,10 +1,13 @@
 // ═══════════════════════════════════════════════════════════
 //  Page content blocks — hero, stats, about, team, testimonials,
-//  process, FAQs. Admin section: "Website Management → Content".
-//  [Bracketed] values are placeholders awaiting the client.
+//  process, FAQs. Defaults for admin → "Home page", "Team",
+//  "Clients", "FAQs" and "Legal pages".
+//  [Bracketed] values are placeholders: hidden on the live site.
 // ═══════════════════════════════════════════════════════════
 
-export const HERO = {
+import { fromContent } from '../lib/content.js';
+
+export const HERO_DEFAULT = {
   eyebrow: 'Tax · Compliance · Global Company Formation',
   title: 'Counsel for your business,',
   titleAccent: 'at home and abroad.',
@@ -13,16 +16,31 @@ export const HERO = {
   primaryCta: { label: 'Book a consultation', href: '/contact' },
   secondaryCta: { label: 'Explore services', href: '/services' },
   searchChips: ['GST registration', 'ITR filing', 'Delaware LLC', 'UAE free zone', 'Trademark'],
+  // Background photo. Self-hosted in public/images so the hero never waits on a third party;
+  // the dark overlay keeps text readable even if the image fails to load.
+  image: {
+    src: '/images/hero-1600.webp',
+    alt: 'Adviser reviewing and signing client documents',
+  },
+  // Figures shown in the trust strip under the description.
+  proof: [
+    { value: '10+', label: 'Years of practice' },
+    { value: '7', label: 'Jurisdictions' },
+    { value: '100+', label: 'Services' },
+  ],
+  // Optional review rating — shown as stars only when set, e.g.
+  //   { score: 4.9, count: 120, source: 'Google', href: 'https://g.page/r/...' }
+  rating: null,
 };
 
-export const STATS = [
-  { value: '[00]+', label: 'Years of practice' },
-  { value: '[000]+', label: 'Clients served' },
+export const STATS_DEFAULT = [
+  { value: '10+', label: 'Years of practice' },
+  { value: '[000+]', label: 'Clients served' },
   { value: '7', label: 'Jurisdictions covered' },
   { value: '100+', label: 'Services offered' },
 ];
 
-export const ABOUT = {
+export const ABOUT_DEFAULT = {
   heading: 'A practice built on precision and accountability',
   paragraphs: [
     'Mishra and Associates advises individuals, founders and growing companies on tax, regulatory compliance and company formation. We combine the rigour of a traditional practice with the responsiveness of a modern, digital-first firm.',
@@ -34,13 +52,19 @@ export const ABOUT = {
     'Documents handled securely; work tracked against a compliance calendar',
     'Proper tax invoice for every engagement',
   ],
+  image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&q=80&auto=format&fit=crop',
+  founderQuote: {
+    text: '[A short quote from the founder about the firm’s philosophy.]',
+    name: '[Founder name]',
+    role: '[Designation]',
+  },
   clientTypes: [
     'Salaried professionals', 'Freelancers & consultants', 'Startups', 'Private limited companies',
     'Traders & manufacturers', 'Importers & exporters', 'NRIs', 'NGOs, trusts & societies',
   ],
 };
 
-export const TEAM = [
+export const TEAM_DEFAULT = [
   {
     name: '[Founder name]',
     role: '[Founder & Managing Partner]',
@@ -67,7 +91,7 @@ export const TEAM = [
   },
 ];
 
-export const WHY_US = [
+export const WHY_US_DEFAULT = [
   { icon: 'ri-earth-line', title: 'India and abroad, one desk', desc: 'Domestic compliance and overseas incorporations handled together — including FEMA/ODI reporting that ties them up.' },
   { icon: 'ri-calendar-check-line', title: 'Calendar-driven compliance', desc: 'Every client is mapped to a statutory calendar, so filings are prepared ahead of due dates, not on them.' },
   { icon: 'ri-price-tag-3-line', title: 'Transparent fees', desc: 'Professional fees quoted upfront. Government fees are passed through at actuals with receipts.' },
@@ -76,14 +100,14 @@ export const WHY_US = [
   { icon: 'ri-file-text-line', title: 'Documented advice', desc: 'Positions taken in your filings are documented, so they hold up if questioned later.' },
 ];
 
-export const PROCESS_STEPS = [
+export const PROCESS_STEPS_DEFAULT = [
   { title: 'Consultation', desc: 'Tell us what you need. We confirm scope, timelines and a fixed fee.' },
   { title: 'Documents', desc: 'You receive a tailored checklist and share documents securely.' },
   { title: 'Execution', desc: 'Our team prepares, reviews and files on the relevant portals.' },
   { title: 'Delivery', desc: 'You receive acknowledgements, certificates and a compliance calendar.' },
 ];
 
-export const TESTIMONIALS = [
+export const TESTIMONIALS_DEFAULT = [
   { quote: '[Client testimonial — to be provided by the firm. Two or three sentences about the experience.]', name: '[Client name]', role: '[Designation, Company]', city: '[City]' },
   { quote: '[Client testimonial — to be provided by the firm. Two or three sentences about the experience.]', name: '[Client name]', role: '[Designation, Company]', city: '[City]' },
   { quote: '[Client testimonial — to be provided by the firm. Two or three sentences about the experience.]', name: '[Client name]', role: '[Designation, Company]', city: '[City]' },
@@ -92,9 +116,9 @@ export const TESTIMONIALS = [
 // ─── Our clients page ─────────────────────────────────────────
 // Add each client's logo (import the file and set `logo`) once the firm
 // confirms which names can be shown publicly.
-export const CLIENTS = Array.from({ length: 12 }, (_, i) => ({ name: `[Client ${i + 1}]`, industry: '[Industry]', logo: null }));
+export const CLIENTS_DEFAULT = Array.from({ length: 12 }, (_, i) => ({ name: `[Client ${i + 1}]`, industry: '[Industry]', logo: '' }));
 
-export const CLIENT_INDUSTRIES = [
+export const CLIENT_INDUSTRIES_DEFAULT = [
   { icon: 'ri-store-2-line', name: 'Traders & distributors' },
   { icon: 'ri-settings-3-line', name: 'Manufacturers' },
   { icon: 'ri-rocket-2-line', name: 'Startups & tech companies' },
@@ -106,13 +130,13 @@ export const CLIENT_INDUSTRIES = [
   { icon: 'ri-hand-heart-line', name: 'NGOs, trusts & societies' },
 ];
 
-export const CASE_STUDIES = [
+export const CASE_STUDIES_DEFAULT = [
   { client: '[Client / industry]', service: 'Company registration — UAE', challenge: '[What the client needed]', outcome: '[What we delivered and the result]' },
   { client: '[Client / industry]', service: 'GST & accounting', challenge: '[What the client needed]', outcome: '[What we delivered and the result]' },
   { client: '[Client / industry]', service: 'Trademark registration', challenge: '[What the client needed]', outcome: '[What we delivered and the result]' },
 ];
 
-export const FAQS = [
+export const FAQS_DEFAULT = [
   {
     q: 'What services does Mishra and Associates offer?',
     a: 'We offer GST registration and returns, income tax return filing, TDS compliance, tax audits, tax litigation support, ROC/MCA compliance, accounting and bookkeeping, PF & ESIC, trademark, MSME, FSSAI and import-export registrations — and company registration in India, the USA, UAE, Singapore, Hong Kong, China and the UK.',
@@ -139,4 +163,32 @@ export const FAQS = [
   },
 ];
 
-export const LEGAL_UPDATED = 'October 2026';
+export const LEGAL_UPDATED_DEFAULT = 'October 2026';
+
+export const HOME_SECTIONS_DEFAULT = {
+  jurisdictionStrip: true,
+  practiceAreas: true,
+  globalSetup: true,
+  knowledgeDesk: true,
+  dueDates: true,
+  aboutFirm: true,
+  process: true,
+  testimonials: true,
+  faq: true,
+  cta: true,
+};
+
+// ─── Published values (admin panel), falling back to the defaults above ───
+export const HERO = fromContent('home', 'hero', HERO_DEFAULT);
+export const STATS = fromContent('home', 'stats', STATS_DEFAULT);
+export const ABOUT = fromContent('home', 'about', ABOUT_DEFAULT);
+export const WHY_US = fromContent('home', 'whyUs', WHY_US_DEFAULT);
+export const PROCESS_STEPS = fromContent('home', 'process', PROCESS_STEPS_DEFAULT);
+export const TESTIMONIALS = fromContent('home', 'testimonials', TESTIMONIALS_DEFAULT);
+export const HOME_SECTIONS = fromContent('home', 'sections', HOME_SECTIONS_DEFAULT);
+export const TEAM = fromContent('team', 'members', TEAM_DEFAULT);
+export const CLIENTS = fromContent('clients', 'clients', CLIENTS_DEFAULT);
+export const CLIENT_INDUSTRIES = fromContent('clients', 'industries', CLIENT_INDUSTRIES_DEFAULT);
+export const CASE_STUDIES = fromContent('clients', 'caseStudies', CASE_STUDIES_DEFAULT);
+export const FAQS = fromContent('faqs', 'general', FAQS_DEFAULT);
+export const LEGAL_UPDATED = fromContent('legal', 'updated', LEGAL_UPDATED_DEFAULT);

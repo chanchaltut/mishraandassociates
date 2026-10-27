@@ -9,30 +9,28 @@ import Logo from '../ui/Logo';
 import { Flag } from '../ui';
 import SearchDialog from './SearchDialog';
 
-// ─── Demo strip (only in demo mode) ───────────────────────────
-function DemoBar() {
-  const [hidden, setHidden] = useState(false);
-  const [highlights, setHighlights] = useState(true);
+// ─── Announcement bar (admin → Site settings) ────────────────
+const inWindow = ({ startsAt, endsAt }) => {
+  const today = new Date().toISOString().slice(0, 10);
+  return (!startsAt || startsAt.slice(0, 10) <= today) && (!endsAt || endsAt.slice(0, 10) >= today);
+};
 
-  useEffect(() => {
-    document.body.classList.toggle('ph-hidden', !highlights);
-  }, [highlights]);
-
-  if (!SITE.demoMode || hidden) return null;
+function AnnouncementBar() {
+  const a = SITE.announcement;
+  if (!a?.enabled || !a.text || !inWindow(a)) return null;
+  const external = /^https?:\/\//.test(a.href || '');
+  const linkClass = 'ml-2 font-semibold underline underline-offset-2 hover:no-underline';
   return (
-    <div className="no-print border-b border-sun-deep/40 bg-sun-light text-ink-900">
-      <div className="container-site flex items-center gap-3 py-2 text-xs">
-        <i className="ri-edit-circle-line text-base" aria-hidden="true" />
-        <p className="flex-1 font-medium">
-          Demo preview — <span className="ph">highlighted</span> fields are placeholders awaiting your details. News and notifications are sample entries.
-        </p>
-        <button onClick={() => setHighlights((v) => !v)} className="hidden whitespace-nowrap font-semibold underline underline-offset-2 sm:inline">
-          {highlights ? 'Hide highlights' : 'Show highlights'}
-        </button>
-        <button onClick={() => setHidden(true)} aria-label="Dismiss demo notice" className="grid h-6 w-6 place-items-center rounded-full hover:bg-sun">
-          <i className="ri-close-line" />
-        </button>
-      </div>
+    <div className="no-print bg-sun text-ink-900">
+      <p className="container-site py-2 text-center text-[0.8125rem] font-medium">
+        <i className="ri-megaphone-line mr-2" aria-hidden="true" />
+        {a.text}
+        {a.href && a.linkLabel && (external ? (
+          <a href={a.href} target="_blank" rel="noopener noreferrer" className={linkClass}>{a.linkLabel}</a>
+        ) : (
+          <Link to={a.href} className={linkClass}>{a.linkLabel}</Link>
+        ))}
+      </p>
     </div>
   );
 }
@@ -90,7 +88,7 @@ function ServicesPanel() {
               <i className={`${p.icon} mt-0.5 text-lg text-ink-900`} aria-hidden="true" />
               <span>
                 <span className="block text-[0.9375rem] font-medium text-ink-900 group-hover:underline">{p.title}</span>
-                <span className="mt-0.5 block text-xs text-muted">{p.subcategories.length} services · from {p.startingPrice}</span>
+                <span className="mt-0.5 block text-xs text-muted">{p.subcategories.length} services{p.startingPrice && ` · from ${p.startingPrice}`}</span>
               </span>
             </Link>
           ))}
@@ -263,8 +261,8 @@ export default function Header() {
 
   return (
     <>
-      <DemoBar />
-      <TopBar />
+      <AnnouncementBar />
+      {SITE.features?.ticker !== false && <TopBar />}
       <header
         className={`sticky top-0 z-[100] border-b bg-white transition-shadow duration-300 ${scrolled || menu ? 'border-line shadow-soft' : 'border-line'}`}
         onMouseLeave={() => setMenu(null)}

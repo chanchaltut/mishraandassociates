@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-//  Tender notifications — admin collection: "tenders".
+//  Tender notifications — defaults for admin → "Tenders".
 //  SAMPLE entries for the demo: every row is flagged `sample: true`
 //  and dates are generated relative to today so "closing" badges
 //  stay meaningful. Replace with the live tender feed once the
@@ -9,7 +9,9 @@
 //  documents) are shown only to paid subscribers.
 // ═══════════════════════════════════════════════════════════
 
-export const TENDER_PLAN = {
+import { fromContent } from '../lib/content.js';
+
+export const TENDER_PLAN_DEFAULT = {
   name: 'Tender Alerts — Annual',
   price: '₹10,000',
   period: 'year',
@@ -51,10 +53,10 @@ export const VALUE_BANDS = [
 ];
 
 const day = 24 * 60 * 60 * 1000;
+// Sample dates are relative to today (YYYY-MM-DD, local time)
 const fromToday = (n) => {
-  const d = new Date();
-  d.setHours(17, 0, 0, 0);
-  return new Date(d.getTime() + n * day).toISOString();
+  const d = new Date(Date.now() + n * day);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 };
 
 // value: estimated tender value in ₹ (null = "refer document")
@@ -76,24 +78,30 @@ const RAW = [
   { tid: '[__]86', sector: 'transport', city: 'Ludhiana', state: 'Punjab', title: 'Annual rate contract for hiring of light motor vehicles on monthly basis', value: 2600000, emd: 52000, published: -2, due: 0, source: 'GeM', type: 'Services' },
 ];
 
-export const TENDERS = RAW.map((t, i) => ({
-  id: i + 1,
+export const TENDERS_DEFAULT = RAW.map((t) => ({
   ...t,
   published: fromToday(t.published),
   due: fromToday(t.due),
   sample: true,
 }));
 
-export const TENDER_RESULTS = [
+export const TENDER_RESULTS_DEFAULT = [
   { tid: '[__]11', sector: 'construction', state: 'Delhi', title: 'Construction of multipurpose community hall', bids: 7, awarded: -3, sample: true },
   { tid: '[__]15', sector: 'it', state: 'Maharashtra', title: 'Supply of laptops and tablets for field staff', bids: 12, awarded: -5, sample: true },
   { tid: '[__]22', sector: 'medical', state: 'Gujarat', title: 'Rate contract for diagnostic reagents', bids: 5, awarded: -6, sample: true },
   { tid: '[__]29', sector: 'security', state: 'Karnataka', title: 'Manpower services for hospital housekeeping', bids: 9, awarded: -8, sample: true },
   { tid: '[__]31', sector: 'water', state: 'Uttar Pradesh', title: 'Laying of distribution pipeline under water supply scheme', bids: 4, awarded: -10, sample: true },
-].map((r, i) => ({ id: i + 1, ...r, awarded: fromToday(r.awarded) }));
+].map((r) => ({ ...r, awarded: fromToday(r.awarded) }));
+
+export const TENDER_PLAN = fromContent('tenders', 'plan', TENDER_PLAN_DEFAULT);
+export const TENDERS = fromContent('tenders', 'tenders', TENDERS_DEFAULT).map((t, i) => ({ ...t, id: i + 1 }));
+export const TENDER_RESULTS = fromContent('tenders', 'results', TENDER_RESULTS_DEFAULT).map((r, i) => ({ ...r, id: i + 1 }));
+
+// Date-only values ("2026-10-30") are read as local dates
+const toLocalDate = (v) => (/^\d{4}-\d{2}-\d{2}$/.test(v) ? new Date(`${v}T00:00:00`) : new Date(v));
 
 export const daysLeft = (iso) => {
-  const end = new Date(iso);
+  const end = toLocalDate(iso);
   const now = new Date();
   end.setHours(0, 0, 0, 0);
   now.setHours(0, 0, 0, 0);

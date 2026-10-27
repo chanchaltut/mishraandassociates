@@ -1,13 +1,15 @@
 // ═══════════════════════════════════════════════════════════
 //  Global company registration — one entry per jurisdiction.
-//  Admin collection: "jurisdictions".
+//  Defaults for admin → "Global setup".
 //
 //  Facts are indicative and should be reviewed by the firm before
 //  launch; rules and fees change. Professional fees are placeholders.
 // ═══════════════════════════════════════════════════════════
 
+import { fromContent } from '../lib/content.js';
+
 // Shown on every non-India page: what an Indian promoter must do at home.
-const INDIA_OUTBOUND_NOTE = {
+export const INDIA_NOTE_DEFAULT = {
   title: 'Investing from India? Stay FEMA-compliant.',
   body: 'Indian residents setting up or funding a foreign company must route the investment through an Authorised Dealer bank under the Overseas Investment framework under FEMA. We handle the ODI filings, valuation and annual reporting alongside the overseas incorporation, so both sides of the structure stay compliant.',
   points: [
@@ -18,7 +20,7 @@ const INDIA_OUTBOUND_NOTE = {
   ],
 };
 
-export const COUNTRIES = [
+export const COUNTRIES_DEFAULT = [
   {
     slug: 'india',
     name: 'India',
@@ -84,7 +86,7 @@ export const COUNTRIES = [
     tagline: 'Delaware C-Corp or Wyoming/Delaware LLC — formed remotely, with EIN, registered agent and India-side ODI compliance.',
     intro:
       'US entities are formed at state level. Most founders choose a Delaware C-Corporation when they plan to raise venture capital, or an LLC in Delaware or Wyoming for trading, services and holding structures. Owners and directors do not need to be US residents and the process can be completed remotely.',
-    startingPrice: '[Fee on request]',
+    startingPrice: 'Fee on request',
     facts: [
       { label: 'Popular entity', value: 'Delaware C-Corp / LLC' },
       { label: 'Registrar', value: 'State Secretary of State' },
@@ -137,7 +139,7 @@ export const COUNTRIES = [
     tagline: 'Free Zone or Mainland — 100% foreign ownership, residence visas and a competitive corporate tax regime.',
     intro:
       'The UAE offers Free Zone companies (100% foreign owned, with activities largely within the zone or abroad) and Mainland companies (trade anywhere in the UAE). Most commercial activities now permit 100% foreign ownership on the Mainland too. We help you pick the right zone, licence and visa package.',
-    startingPrice: '[Fee on request]',
+    startingPrice: 'Fee on request',
     facts: [
       { label: 'Popular entity', value: 'Free Zone LLC / FZCO' },
       { label: 'Registrar', value: 'Free Zone authority or Department of Economy' },
@@ -191,7 +193,7 @@ export const COUNTRIES = [
     tagline: 'Private Limited (Pte. Ltd.) with ACRA — fast incorporation, nominee director options and a respected tax regime.',
     intro:
       'Singapore Private Limited companies are registered with ACRA and are among the fastest to incorporate once documents are ready. Every company needs at least one locally resident director and a qualified company secretary — we arrange both if you do not have them.',
-    startingPrice: '[Fee on request]',
+    startingPrice: 'Fee on request',
     facts: [
       { label: 'Popular entity', value: 'Private Limited (Pte. Ltd.)' },
       { label: 'Registrar', value: 'ACRA' },
@@ -243,7 +245,7 @@ export const COUNTRIES = [
     tagline: 'Private Company Limited by Shares — no local director needed, territorial tax system and access to Greater China.',
     intro:
       'A Hong Kong private company can be fully foreign owned and directed. You will need a local company secretary and a registered office in Hong Kong, both of which we can provide. Incorporation and business registration are completed together with the Companies Registry.',
-    startingPrice: '[Fee on request]',
+    startingPrice: 'Fee on request',
     facts: [
       { label: 'Popular entity', value: 'Private Company Limited by Shares' },
       { label: 'Registrar', value: 'Companies Registry' },
@@ -295,7 +297,7 @@ export const COUNTRIES = [
     tagline: 'Wholly Foreign-Owned Enterprise (WFOE) — full control of your China operations, from licence to bank account.',
     intro:
       'Foreign investors typically enter China through a Wholly Foreign-Owned Enterprise (a foreign-invested limited liability company), a joint venture or a representative office. Set-up involves business licence registration, company seals, bank accounts and tax registration, and depends on the city and the activity.',
-    startingPrice: '[Fee on request]',
+    startingPrice: 'Fee on request',
     facts: [
       { label: 'Popular entity', value: 'WFOE (foreign-invested LLC)' },
       { label: 'Registrar', value: 'Local Administration for Market Regulation' },
@@ -350,7 +352,7 @@ export const COUNTRIES = [
     tagline: 'Private Limited Company with Companies House — quick online incorporation, no residency requirement.',
     intro:
       'A UK private limited company can be incorporated online with Companies House, usually within a day once identity checks and documents are complete. Directors and shareholders can be non-residents, but the company needs a registered office address in the UK, which we can arrange.',
-    startingPrice: '[Fee on request]',
+    startingPrice: 'Fee on request',
     facts: [
       { label: 'Popular entity', value: 'Private Limited Company (Ltd)' },
       { label: 'Registrar', value: 'Companies House' },
@@ -397,14 +399,16 @@ export const COUNTRIES = [
   },
 ];
 
-COUNTRIES.forEach((c) => {
-  if (!c.isHome) c.indiaNote = INDIA_OUTBOUND_NOTE;
-});
+const INDIA_NOTE = fromContent('countries', 'indiaNote', INDIA_NOTE_DEFAULT);
+
+export const COUNTRIES = fromContent('countries', 'countries', COUNTRIES_DEFAULT).map((c) =>
+  c.isHome ? c : { ...c, indiaNote: INDIA_NOTE }
+);
 
 export const getCountry = (slug) => COUNTRIES.find((c) => c.slug === slug);
 
 // Comparison table on /company-registration
-export const COMPARISON = [
+export const COMPARISON_DEFAULT = [
   { slug: 'india', entity: 'Private Limited', timeline: '7–15 working days', localDirector: 'Yes — 1 resident', tax: '22% / 25% base rate', capital: 'No minimum' },
   { slug: 'usa', entity: 'C-Corp / LLC', timeline: 'Days (EIN extra)', localDirector: 'No', tax: '21% federal + state', capital: 'No minimum' },
   { slug: 'uae', entity: 'Free Zone / Mainland', timeline: '1–4 weeks', localDirector: 'No', tax: '9% above AED 375k', capital: 'Varies by zone' },
@@ -413,3 +417,5 @@ export const COMPARISON = [
   { slug: 'china', entity: 'WFOE', timeline: '1–3 months', localDirector: 'Legal rep. required', tax: '25% standard', capital: 'Subscribed, paid in stages' },
   { slug: 'uk', entity: 'Private Ltd', timeline: 'Often 24 hours', localDirector: 'No', tax: '19% – 25%', capital: 'No minimum' },
 ];
+
+export const COMPARISON = fromContent('countries', 'comparison', COMPARISON_DEFAULT);

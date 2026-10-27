@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Seo, { breadcrumbLd, faqLd } from '../lib/seo';
-import { TM_CLASSES, TM_STATUSES, RECENT_FILINGS, IP_INDIA_SEARCH_URL, timeAgo } from '../data/trademarks';
+import { TM_CLASSES, TM_STATUSES, RECENT_FILINGS, SHOW_RECENT_FILINGS, IP_INDIA_SEARCH_URL, timeAgo } from '../data/trademarks';
 import { TRADEMARK_SEARCH_FAQS } from '../data/faqs';
 import { SITE, waLink } from '../data/site';
 import { submitForm } from '../lib/api';
@@ -170,6 +170,7 @@ export default function TrademarkSearch() {
 
       <section className="bg-white py-20 sm:py-24">
         <div className="container-site grid gap-14 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+          {SHOW_RECENT_FILINGS && RECENT_FILINGS.length > 0 && (
           <div>
             <SectionHeading eyebrow="New trademarks" title="Latest filings" accent="in India." />
             <ul className="mt-10 divide-y divide-line border-y border-ink-900">
@@ -193,8 +194,9 @@ export default function TrademarkSearch() {
               ))}
             </ul>
           </div>
+          )}
 
-          <div className="lg:pt-24">
+          <div className={SHOW_RECENT_FILINGS && RECENT_FILINGS.length > 0 ? 'lg:pt-24' : 'lg:col-span-2'}>
             <div className="rounded-panel bg-paper p-7 sm:p-8">
               <p className="font-serif text-[1.625rem] leading-tight tracking-[-0.02em] text-ink-900">What the status means</p>
               <dl className="mt-6 space-y-5">

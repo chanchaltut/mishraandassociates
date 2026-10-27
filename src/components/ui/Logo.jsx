@@ -1,5 +1,6 @@
 import React from 'react';
 import { SITE } from '../../data/site';
+import { img } from '../../lib/images';
 
 /**
  * Brand logo. Until the final artwork is supplied (SITE.logo), a typographic
@@ -7,7 +8,7 @@ import { SITE } from '../../data/site';
  */
 export default function Logo({ tone = 'dark', compact = false, className = '' }) {
   if (SITE.logo) {
-    return <img src={SITE.logo} alt={SITE.name} className={`h-10 w-auto ${className}`} />;
+    return <img src={img(SITE.logo, 400)} alt={SITE.name} className={`h-10 w-auto ${className}`} />;
   }
 
   const light = tone === 'light';

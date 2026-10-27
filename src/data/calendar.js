@@ -1,9 +1,11 @@
 // ═══════════════════════════════════════════════════════════
 //  Compliance calendar — statutory default due dates (India).
 //  Dates are generated relative to today so the widget never goes stale.
-//  Government extensions are not reflected automatically; the admin
-//  panel will allow overriding / adding dates.
+//  Government extensions are added from admin → "Compliance calendar"
+//  (extra dates, or hiding a standard date by its title).
 // ═══════════════════════════════════════════════════════════
+
+import { fromContent } from '../lib/content.js';
 
 export const CALENDAR_CATEGORIES = ['All', 'Income Tax', 'GST', 'Payroll', 'Corporate'];
 
@@ -53,8 +55,12 @@ const ANNUAL = [
 
 const startOfDay = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
 
+const CUSTOM = fromContent('calendar', 'custom', [{ date: '', title: '', category: '' }]).filter((c) => c.title && !Number.isNaN(Date.parse(c.date)));
+const HIDDEN = new Set(fromContent('calendar', 'hidden', ['']).map((t) => t.trim().toLowerCase()).filter(Boolean));
+
 export function getDueDates(from = new Date(), monthsAhead = 3) {
   const today = startOfDay(from);
+  const until = new Date(today.getFullYear(), today.getMonth() + monthsAhead, 1);
   const items = [];
   for (let i = 0; i < monthsAhead; i++) {
     const year = today.getFullYear() + Math.floor((today.getMonth() + i) / 12);
@@ -66,8 +72,13 @@ export function getDueDates(from = new Date(), monthsAhead = 3) {
       if (m === month) items.push({ date: new Date(year, month, day), title, category, recurring: false });
     });
   }
+  CUSTOM.forEach((c) => {
+    const [y, m, d] = c.date.slice(0, 10).split('-').map(Number);
+    const date = new Date(y, m - 1, d);
+    if (date < until) items.push({ date, title: c.title, category: c.category, recurring: false, custom: true });
+  });
   return items
-    .filter((it) => it.date >= today)
+    .filter((it) => it.date >= today && !(HIDDEN.has(it.title.toLowerCase()) && !it.custom))
     .sort((a, b) => a.date - b.date || a.title.localeCompare(b.title));
 }
 

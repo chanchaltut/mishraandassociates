@@ -9,8 +9,9 @@ import { getDueDates, daysUntil } from '../../data/calendar';
 import { ABOUT, STATS, WHY_US, PROCESS_STEPS, TESTIMONIALS } from '../../data/content';
 import { SITE } from '../../data/site';
 import { formatDate, dayMonth } from '../../lib/format';
+import { img } from '../../lib/images';
 import { SectionHeading, Flag, SampleBadge, useReveal } from '../ui';
-import Ph from '../ui/Ph';
+import Ph, { ready, shown } from '../ui/Ph';
 import NewsletterForm from '../NewsletterForm';
 
 const NUMBER_WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'];
@@ -317,21 +318,34 @@ export function DueDates() {
 // ─── About the firm ───────────────────────────────────────────
 export function AboutFirm() {
   const ref = useReveal();
+  const quote = ABOUT.founderQuote;
   return (
     <section ref={ref} className="bg-white py-20 sm:py-28">
       <div className="container-site grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
         <div className="reveal relative">
           <div className="media relative aspect-[4/5]">
             <img
-              src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&q=80&auto=format&fit=crop"
+              src={img(ABOUT.image, 900)}
               alt="Mishra and Associates office"
               loading="lazy"
               className="h-full w-full object-cover"
             />
             <div className="absolute inset-x-4 bottom-4 rounded-card bg-white p-6 sm:inset-x-6 sm:bottom-6">
-              <p className="text-sm font-semibold text-ink-900">Since <Ph>{SITE.founded}</Ph></p>
-              <p className="mt-2 font-serif text-[1.4rem] leading-snug tracking-[-0.01em] text-ink-900">“<Ph>{'[A short quote from the founder about the firm’s philosophy.]'}</Ph>”</p>
-              <p className="mt-3 text-sm text-ink-800">— <Ph>[Founder name]</Ph>, <Ph>[Designation]</Ph></p>
+              {shown(quote.text) ? (
+                <>
+                  <p className="text-sm font-semibold text-ink-900">{SITE.yearsOfPractice}+ years of practice</p>
+                  <p className="mt-2 font-serif text-[1.4rem] leading-snug tracking-[-0.01em] text-ink-900">“<Ph>{quote.text}</Ph>”</p>
+                  <p className="mt-3 text-sm text-ink-800">— <Ph>{quote.name}</Ph>, <Ph>{quote.role}</Ph></p>
+                </>
+              ) : (
+                <div className="flex items-center gap-5">
+                  <p className="font-serif text-[3.25rem] leading-none tracking-[-0.04em] text-ink-900">{SITE.yearsOfPractice}+</p>
+                  <p className="text-[0.9375rem] leading-snug text-ink-800">
+                    <span className="block font-semibold text-ink-900">Years of practice</span>
+                    in tax, compliance and company formation
+                  </p>
+                </div>
+              )}
             </div>
           </div>
           {SITE.demoMode && (
@@ -341,12 +355,12 @@ export function AboutFirm() {
 
         <div>
           <SectionHeading eyebrow="About the firm" title={ABOUT.heading} />
-          {ABOUT.paragraphs.map((p) => (
+          {ABOUT.paragraphs.filter(shown).map((p) => (
             <p key={p} className="mt-5 text-[1.0625rem] leading-relaxed text-ink-800"><Ph>{p}</Ph></p>
           ))}
 
           <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-8">
-            {STATS.map((s) => (
+            {ready(STATS, 'value').map((s) => (
               <div key={s.label} className="flex flex-col-reverse justify-end border-t border-ink-900 pt-4">
                 <dt className="mt-1 text-[0.8125rem] text-ink-800">{s.label}</dt>
                 <dd className="font-serif text-[2.5rem] leading-none tracking-[-0.03em] text-ink-900"><Ph>{s.value}</Ph></dd>
@@ -400,18 +414,20 @@ export function Process() {
 // ─── Testimonials ─────────────────────────────────────────────
 export function Testimonials() {
   const ref = useReveal();
+  const items = ready(TESTIMONIALS, 'quote');
+  if (!items.length) return null;
   return (
     <section ref={ref} className="on-dark bg-brand-800 py-20 text-white sm:py-28">
       <div className="container-site">
         <SectionHeading light eyebrow="Client voices" title="What our clients" accent="say about us." />
         <div className="mt-14 grid gap-12 md:grid-cols-3 md:gap-8">
-          {TESTIMONIALS.map((t, i) => (
+          {items.map((t, i) => (
             <figure key={i} className="reveal flex flex-col border-t border-white/40 pt-7" style={{ transitionDelay: `${i * 80}ms` }}>
               <span className="font-serif text-[4rem] leading-[0.6] text-sun" aria-hidden="true">“</span>
               <blockquote className="mt-4 flex-1 font-serif text-[1.375rem] leading-snug tracking-[-0.01em] text-white"><Ph>{t.quote}</Ph></blockquote>
               <figcaption className="mt-7 text-sm">
                 <p className="font-semibold text-white"><Ph>{t.name}</Ph></p>
-                <p className="text-white/70"><Ph>{t.role}</Ph> · <Ph>{t.city}</Ph></p>
+                <p className="text-white/70">{[t.role, t.city].filter(shown).map((v, j) => <React.Fragment key={j}>{j > 0 && ' · '}<Ph>{v}</Ph></React.Fragment>)}</p>
               </figcaption>
             </figure>
           ))}

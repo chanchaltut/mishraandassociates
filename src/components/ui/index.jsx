@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { flagUrl } from '../../lib/format';
 import { SITE } from '../../data/site';
+import { pageOverride } from '../../data/pages';
 
 // ─── Scroll reveal ────────────────────────────────────────────
 export function useReveal() {
@@ -44,7 +45,13 @@ export function SectionHeading({ eyebrow, title, accent, intro, align = 'left', 
 // Full-bleed block. tone: 'beige' (textured) or 'white'.
 const HERO_TONES = { beige: 'bg-texture', white: 'bg-white border-b border-line' };
 
-export function PageHero({ eyebrow, title, accent, intro, crumbs = [], children, aside, tone = 'beige' }) {
+export function PageHero({ crumbs = [], children, aside, tone = 'beige', ...text }) {
+  // Admin → "Pages & SEO" can replace the heading block; blank fields keep the page's own text
+  const page = pageOverride(crumbs[crumbs.length - 1]?.path);
+  const eyebrow = page?.eyebrow || text.eyebrow;
+  const title = page?.heading || text.title;
+  const accent = page?.heading ? page.accent : text.accent;
+  const intro = page?.intro || text.intro;
   return (
     <section className={`relative overflow-hidden ${HERO_TONES[tone]}`}>
       <div className="container-site relative pb-14 pt-6 sm:pb-20 sm:pt-8 lg:pb-24">

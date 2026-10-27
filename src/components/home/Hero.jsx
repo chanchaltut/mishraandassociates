@@ -6,7 +6,10 @@ import { NEWS } from '../../data/news';
 import { getDueDates, daysUntil } from '../../data/calendar';
 import { searchSite } from '../../lib/search';
 import { formatDate, dayMonth } from '../../lib/format';
+import { SITE } from '../../data/site';
+import { img, srcSetFor } from '../../lib/images';
 import { Flag, SampleBadge } from '../ui';
+import SafeSection from '../SafeSection';
 
 function HeroSearch() {
   const [q, setQ] = useState('');
@@ -20,8 +23,8 @@ function HeroSearch() {
   };
 
   return (
-    <div className="relative mt-10 max-w-xl">
-      <form onSubmit={submit} className="flex items-center gap-2 rounded-full border border-ink-900 bg-white p-1.5 focus-within:ring-2 focus-within:ring-brand-500">
+    <div className="relative mt-8 max-w-xl">
+      <form onSubmit={submit} className="flex items-center gap-2 rounded-full bg-white p-1.5 focus-within:ring-2 focus-within:ring-sun">
         <i className="ri-search-line pl-3 text-lg text-ink-900" aria-hidden="true" />
         <input
           value={q}
@@ -50,10 +53,10 @@ function HeroSearch() {
         </ul>
       )}
 
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        <span className="text-[0.8125rem] font-medium text-ink-900">Popular:</span>
+      <div className="mt-4 hidden flex-wrap items-center gap-2 sm:flex">
+        <span className="text-[0.8125rem] font-medium text-white/80">Popular:</span>
         {HERO.searchChips.map((c) => (
-          <button key={c} onClick={() => setQ(c)} className="rounded-full border border-ink-900/30 px-3 py-1 text-[0.8125rem] text-ink-900 transition-colors hover:border-ink-900 hover:bg-white">{c}</button>
+          <button key={c} onClick={() => setQ(c)} className="rounded-full border border-white/30 px-3 py-1 text-[0.8125rem] text-white transition-colors hover:border-white hover:bg-white hover:text-ink-900">{c}</button>
         ))}
       </div>
     </div>
@@ -145,29 +148,109 @@ function UpdatesDesk() {
   );
 }
 
-export default function Hero() {
+function Stars({ score }) {
   return (
-    <section className="relative overflow-hidden bg-texture">
-      <div className="container-site relative grid gap-14 pb-20 pt-14 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:pb-28 lg:pt-24">
-        <div className="animate-rise">
-          <p className="eyebrow">{HERO.eyebrow}</p>
-          <h1 className="h-display mt-5 text-[3rem] leading-[1] sm:text-[4.25rem] lg:text-[5.25rem]">
-            {HERO.title} <em className="italic">{HERO.titleAccent}</em>
+    <span className="flex gap-0.5 text-xl text-sun" aria-hidden="true">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <i key={n} className={score >= n ? 'ri-star-fill' : score >= n - 0.5 ? 'ri-star-half-fill' : 'ri-star-line'} />
+      ))}
+    </span>
+  );
+}
+
+// Proof strip: optional review rating, headline figures and GST registration
+function TrustStrip() {
+  const { proof = [] } = HERO;
+  const rating = HERO.rating?.score ? HERO.rating : null;
+  const RatingTag = rating?.href ? 'a' : 'div';
+  return (
+    <div className="mt-8 max-w-xl rounded-card border border-white/15 bg-white/[0.06] p-5 backdrop-blur-sm sm:p-6">
+      {rating && (
+        <RatingTag
+          {...(rating.href ? { href: rating.href, target: '_blank', rel: 'noopener noreferrer' } : {})}
+          className="mb-5 flex flex-col items-center gap-2 border-b border-white/15 pb-5 text-center sm:flex-row sm:gap-3 sm:text-left"
+        >
+          <Stars score={rating.score} />
+          <span className="text-sm text-white/80">
+            <span className="font-semibold text-white">{rating.score}/5</span>
+            {rating.count ? ` from ${rating.count}+ reviews` : ''}{rating.source ? ` on ${rating.source}` : ''}
+          </span>
+        </RatingTag>
+      )}
+
+      {proof.length > 0 && (
+        <dl className="grid grid-cols-3 divide-x divide-white/15">
+          {proof.map((p) => (
+            <div key={p.label} className="flex flex-col-reverse px-2 text-center first:pl-0 last:pr-0 sm:px-5 sm:text-left">
+              <dt className="mt-1.5 text-xs leading-snug text-white/75 sm:text-[0.8125rem]">{p.label}</dt>
+              <dd className="font-serif text-[2.125rem] leading-none tracking-[-0.03em] text-sun sm:text-[2.75rem]">{p.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+
+      {SITE.gstin && (
+        <p className={`flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[0.8125rem] text-white/80 sm:justify-start ${proof.length ? 'mt-5 border-t border-white/15 pt-4' : ''}`}>
+          <i className="ri-shield-check-fill text-base text-sun" aria-hidden="true" />
+          <span className="font-semibold text-white">GST registered</span>
+          <span className="text-white/40" aria-hidden="true">·</span>
+          <span>GSTIN <span className="tracking-wide text-white">{SITE.gstin}</span></span>
+        </p>
+      )}
+    </div>
+  );
+}
+
+// Everything in the hero is bundled with the page — nothing waits on a network
+// request. The dark base colour means the text stays legible even before (or
+// without) the background photo.
+export default function Hero() {
+  const { image } = HERO;
+  return (
+    <section className="relative isolate z-10 bg-ink-950">
+      {image?.src && (
+        <img
+          src={img(image.src, 1600)}
+          srcSet={srcSetFor(image.src)}
+          sizes="100vw"
+          alt={image.alt || ''}
+          fetchpriority="high"
+          decoding="async"
+          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-[65%_center]"
+        />
+      )}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-ink-950/80 via-ink-950/75 to-ink-950/90 lg:bg-gradient-to-r lg:from-ink-950/95 lg:via-ink-950/80 lg:to-ink-950/50"
+      />
+
+      <div className="container-site grid gap-14 pb-16 pt-14 sm:pb-20 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:pb-28 lg:pt-24">
+        <div className="on-dark animate-rise text-white">
+          <p className="eyebrow eyebrow-light">{HERO.eyebrow}</p>
+          <h1 className="h-display mt-5 text-[2.75rem] leading-[1.02] text-white sm:text-[4.25rem] lg:text-[5rem]">
+            {HERO.title} <em className="italic text-sun">{HERO.titleAccent}</em>
           </h1>
-          <p className="mt-7 max-w-xl text-[1.0625rem] leading-relaxed text-ink-900 sm:text-xl">{HERO.description}</p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Link to={HERO.primaryCta.href} className="btn-dark !px-7 !py-3.5">
+          <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-white/85 sm:text-xl">{HERO.description}</p>
+
+          <TrustStrip />
+
+          <div className="mt-8 flex max-w-xl flex-col gap-3 sm:flex-row">
+            <Link to={HERO.primaryCta.href} className="btn-primary !px-8 !py-4 !text-base">
               {HERO.primaryCta.label}
             </Link>
-            <Link to={HERO.secondaryCta.href} className="btn-light !px-7 !py-3.5">
+            <Link to={HERO.secondaryCta.href} className="btn-outline-light !px-8 !py-4 !text-base">
               {HERO.secondaryCta.label}
             </Link>
           </div>
           <HeroSearch />
         </div>
 
-        <div className="animate-rise [animation-delay:150ms] lg:pr-2">
-          <UpdatesDesk />
+        {/* On phones the same updates appear further down the page (Knowledge Desk, Due Dates) */}
+        <div className="hidden animate-rise [animation-delay:150ms] lg:block lg:pr-2">
+          <SafeSection>
+            <UpdatesDesk />
+          </SafeSection>
         </div>
       </div>
     </section>

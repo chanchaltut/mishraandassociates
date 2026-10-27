@@ -1,8 +1,10 @@
 // ═══════════════════════════════════════════════════════════
 //  Trademark search — Nice classes, application statuses and
-//  recent filings. Recent filings are SAMPLE entries for the demo
-//  (`sample: true`); replace with a live feed once available.
+//  recent filings. Recent filings are edited in admin →
+//  "Trademark search"; the defaults are SAMPLE entries.
 // ═══════════════════════════════════════════════════════════
+
+import { fromContent } from '../lib/content.js';
 
 export const IP_INDIA_SEARCH_URL = 'https://tmrsearch.ipindia.gov.in/tmrpublicsearch/';
 
@@ -32,7 +34,7 @@ export const TM_STATUSES = [
 
 const hoursAgo = (h) => new Date(Date.now() - h * 3600 * 1000).toISOString();
 
-export const RECENT_FILINGS = [
+export const RECENT_FILINGS_DEFAULT = [
   { mark: 'Saffron Loom', applicant: 'Saffron Loom Textiles', state: 'Gujarat', cls: 24, status: 'Formalities Chk Pass', filed: hoursAgo(5) },
   { mark: 'Nimbu Bites', applicant: 'Citrus Snacks LLP', state: 'Maharashtra', cls: 30, status: 'Formalities Chk Pass', filed: hoursAgo(9) },
   { mark: 'Kavach Secure', applicant: 'Kavach Systems Pvt Ltd', state: 'Karnataka', cls: 42, status: 'Formalities Chk Pass', filed: hoursAgo(14) },
@@ -41,7 +43,10 @@ export const RECENT_FILINGS = [
   { mark: 'Tarang Audio', applicant: 'Tarang Electronics', state: 'Tamil Nadu', cls: 9, status: 'Marked for Exam', filed: hoursAgo(31) },
   { mark: 'Mitti Craft', applicant: 'Mitti Craft Studio', state: 'Rajasthan', cls: 21, status: 'Formalities Chk Pass', filed: hoursAgo(40) },
   { mark: 'Yatra Wheels', applicant: 'Yatra Mobility Pvt Ltd', state: 'Uttar Pradesh', cls: 39, status: 'Formalities Chk Pass', filed: hoursAgo(47) },
-].map((f, i) => ({ id: i + 1, ...f, sample: true }));
+].map((f) => ({ ...f, sample: true }));
+
+export const SHOW_RECENT_FILINGS = fromContent('trademarks', 'showRecent', true);
+export const RECENT_FILINGS = fromContent('trademarks', 'recent', RECENT_FILINGS_DEFAULT).map((f, i) => ({ ...f, id: i + 1 }));
 
 export const timeAgo = (iso) => {
   const h = Math.max(1, Math.round((Date.now() - new Date(iso)) / 3600000));

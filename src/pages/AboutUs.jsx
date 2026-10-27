@@ -3,7 +3,7 @@ import Seo, { breadcrumbLd } from '../lib/seo';
 import { ABOUT, TEAM, WHY_US, STATS } from '../data/content';
 import { SITE } from '../data/site';
 import { PageHero, SectionHeading } from '../components/ui';
-import Ph from '../components/ui/Ph';
+import Ph, { ready, shown } from '../components/ui/Ph';
 import { CTABand } from '../components/Blocks';
 import { Process, Testimonials } from '../components/home/Sections';
 import { isPlaceholder } from '../lib/format';
@@ -12,6 +12,7 @@ const initials = (name) =>
   isPlaceholder(name) ? '—' : name.split(' ').map((w) => w[0]).slice(0, 2).join('');
 
 export default function AboutUs() {
+  const team = ready(TEAM, 'name');
   const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }];
   return (
     <>
@@ -27,7 +28,7 @@ export default function AboutUs() {
         <div className="container-site grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <SectionHeading eyebrow="Our story" title={ABOUT.heading} />
-            {ABOUT.paragraphs.slice(1).map((p) => (
+            {ABOUT.paragraphs.slice(1).filter(shown).map((p) => (
               <p key={p} className="mt-5 text-[1.0625rem] leading-relaxed text-ink-800"><Ph>{p}</Ph></p>
             ))}
             <ul className="mt-8 space-y-3">
@@ -38,7 +39,7 @@ export default function AboutUs() {
           </div>
           <div>
             <dl className="grid grid-cols-2 gap-3">
-              {STATS.map((s, i) => (
+              {ready(STATS, 'value').map((s, i) => (
                 <div key={s.label} className={`flex flex-col-reverse rounded-card p-7 ${['bg-cream', 'bg-cornflower', 'bg-mint', 'bg-peach'][i % 4]}`}>
                   <dt className="mt-2 text-sm text-ink-800">{s.label}</dt>
                   <dd className="font-serif text-[3rem] leading-none tracking-[-0.03em] text-ink-900"><Ph>{s.value}</Ph></dd>
@@ -55,12 +56,12 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="bg-paper py-20 sm:py-28">
+      {/* Team — hidden until at least one profile is filled in */}
+      {team.length > 0 && <section className="bg-paper py-20 sm:py-28">
         <div className="container-site">
           <SectionHeading eyebrow="Our people" title="The team behind" accent="your filings." />
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {TEAM.map((m, i) => (
+            {team.map((m, i) => (
               <article key={i} className="overflow-hidden rounded-panel bg-white">
                 <div className={`relative grid aspect-[4/3] place-items-center ${['bg-texture', 'bg-cornflower', 'bg-mint'][i % 3]}`}>
                   {m.image ? (
@@ -82,10 +83,10 @@ export default function AboutUs() {
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
-      {/* Values */}
-      <section className="bg-white py-20 sm:py-28">
+      {/* Values — takes the paper tint when the team section above is hidden */}
+      <section className={`py-20 sm:py-28 ${team.length ? 'bg-white' : 'bg-paper'}`}>
         <div className="container-site">
           <SectionHeading eyebrow="Why clients choose us" title="How we" accent="practise." />
           <div className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">

@@ -32,7 +32,7 @@ export default function ServiceDetail() {
     <>
       <Seo
         title={service.title}
-        description={`${service.shortDesc} Starting from ${service.startingPrice}. Mishra and Associates, Delhi — serving clients across India.`}
+        description={`${service.shortDesc}${service.startingPrice ? ` Starting from ${service.startingPrice}.` : ''} Mishra and Associates, Delhi — serving clients across India.`}
         path={path}
         jsonLd={[
           breadcrumbLd(crumbs),
@@ -59,8 +59,8 @@ export default function ServiceDetail() {
           <div className="rounded-panel border border-ink-900 bg-white p-7">
             <dl className="grid grid-cols-2 gap-5">
               <div>
-                <dt className="label">Starting from</dt>
-                <dd className="mt-1 font-serif text-[1.75rem] leading-tight tracking-[-0.02em] text-ink-900">{service.startingPrice}</dd>
+                <dt className="label">{service.startingPrice ? 'Starting from' : 'Fee'}</dt>
+                <dd className="mt-1 font-serif text-[1.75rem] leading-tight tracking-[-0.02em] text-ink-900">{service.startingPrice || 'On request'}</dd>
               </div>
               <div>
                 <dt className="label">Timeline</dt>

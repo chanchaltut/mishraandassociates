@@ -22,7 +22,8 @@ function CategoryCard({ service, defaultOpen }) {
             {service.badge && <span className="tag bg-sun-light text-ink-900">{service.badge}</span>}
           </span>
           <span className="mt-1 block text-sm text-ink-800">
-            {service.subcategories.length} services · from <strong className="font-semibold text-ink-900"><Ph>{service.startingPrice}</Ph></strong>
+            {service.subcategories.length} services
+            {service.startingPrice && <> · from <strong className="font-semibold text-ink-900"><Ph>{service.startingPrice}</Ph></strong></>}
           </span>
         </span>
         <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-900 text-xl text-ink-900 transition-transform ${open ? 'rotate-180' : ''}`}><i className="ri-arrow-down-s-line" /></span>
@@ -41,7 +42,7 @@ function CategoryCard({ service, defaultOpen }) {
                     {sub.popular && <span className="tag bg-brand-50 text-brand-800">Popular</span>}
                   </span>
                   <span className="flex items-center gap-3 pl-6 sm:pl-0">
-                    <span className="text-[0.8125rem] font-semibold text-ink-900"><Ph>{sub.price}</Ph></span>
+                    {sub.price && <span className="text-[0.8125rem] font-semibold text-ink-900"><Ph>{sub.price}</Ph></span>}
                     {sub.href ? (
                       <Link to={sub.href} className="rounded-full border border-ink-900 px-3.5 py-1.5 text-xs font-medium text-ink-900 transition-colors hover:bg-sun">Details</Link>
                     ) : (

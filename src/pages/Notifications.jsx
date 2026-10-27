@@ -7,12 +7,6 @@ import { PageHero, SampleBadge } from '../components/ui';
 import Ph from '../components/ui/Ph';
 import { CTABand } from '../components/Blocks';
 
-// Show "[__]" inside notification numbers as a highlighted placeholder.
-const NumberCell = ({ value }) => {
-  const parts = value.split(/(\[__\])/);
-  return <>{parts.map((p, i) => (p === '[__]' ? <Ph key={i}>{p}</Ph> : p))}</>;
-};
-
 export default function Notifications() {
   const [params, setParams] = useSearchParams();
   const authority = params.get('authority') || 'all';
@@ -81,14 +75,16 @@ export default function Notifications() {
                       <span className="tag bg-ink-900 text-white">{authorityOf(n.authority)?.name}</span>
                       <span className="mt-1 block text-xs text-muted">{n.type}</span>
                     </td>
-                    <td className="px-5 py-4 text-xs font-semibold text-ink-800"><NumberCell value={n.number} /></td>
+                    <td className="px-5 py-4 text-xs font-semibold text-ink-800"><Ph>{n.number}</Ph></td>
                     <td className="px-5 py-4">
                       <span className="font-medium leading-snug text-ink-900">{n.title}</span> <SampleBadge item={n} />
                     </td>
                     <td className="px-5 py-4 text-right">
-                      <a href={n.pdfUrl} className="inline-flex items-center gap-1 rounded-full border border-ink-900 px-3.5 py-1.5 text-xs font-medium text-ink-900 transition-colors hover:bg-sun">
-                        <i className="ri-file-pdf-2-line" /> PDF
-                      </a>
+                      {n.pdfUrl && (
+                        <a href={n.pdfUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-full border border-ink-900 px-3.5 py-1.5 text-xs font-medium text-ink-900 transition-colors hover:bg-sun">
+                          <i className="ri-file-pdf-2-line" /> PDF
+                        </a>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -106,10 +102,10 @@ export default function Notifications() {
                   <span className="text-xs text-muted">{formatDate(n.date)}</span>
                 </div>
                 <p className="mt-3 font-medium leading-snug text-ink-900">{n.title}</p>
-                <p className="mt-1 text-xs text-muted"><NumberCell value={n.number} /> · {n.type}</p>
+                <p className="mt-1 text-xs text-muted"><Ph>{n.number}</Ph> · {n.type}</p>
                 <div className="mt-3 flex items-center justify-between">
                   <SampleBadge item={n} />
-                  <a href={n.pdfUrl} className="text-link text-xs"><i className="ri-file-pdf-2-line" /> View PDF</a>
+                  {n.pdfUrl && <a href={n.pdfUrl} target="_blank" rel="noopener noreferrer" className="text-link text-xs"><i className="ri-file-pdf-2-line" /> View PDF</a>}
                 </div>
               </li>
             ))}

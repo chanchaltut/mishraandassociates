@@ -15,3 +15,7 @@ export const dayMonth = (value) => {
 };
 
 export const flagUrl = (code, width = 80) => `https://flagcdn.com/w${width}/${code}.png`;
+
+// Newest first by `date`; items without a valid date go last.
+export const byDateDesc = (items, key = 'date') =>
+  [...items].sort((a, b) => (Date.parse(b[key]) || 0) - (Date.parse(a[key]) || 0));

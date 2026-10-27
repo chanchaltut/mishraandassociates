@@ -54,7 +54,9 @@ export default function Services() {
               <Link key={s.slug} to={`/services/${s.slug}`} className="group flex flex-col rounded-card bg-paper p-5 transition-colors hover:bg-sun-light">
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-white text-xl text-ink-900"><i className={s.icon} /></span>
                 <p className="mt-6 font-serif text-[1.25rem] leading-tight tracking-[-0.015em] text-ink-900 group-hover:underline">{s.shortTitle}</p>
-                <p className="mt-auto pt-3 text-[0.8125rem] text-ink-800">From <span className="font-semibold text-ink-900">{s.startingPrice}</span></p>
+                <p className="mt-auto pt-3 text-[0.8125rem] text-ink-800">
+                  {s.startingPrice ? <>From <span className="font-semibold text-ink-900">{s.startingPrice}</span></> : 'Quote on request'}
+                </p>
               </Link>
             ))}
           </div>

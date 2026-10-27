@@ -3,9 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import Seo, { breadcrumbLd } from '../lib/seo';
 import { SITE, waLink } from '../data/site';
 import { PARENT_SERVICES } from '../data/services';
-import { submitForm, isBackendConnected } from '../lib/api';
+import { submitForm } from '../lib/api';
 import { PageHero } from '../components/ui';
-import Ph from '../components/ui/Ph';
+import { shown } from '../components/ui/Ph';
 
 const EMPTY = { name: '', email: '', phone: '', service: '', message: '' };
 
@@ -71,10 +71,14 @@ export default function Contact() {
               <p className="text-sm font-semibold text-sun">Office</p>
               <p className="mt-3 font-serif text-[1.25rem] leading-snug text-white">
                 {SITE.legalName}<br />
-                <Ph>{SITE.address.street}</Ph><br />
-                {SITE.address.city} <Ph>{SITE.address.postalCode}</Ph>, {SITE.address.country}
+                {SITE.address.street}<br />
+                {SITE.address.city} {SITE.address.postalCode}, {SITE.address.country}
               </p>
-              <p className="mt-4 flex items-center gap-2 text-sm text-white/70"><i className="ri-time-line text-sun" /> <Ph>{SITE.hours}</Ph></p>
+              {shown(SITE.hours) && <p className="mt-4 flex items-center gap-2 text-sm text-white/70"><i className="ri-time-line text-sun" /> {SITE.hours}</p>}
+              <p className="mt-2 flex items-center gap-2 text-sm text-white/70"><i className="ri-shield-check-line text-sun" /> GSTIN {SITE.gstin}</p>
+              <a href={SITE.address.mapUrl} target="_blank" rel="noopener noreferrer" className="btn-primary btn-sm mt-6">
+                <i className="ri-direction-line" /> Get directions
+              </a>
             </div>
 
             <div className="grid aspect-[4/3] place-items-center overflow-hidden rounded-card bg-paper">
@@ -95,9 +99,6 @@ export default function Contact() {
                 <i className="ri-checkbox-circle-line text-5xl text-ink-900" />
                 <p className="mt-3 font-serif text-[1.75rem] leading-tight tracking-[-0.02em] text-ink-900">Thank you — we’ve received your enquiry.</p>
                 <p className="mt-2 text-ink-800">An adviser will get back to you within one working day.</p>
-                {!isBackendConnected && SITE.demoMode && (
-                  <p className="mt-4 text-xs text-ink-900">Demo mode: enquiries will be delivered to the admin panel and email once the backend is connected.</p>
-                )}
                 <button onClick={() => setStatus('idle')} className="btn-outline mt-6">Send another</button>
               </div>
             ) : (
@@ -132,9 +133,17 @@ export default function Contact() {
                   </button>
                 </div>
                 {status === 'error' && (
-                  <p className="text-sm text-red-700 sm:col-span-2">
-                    Something went wrong. Please call {SITE.phone.display} or email {SITE.email}.
-                  </p>
+                  <div className="rounded-card bg-rose/40 p-4 text-sm text-ink-900 sm:col-span-2">
+                    <p>We couldn’t send your enquiry just now. Your message is still here — send it on WhatsApp in one tap, or call {SITE.phone.display}.</p>
+                    <a
+                      href={waLink(`Hello ${SITE.name}, I'm ${form.name || ''}${form.phone ? ` (${form.phone})` : ''}.${form.service ? ` Service: ${form.service}.` : ''} ${form.message}`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-whatsapp btn-sm mt-3"
+                    >
+                      <i className="ri-whatsapp-line" /> Send on WhatsApp
+                    </a>
+                  </div>
                 )}
               </form>
             )}

@@ -1,22 +1,24 @@
 # Information needed from Mishra and Associates
 
-Fields highlighted on the demo site are placeholders. Please share the following.
+Anything not yet provided is hidden on the live site until it is filled in (from the admin panel once it is live). Please share the following.
 Items marked ✅ have already been received.
 
 ## 1. Brand & contact
 - Logo files (SVG preferred, or high-resolution PNG)
 - ✅ Office address — L1A/22A, Mohan Garden, Uttam Nagar, New Delhi 110059
-- Google Maps pin for the office (to confirm the map location is exact)
+- ✅ Google Maps pin — https://maps.app.goo.gl/x2TSKaR7K1sEiTeG7 (used for “Get directions”)
 - Office hours (e.g. Mon–Sat, 10 AM – 7 PM)
 - Social media links you use: LinkedIn, Facebook, Instagram, X, YouTube (remove the rest)
 - Confirm phone **+91 11 6926 6597**, WhatsApp **+91 99116 81113** and email **contact@mishraandassociates.in**
 
 ## 2. About the firm
 - Year established
-- Registration details to display (ICAI firm registration no., GSTIN) — or confirm none should be shown
+- ✅ GSTIN — 07CWJPM0585R2ZN (shown in the hero, footer and contact page)
+- ICAI firm registration no. — if it should be displayed
 - A short paragraph on the firm's history, founding partner and strengths
 - A one-line quote from the founder
-- Years in practice and approximate number of clients served
+- ✅ Years in practice — 10+
+- Approximate number of clients served
 
 ## 3. Team
 For each person to feature (currently 3 slots): name, designation, qualifications, 2–3 line profile, photo, LinkedIn URL.
@@ -30,6 +32,7 @@ For each person to feature (currently 3 slots): name, designation, qualification
 - Company registration fees for the **USA, UAE, Singapore, Hong Kong, China and UK** (currently "Fee on request")
 - **ISO certification** fees — ISO 9001, 14001, 45001, 27001, 22000 (currently "On Consultation")
 - **CHA / customs clearance** fees, or confirm "On Consultation"
+- ✅ ROC / MCA compliance — prices removed (shown as a quote on request)
 - Review the other "starting from" prices on the Services page and correct any that are wrong
 - **Tender alerts subscription:** confirm ₹10,000/year and whether it is **+ 18% GST** or inclusive
 

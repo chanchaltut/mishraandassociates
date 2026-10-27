@@ -1,13 +1,16 @@
 // ═══════════════════════════════════════════════════════════
-//  News & updates — admin collection: "news".
+//  News & updates — defaults for admin → "News".
 //  These are SAMPLE entries for the demo (flagged `sample: true`).
 //  They describe recurring compliance events and will be replaced
 //  by updates the firm publishes from the admin panel.
 // ═══════════════════════════════════════════════════════════
 
+import { fromContent } from '../lib/content.js';
+import { byDateDesc } from '../lib/format.js';
+
 export const NEWS_CATEGORIES = ['All', 'Income Tax', 'GST', 'Corporate Law', 'FEMA & RBI', 'International'];
 
-export const NEWS = [
+export const NEWS_DEFAULT = [
   {
     slug: 'tds-returns-q2-due-31-october',
     title: 'TDS returns for the July–September quarter are due by 31 October',
@@ -107,5 +110,7 @@ export const NEWS = [
     ],
   },
 ];
+
+export const NEWS = byDateDesc(fromContent('news', 'items', NEWS_DEFAULT));
 
 export const getNews = (slug) => NEWS.find((n) => n.slug === slug);

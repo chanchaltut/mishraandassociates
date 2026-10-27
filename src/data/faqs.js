@@ -1,20 +1,22 @@
 // ═══════════════════════════════════════════════════════════
 //  Frequently asked questions — general, per service and global
 //  setup. Feeds the /faqs page, each service page and the
-//  FAQPage structured data. Admin section: "Content → FAQs".
+//  FAQPage structured data. Defaults for admin → "FAQs"; service
+//  FAQs are edited with each service page.
 // ═══════════════════════════════════════════════════════════
 
-import { FAQS } from './content';
-import { SERVICES } from './services';
+import { fromContent, hasContent } from '../lib/content.js';
+import { FAQS } from './content.js';
+import { SERVICES } from './services.js';
 
-export const GLOBAL_FAQS = [
+export const GLOBAL_FAQS_DEFAULT = [
   { q: 'Which country is best for incorporating a company as an Indian founder?', a: 'It depends on your goal. A Delaware C-Corp suits startups raising US capital; the UAE suits trading and regional services with residence visas; Singapore and Hong Kong are common Asian holding and trading hubs; the UK offers fast setup and credibility with European clients; and a WFOE is needed to operate inside mainland China.' },
   { q: 'Do Indian residents need RBI approval to set up a company abroad?', a: 'Most overseas investments by Indian residents fall under the automatic route, but they must be made through an Authorised Dealer bank with the prescribed ODI filings and annual reporting under FEMA. We handle these filings alongside the overseas incorporation.' },
   { q: 'Can you provide the local director, secretary or registered address?', a: 'Yes. Where a jurisdiction requires a local resident director, company secretary, registered agent or registered office — for example in Singapore, Hong Kong, the USA or the UK — we arrange it through our partner network.' },
   { q: 'How long does international company registration take?', a: 'It ranges from about a day (UK online incorporation) to one to three months (China). Most jurisdictions complete within one to four weeks once KYC documents are ready.' },
 ];
 
-export const SERVICE_FAQS = {
+export const SERVICE_FAQS_DEFAULT = {
   'income-tax': [
     { q: 'Which ITR form should I file?', a: 'ITR-1 is for resident individuals with income up to ₹50 lakh from salary, one house property and other sources. ITR-2 applies if you have capital gains, more than one house property or foreign assets, but no business income. ITR-3 is for business or professional income, and ITR-4 for those opting for presumptive taxation. We confirm the right form after reviewing your AIS.' },
     { q: 'What happens if I miss the ITR due date?', a: 'You can still file a belated return up to 31 December following the financial year, with a late fee of up to ₹5,000 (₹1,000 if total income does not exceed ₹5 lakh) and interest on any tax unpaid. Some losses cannot be carried forward in a belated return. After that window, an updated return (ITR-U) may still be possible on payment of additional tax.' },
@@ -101,19 +103,28 @@ export const SERVICE_FAQS = {
   ],
 };
 
-export const TENDER_FAQS = [
+export const TENDER_FAQS_DEFAULT = [
   { q: 'What does the ₹10,000 yearly subscription include?', a: 'Full tender details — tender value, EMD, issuing department, bid dates and document links — plus daily email and WhatsApp alerts for the keywords, sectors and states you choose, and access to tender results.' },
   { q: 'Which tenders do you cover?', a: 'Government and PSU tenders published on central, state and GeM portals across India. You can filter by keyword, state, sector and value.' },
   { q: 'Can you help us bid for a tender?', a: 'Yes. We help with DSC, GeM and e-procurement portal registration, MSME / NSIC registration for EMD exemption, financial documents, CA certificates and bid paperwork.' },
   { q: 'How do I pay for the subscription?', a: 'Submit the subscription form and our team will confirm your alert preferences and share a payment link. Your access is activated as soon as payment is received, and a GST invoice is issued.' },
 ];
 
-export const TRADEMARK_SEARCH_FAQS = [
+export const TRADEMARK_SEARCH_FAQS_DEFAULT = [
   { q: 'What is a trademark search?', a: 'It checks the IP India register for existing marks that are identical or similar to your proposed brand name, logo or tagline in the classes you want to register in — so you can avoid objections and oppositions later.' },
   { q: 'Is a word search enough?', a: 'Not always. Examiners also look at phonetic similarity (marks that sound alike), similar logos and related classes. Our report covers word, phonetic and class-wise matches.' },
   { q: 'What are the 45 trademark classes?', a: 'Goods are grouped into classes 1 to 34 and services into classes 35 to 45 under the Nice Classification. You need a separate application (or a multi-class application) for each class you want to protect.' },
   { q: 'Does a clear search guarantee registration?', a: 'No search can guarantee registration — the examiner may still raise objections, and third parties can oppose the mark after publication. A careful search significantly reduces that risk.' },
 ];
+
+export const GLOBAL_FAQS = fromContent('faqs', 'global', GLOBAL_FAQS_DEFAULT);
+export const TENDER_FAQS = fromContent('faqs', 'tenders', TENDER_FAQS_DEFAULT);
+export const TRADEMARK_SEARCH_FAQS = fromContent('faqs', 'trademark', TRADEMARK_SEARCH_FAQS_DEFAULT);
+
+// Service FAQs are stored on each service page once the admin panel has published them
+export const SERVICE_FAQS = hasContent('servicePages')
+  ? Object.fromEntries(SERVICES.filter((s) => Array.isArray(s.faqs) && s.faqs.length).map((s) => [s.slug, s.faqs]))
+  : SERVICE_FAQS_DEFAULT;
 
 export const FAQ_GROUPS = [
   { id: 'general', title: 'General', items: FAQS },

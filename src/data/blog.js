@@ -1,9 +1,12 @@
 // ═══════════════════════════════════════════════════════════
-//  Blog posts — admin collection: "posts".
+//  Blog posts — defaults for admin → "Blog".
 //  Body paragraphs support **bold** lead-ins and \n line breaks.
 // ═══════════════════════════════════════════════════════════
 
-export const BLOG_POSTS = [
+import { fromContent } from '../lib/content.js';
+import { byDateDesc } from '../lib/format.js';
+
+export const BLOG_POSTS_DEFAULT = [
   {
     "slug": "incorporating-abroad-indian-founders-fema-guide",
     "title": "Incorporating Abroad as an Indian Founder: Choosing a Jurisdiction and Staying FEMA-Compliant",
@@ -180,6 +183,8 @@ export const BLOG_POSTS = [
     ]
   }
 ];
+
+export const BLOG_POSTS = byDateDesc(fromContent('blog', 'posts', BLOG_POSTS_DEFAULT));
 
 export const BLOG_CATEGORIES = ['All', ...new Set(BLOG_POSTS.map((p) => p.category))];
 

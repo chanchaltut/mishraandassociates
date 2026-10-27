@@ -3,13 +3,15 @@ import Seo, { breadcrumbLd } from '../lib/seo';
 import { CLIENTS, CLIENT_INDUSTRIES, CASE_STUDIES, STATS } from '../data/content';
 import { SITE } from '../data/site';
 import { PageHero, SectionHeading } from '../components/ui';
-import Ph from '../components/ui/Ph';
+import Ph, { ready } from '../components/ui/Ph';
 import { CTABand } from '../components/Blocks';
 import { Testimonials } from '../components/home/Sections';
 
 const FILLS = ['bg-cream', 'bg-cornflower', 'bg-mint', 'bg-rose', 'bg-peach'];
 
 export default function Clients() {
+  const clients = ready(CLIENTS, 'name');
+  const stories = ready(CASE_STUDIES, 'client');
   const crumbs = [{ name: 'Home', path: '/' }, { name: 'Our Clients', path: '/clients' }];
   return (
     <>
@@ -27,12 +29,12 @@ export default function Clients() {
         intro="From first-time founders to established exporters, our clients rely on one accountable team for their tax, compliance and global setup."
       />
 
-      {/* Logo wall */}
-      <section className="bg-white py-20 sm:py-24">
+      {/* Logo wall — hidden until client names are confirmed */}
+      {clients.length > 0 && <section className="bg-white py-20 sm:py-24">
         <div className="container-site">
           <p className="text-center text-[0.9375rem] font-medium text-ink-900">A few of the businesses we work with</p>
           <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {CLIENTS.map((c, i) => (
+            {clients.map((c, i) => (
               <li key={i} className="grid aspect-[3/2] place-items-center rounded-card bg-paper p-6 text-center">
                 {c.logo ? (
                   <img src={c.logo} alt={c.name} loading="lazy" className="max-h-14 w-auto object-contain" />
@@ -47,12 +49,12 @@ export default function Clients() {
           </ul>
           {SITE.demoMode && <p className="mt-4 text-center text-xs text-muted">Client logos to be provided — shown only with each client’s permission.</p>}
         </div>
-      </section>
+      </section>}
 
       {/* Stats */}
       <section className="bg-texture py-16 sm:py-20">
         <div className="container-site grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4">
-          {STATS.map((s) => (
+          {ready(STATS, 'value').map((s) => (
             <div key={s.label} className="border-t border-ink-900 pt-5">
               <p className="font-serif text-[3.5rem] leading-none tracking-[-0.04em] text-ink-900 sm:text-[4.5rem]"><Ph>{s.value}</Ph></p>
               <p className="mt-2 text-[0.9375rem] text-ink-900">{s.label}</p>
@@ -77,11 +79,11 @@ export default function Clients() {
       </section>
 
       {/* Case studies */}
-      <section className="bg-paper py-20 sm:py-28">
+      {stories.length > 0 && <section className="bg-paper py-20 sm:py-28">
         <div className="container-site">
           <SectionHeading eyebrow="Client stories" title="What we did," accent="and what changed." />
           <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {CASE_STUDIES.map((c, i) => (
+            {stories.map((c, i) => (
               <article key={i} className="flex flex-col rounded-panel bg-white p-7 sm:p-8">
                 <span className={`self-start rounded-full px-3 py-1 text-xs font-semibold text-ink-900 ${['bg-cornflower', 'bg-mint', 'bg-peach'][i % 3]}`}>{c.service}</span>
                 <p className="mt-6 font-serif text-[1.625rem] leading-tight tracking-[-0.02em] text-ink-900"><Ph>{c.client}</Ph></p>
@@ -99,7 +101,7 @@ export default function Clients() {
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       <Testimonials />
       <CTABand title="Join businesses that" accent="file with confidence." />

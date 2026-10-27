@@ -4,11 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/fetch-snapshot.mjs --soft",
     "dev": "vite",
-    "prebuild": "node scripts/generate-seo-files.mjs",
+    "prebuild": "node scripts/fetch-snapshot.mjs && node scripts/generate-seo-files.mjs",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "npm run dev --prefix server"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
