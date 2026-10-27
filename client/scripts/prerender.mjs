@@ -5,7 +5,8 @@
 //   dist/index.html            home page
 //   dist/<path>.html           every other page in routes.mjs (served at /<path> by
 //                              "cleanUrls" in vercel.json)
-//   dist/200.html              plain app shell for everything else (admin, unknown URLs)
+//   dist/200.html              plain app shell for everything else (admin, unknown URLs);
+//                              vercel.json rewrites to "/200" (cleanUrls serves it without .html)
 import fs from 'node:fs';
 import { PAGES, EXTRA_PAGES } from './routes.mjs';
 

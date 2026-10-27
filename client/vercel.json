@@ -8,7 +8,7 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/200.html"
+      "destination": "/200"
     }
   ],
   "headers": [
