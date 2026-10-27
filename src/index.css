@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    Mishra and Associates — Global styles
-   Palette: warm peppercorn ink + signature yellow on white,
-   with teal for links/icons and soft cream/pastel fills.
+   Palette: warm peppercorn ink on white and textured beige,
+   antique-gold accents, teal for links/icons, soft pastel fills.
    Re-theme by editing the RGB channels in :root.
 ═══════════════════════════════════════════════════════════ */
 
@@ -24,11 +24,14 @@
   --brand-800: 0 78 86;     /* #004E56 */
   --brand-900: 0 32 35;     /* #002023 */
 
-  --sun: 255 224 27;        /* #FFE01B */
-  --sun-light: 255 247 193; /* #FFF7C1 */
-  --sun-deep: 230 199 0;    /* #E6C700 */
+  --sun: 216 176 96;        /* #D8B060 antique gold */
+  --sun-light: 245 234 208; /* #F5EAD0 */
+  --sun-deep: 184 145 66;   /* #B89142 */
 
-  --cream: 251 238 202;     /* #FBEECA */
+  --beige: 243 237 226;     /* #F3EDE2 textured section background */
+  --beige-deep: 231 221 202;/* #E7DDCA */
+
+  --cream: 239 231 216;     /* #EFE7D8 sand */
   --cornflower: 210 235 255;/* #D2EBFF */
   --mint: 237 255 204;      /* #EDFFCC */
   --rose: 255 204 216;      /* #FFCCD8 */
@@ -219,6 +222,16 @@
 }
 
 @layer utilities {
+  /* Beige paper: fine grain + soft light falloff (no image request) */
+  .bg-texture {
+    background-color: rgb(var(--beige));
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .27 0 0 0 0 .16 0 0 0 1.4 -.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse 80% 70% at 12% 0%, rgb(255 255 255 / 0.6), transparent 60%),
+      radial-gradient(ellipse 70% 80% at 100% 100%, rgb(var(--beige-deep) / 0.85), transparent 65%);
+    background-size: 240px 240px, 100% 100%, 100% 100%;
+  }
+
   .scrollbar-none {
     scrollbar-width: none;
   }

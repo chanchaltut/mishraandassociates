@@ -75,7 +75,45 @@ export const SERVICE_FAQS = {
     { q: 'Can F&O losses be carried forward?', a: 'Yes. Non-speculative business losses can be carried forward for eight years and set off against business income — but only if the return is filed by the due date.' },
     { q: 'How are capital gains on listed shares taxed?', a: 'Short-term gains on listed equity (held up to 12 months) are taxed at 20%. Long-term gains are taxed at 12.5% on the amount exceeding ₹1.25 lakh in a financial year.' },
   ],
+  'trademark-registration': [
+    { q: 'What is the government fee for a trademark application?', a: 'For e-filing, the IP India fee is ₹4,500 per class for individuals, startups and small enterprises, and ₹9,000 per class for others. Our professional fee is charged separately.' },
+    { q: 'Can I use the ™ and ® symbols?', a: 'You can use ™ as soon as the application is filed. The ® symbol can be used only after the mark is registered — using it earlier is an offence under the Trade Marks Act.' },
+    { q: 'How long does registration take?', a: 'Filing takes a day or two once documents are ready. If the examiner raises no objection and nobody opposes the mark after it is advertised in the Trade Marks Journal, registration typically follows in about 6 to 18 months.' },
+    { q: 'How long is a registered trademark valid?', a: 'Ten years from the date of application, renewable indefinitely for further ten-year periods.' },
+  ],
+  'iso-certification': [
+    { q: 'Who issues the ISO certificate?', a: 'An accredited certification body issues the certificate after its own audit. We prepare your organisation for that audit and coordinate with the certification body — we do not issue certificates ourselves.' },
+    { q: 'Which ISO standard do I need?', a: 'ISO 9001 (quality) is the most widely asked for in tenders and supplier onboarding. ISO 14001 covers environmental management, ISO 45001 workplace health and safety, ISO/IEC 27001 information security, and ISO 22000 food safety. We recommend based on your industry and customer requirements.' },
+    { q: 'How long is ISO certification valid?', a: 'Certificates are generally valid for three years, with surveillance audits by the certification body in the first and second years, followed by a recertification audit.' },
+    { q: 'Does ISO certification help in government tenders?', a: 'Many tenders list ISO 9001 or a sector-specific standard as an eligibility or scoring criterion. Check the tender document — we can help you plan certification well before the bid due date.' },
+  ],
+  'cha-customs-clearance': [
+    { q: 'What is a Custom House Agent (CHA)?', a: 'A CHA — now called a Customs Broker — is licensed under the Customs Brokers Licensing Regulations, 2018 to transact business with Customs on behalf of importers and exporters, including filing Bills of Entry and Shipping Bills on ICEGATE.' },
+    { q: 'What documents are needed for import clearance?', a: 'Typically the commercial invoice, packing list, bill of lading or airway bill, IEC, GSTIN, and — depending on the goods — certificate of origin, insurance, licences or product-specific approvals.' },
+    { q: 'Do I need an IEC to import or export?', a: 'Yes, an Import Export Code from DGFT is required for most commercial imports and exports. We can obtain it for you before the first shipment.' },
+    { q: 'What is an AD code and why is it needed?', a: 'The Authorised Dealer code links your bank account to the port of export. It must be registered at each port you export through so that export proceeds and incentives are credited correctly.' },
+  ],
+  'accounting-bookkeeping': [
+    { q: 'Which accounting software do you work with?', a: 'Tally Prime, Zoho Books and QuickBooks are the most common. We can work in your existing setup or recommend one that suits your volume and reporting needs.' },
+    { q: 'How do I share bills and statements with you?', a: 'Through a shared folder, email or WhatsApp — whatever is easiest. Bank feeds can be connected in supported software so statements do not have to be sent manually.' },
+    { q: 'Will my books be ready for GST and TDS filings?', a: 'Yes. Bookkeeping is closed on a monthly calendar ahead of GST and TDS due dates, with input-credit and TDS reconciliations done every period.' },
+    { q: 'Can you take over books that are behind?', a: 'Yes. We regularly catch up on pending months or years and then move you to a monthly routine.' },
+  ],
 };
+
+export const TENDER_FAQS = [
+  { q: 'What does the ₹10,000 yearly subscription include?', a: 'Full tender details — tender value, EMD, issuing department, bid dates and document links — plus daily email and WhatsApp alerts for the keywords, sectors and states you choose, and access to tender results.' },
+  { q: 'Which tenders do you cover?', a: 'Government and PSU tenders published on central, state and GeM portals across India. You can filter by keyword, state, sector and value.' },
+  { q: 'Can you help us bid for a tender?', a: 'Yes. We help with DSC, GeM and e-procurement portal registration, MSME / NSIC registration for EMD exemption, financial documents, CA certificates and bid paperwork.' },
+  { q: 'How do I pay for the subscription?', a: 'Submit the subscription form and our team will confirm your alert preferences and share a payment link. Your access is activated as soon as payment is received, and a GST invoice is issued.' },
+];
+
+export const TRADEMARK_SEARCH_FAQS = [
+  { q: 'What is a trademark search?', a: 'It checks the IP India register for existing marks that are identical or similar to your proposed brand name, logo or tagline in the classes you want to register in — so you can avoid objections and oppositions later.' },
+  { q: 'Is a word search enough?', a: 'Not always. Examiners also look at phonetic similarity (marks that sound alike), similar logos and related classes. Our report covers word, phonetic and class-wise matches.' },
+  { q: 'What are the 45 trademark classes?', a: 'Goods are grouped into classes 1 to 34 and services into classes 35 to 45 under the Nice Classification. You need a separate application (or a multi-class application) for each class you want to protect.' },
+  { q: 'Does a clear search guarantee registration?', a: 'No search can guarantee registration — the examiner may still raise objections, and third parties can oppose the mark after publication. A careful search significantly reduces that risk.' },
+];
 
 export const FAQ_GROUPS = [
   { id: 'general', title: 'General', items: FAQS },

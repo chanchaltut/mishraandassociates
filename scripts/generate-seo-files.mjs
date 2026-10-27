@@ -19,11 +19,14 @@ const pages = [
   ['/news', 'daily', '0.8'],
   ['/notifications', 'daily', '0.8'],
   ['/compliance-calendar', 'weekly', '0.7'],
+  ['/tenders', 'daily', '0.8'],
+  ['/trademark-search', 'monthly', '0.8'],
   ['/faqs', 'monthly', '0.7'],
   ['/blog', 'weekly', '0.7'],
   ...BLOG_POSTS.map((p) => [`/blog/${p.slug}`, 'monthly', '0.6', p.date]),
   ...NEWS.map((n) => [`/news/${n.slug}`, 'monthly', '0.5', n.date]),
   ['/about', 'monthly', '0.6'],
+  ['/clients', 'monthly', '0.6'],
   ['/contact', 'yearly', '0.6'],
 ];
 
@@ -61,6 +64,8 @@ ${BLOG_POSTS.map((p) => `- [${p.title}](${url(`/blog/${p.slug}`)}): ${p.excerpt}
 - [News & updates](${url('/news')})
 - [Notifications & circulars](${url('/notifications')}): CBDT, CBIC, MCA, RBI, SEBI, DGFT
 - [Compliance calendar](${url('/compliance-calendar')}): upcoming statutory due dates in India
+- [Tender notifications](${url('/tenders')}): government, PSU and GeM tenders across India, with an annual alerts subscription
+- [Trademark search](${url('/trademark-search')}): free brand-name availability report across all 45 classes
 - [Frequently asked questions](${url('/faqs')}): income tax, GST, TDS, audit, ROC and global company registration
 
 ## Contact

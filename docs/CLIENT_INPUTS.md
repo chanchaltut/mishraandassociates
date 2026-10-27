@@ -1,41 +1,57 @@
 # Information needed from Mishra and Associates
 
-Highlighted fields on the demo site are placeholders. Please share the following:
+Fields highlighted on the demo site are placeholders. Please share the following.
+Items marked ✅ have already been received.
 
-## Brand
-- Logo files (SVG preferred, or high-resolution PNG). The site colours will be matched to the logo.
-- Any brand colour preferences.
-
-## Contact & office
-- Full office address with PIN code
-- Google Maps link to the office
+## 1. Brand & contact
+- Logo files (SVG preferred, or high-resolution PNG)
+- ✅ Office address — L1A/22A, Mohan Garden, Uttam Nagar, New Delhi 110059
+- Google Maps pin for the office (to confirm the map location is exact)
 - Office hours (e.g. Mon–Sat, 10 AM – 7 PM)
-- Social media links: LinkedIn, Facebook, Instagram, X, YouTube (only the ones you use)
+- Social media links you use: LinkedIn, Facebook, Instagram, X, YouTube (remove the rest)
+- Confirm phone **+91 11 6926 6597**, WhatsApp **+91 99116 81113** and email **contact@mishraandassociates.in**
 
-## About the firm
+## 2. About the firm
 - Year established
-- Firm type and registration details to display (e.g. ICAI firm registration number, GSTIN) — or confirm none should be shown
-- A short paragraph about the firm's history and strengths
+- Registration details to display (ICAI firm registration no., GSTIN) — or confirm none should be shown
+- A short paragraph on the firm's history, founding partner and strengths
 - A one-line quote from the founder
-- Number of years in practice and approximate clients served (for the stats strip)
+- Years in practice and approximate number of clients served
 
-## Team
-For each person to feature: name, designation, qualifications, 2–3 line profile, photo, LinkedIn URL.
+## 3. Team
+For each person to feature (currently 3 slots): name, designation, qualifications, 2–3 line profile, photo, LinkedIn URL.
 
-## Testimonials
-3–6 client testimonials with name, designation/company and city, and the client's permission to publish.
+## 4. Our Clients page
+- Client names and logos (12 slots) — only clients who have given permission to be shown
+- 3 client stories: client/industry, what they needed, what you delivered and the result
+- 3–6 testimonials: quote, name, designation/company, city — with permission to publish
 
-## Services & pricing
-- Confirm the domestic service list and the "starting from" prices shown, or share your own.
-- Professional fees for company registration in the **USA, UAE, Singapore, Hong Kong, China and UK** (currently "Fee on request").
-- Any services to add or remove.
-- Whether prices should be shown at all.
+## 5. Fees
+- Company registration fees for the **USA, UAE, Singapore, Hong Kong, China and UK** (currently "Fee on request")
+- **ISO certification** fees — ISO 9001, 14001, 45001, 27001, 22000 (currently "On Consultation")
+- **CHA / customs clearance** fees, or confirm "On Consultation"
+- Review the other "starting from" prices on the Services page and correct any that are wrong
+- **Tender alerts subscription:** confirm ₹10,000/year and whether it is **+ 18% GST** or inclusive
 
-## Photos
-Office and team photos to replace the stock images.
+## 6. Services — confirm
+- **CHA / customs clearance:** do you hold a Customs Broker licence, or work through a partner? (affects the wording)
+- **ISO certification:** which certification bodies you work with (optional, to display)
+- Any services to add or remove
 
-## Content review
-- Review the seven country pages (India, USA, UAE, Singapore, Hong Kong, China, UK) for accuracy and the services you actually offer in each.
-- News and Notifications currently show **sample** entries. Confirm who will publish updates once the admin panel is live.
+## 7. Tenders & trademark search
+- **Tender listings are sample data.** Decide the source: a paid tender-data provider, or your team uploading tenders from the admin panel
+- How subscribers will pay: payment link (Razorpay / UPI) or bank transfer
+- Who handles tender-subscription requests and trademark-search report requests (name + email)
+- **"New trademark filings" list is sample data** — confirm whether to keep the section (needs a data source) or remove it
 
-> **If the firm is registered with ICAI:** please check the site against ICAI's guidelines for members' websites. They may restrict showing fees, client testimonials and similar promotional content, so some sections may need to be removed or reworded.
+## 8. Photos
+- Office and team photos to replace the stock images (home page office photo, About page)
+- Optional: your own images for the 9 blog articles (currently stock photos)
+
+## 9. Content review
+- The seven country pages (India, USA, UAE, Singapore, Hong Kong, China, UK) — accuracy and the services you offer in each
+- The four new service pages: Trademark Registration, ISO Certification, CHA / Customs Clearance, Accounting & Bookkeeping
+- Blog articles (written in your firm's name)
+- News, Notifications and Tenders show **sample** entries — confirm who will publish real updates once the admin panel is live
+
+> **If the firm is registered with ICAI:** please check the site against ICAI's guidelines for members' websites. They may restrict showing fees, client names, testimonials and similar promotional content, so some sections may need to be removed or reworded.

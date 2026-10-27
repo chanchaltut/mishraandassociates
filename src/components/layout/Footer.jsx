@@ -109,6 +109,7 @@ export default function Footer() {
           </Col>
           <Col title="Firm">
             <FLink to="/about">About us</FLink>
+            <FLink to="/clients">Our clients</FLink>
             <FLink to="/contact">Contact</FLink>
             <FLink to="/privacy-policy">Privacy policy</FLink>
             <FLink to="/terms-conditions">Terms of use</FLink>

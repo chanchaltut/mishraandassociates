@@ -30,11 +30,16 @@ export default {
           800: v('brand-800'),
           900: v('brand-900'),
         },
-        // Signature yellow
+        // Antique-gold accent
         sun: {
           DEFAULT: v('sun'),
           light: v('sun-light'),
           deep: v('sun-deep'),
+        },
+        // Textured section background (use with .bg-texture)
+        beige: {
+          DEFAULT: v('beige'),
+          deep: v('beige-deep'),
         },
         // Soft section and card fills
         cream: v('cream'),

@@ -62,7 +62,7 @@ export default function AboutUs() {
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {TEAM.map((m, i) => (
               <article key={i} className="overflow-hidden rounded-panel bg-white">
-                <div className={`relative grid aspect-[4/3] place-items-center ${['bg-sun', 'bg-cornflower', 'bg-mint'][i % 3]}`}>
+                <div className={`relative grid aspect-[4/3] place-items-center ${['bg-texture', 'bg-cornflower', 'bg-mint'][i % 3]}`}>
                   {m.image ? (
                     <img src={m.image} alt={m.name} className="h-full w-full object-cover" />
                   ) : (

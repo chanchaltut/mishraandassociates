@@ -89,6 +89,29 @@ export const TESTIMONIALS = [
   { quote: '[Client testimonial — to be provided by the firm. Two or three sentences about the experience.]', name: '[Client name]', role: '[Designation, Company]', city: '[City]' },
 ];
 
+// ─── Our clients page ─────────────────────────────────────────
+// Add each client's logo (import the file and set `logo`) once the firm
+// confirms which names can be shown publicly.
+export const CLIENTS = Array.from({ length: 12 }, (_, i) => ({ name: `[Client ${i + 1}]`, industry: '[Industry]', logo: null }));
+
+export const CLIENT_INDUSTRIES = [
+  { icon: 'ri-store-2-line', name: 'Traders & distributors' },
+  { icon: 'ri-settings-3-line', name: 'Manufacturers' },
+  { icon: 'ri-rocket-2-line', name: 'Startups & tech companies' },
+  { icon: 'ri-ship-line', name: 'Importers & exporters' },
+  { icon: 'ri-building-line', name: 'Government contractors' },
+  { icon: 'ri-restaurant-2-line', name: 'Food & hospitality' },
+  { icon: 'ri-hospital-line', name: 'Healthcare & pharma' },
+  { icon: 'ri-user-star-line', name: 'Professionals & NRIs' },
+  { icon: 'ri-hand-heart-line', name: 'NGOs, trusts & societies' },
+];
+
+export const CASE_STUDIES = [
+  { client: '[Client / industry]', service: 'Company registration — UAE', challenge: '[What the client needed]', outcome: '[What we delivered and the result]' },
+  { client: '[Client / industry]', service: 'GST & accounting', challenge: '[What the client needed]', outcome: '[What we delivered and the result]' },
+  { client: '[Client / industry]', service: 'Trademark registration', challenge: '[What the client needed]', outcome: '[What we delivered and the result]' },
+];
+
 export const FAQS = [
   {
     q: 'What services does Mishra and Associates offer?',

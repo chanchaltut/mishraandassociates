@@ -35,6 +35,9 @@ export function getSearchIndex() {
     })),
     ...FAQ_GROUPS.flatMap((g) => g.items.map((f) => ({ kind: 'FAQ', title: f.q, meta: g.title, href: `/faqs#${g.id}`, icon: 'ri-question-answer-line' }))),
     { kind: 'Page', title: 'Compliance calendar — upcoming due dates', meta: 'GST, TDS, ITR, ROC and payroll deadlines', href: '/compliance-calendar', icon: 'ri-calendar-check-line' },
+    { kind: 'Page', title: 'Tender notifications — government & PSU tenders', meta: 'Search tenders by keyword, state, sector and value; daily alerts', href: '/tenders', icon: 'ri-auction-line' },
+    { kind: 'Page', title: 'Trademark search — check brand name availability', meta: 'Free availability report across all 45 classes', href: '/trademark-search', icon: 'ri-search-eye-line' },
+    { kind: 'Page', title: 'Our clients', meta: 'Businesses we work with and client stories', href: '/clients', icon: 'ri-group-line' },
     { kind: 'Page', title: 'Contact us', meta: 'Phone, email and enquiry form', href: '/contact', icon: 'ri-phone-line' },
     { kind: 'Page', title: 'About the firm', meta: 'Our practice, people and approach', href: '/about', icon: 'ri-building-line' },
   ];

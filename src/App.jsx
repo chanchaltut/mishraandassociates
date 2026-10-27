@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import FloatingActions from './components/layout/FloatingActions';
+import IncorporationPopup from './components/layout/IncorporationPopup';
 import Home from './pages/Home';
 
 const Services = lazy(() => import('./pages/Services'));
@@ -17,6 +18,9 @@ const ComplianceCalendar = lazy(() => import('./pages/ComplianceCalendar'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const AboutUs = lazy(() => import('./pages/AboutUs'));
 const Contact = lazy(() => import('./pages/Contact'));
+const Tenders = lazy(() => import('./pages/Tenders'));
+const TrademarkSearch = lazy(() => import('./pages/TrademarkSearch'));
+const Clients = lazy(() => import('./pages/Clients'));
 const PrivacyPolicy = lazy(() => import('./pages/Legal').then((m) => ({ default: m.PrivacyPolicy })));
 const TermsConditions = lazy(() => import('./pages/Legal').then((m) => ({ default: m.TermsConditions })));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -58,10 +62,13 @@ export default function App() {
             <Route path="/news/:slug" element={<Article kind="news" />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/compliance-calendar" element={<ComplianceCalendar />} />
+            <Route path="/tenders" element={<Tenders />} />
+            <Route path="/trademark-search" element={<TrademarkSearch />} />
             <Route path="/faqs" element={<FAQ />} />
             <Route path="/faq" element={<Navigate to="/faqs" replace />} />
 
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/clients" element={<Clients />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
@@ -72,6 +79,7 @@ export default function App() {
       </main>
       <Footer />
       <FloatingActions />
+      <IncorporationPopup />
     </>
   );
 }

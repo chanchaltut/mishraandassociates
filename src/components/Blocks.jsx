@@ -32,7 +32,7 @@ export function CTABand({
   text = 'Tell us what you need. We’ll confirm scope, timeline and a fixed fee — usually the same day.',
 }) {
   return (
-    <section className="bg-sun">
+    <section className="bg-texture">
       <div className="container-site py-20 text-center sm:py-28">
         <h2 className="h-display mx-auto max-w-4xl text-[2.5rem] leading-[1.02] sm:text-[3.75rem] lg:text-[4.5rem]">
           {title} <em className="italic">{accent}</em>

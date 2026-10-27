@@ -22,7 +22,7 @@ export default function News() {
         path="/news"
         jsonLd={breadcrumbLd(crumbs)}
       />
-      <PageHero crumbs={crumbs} eyebrow="Knowledge hub" title="News &" accent="updates." intro="The developments that affect your filings and your business — summarised, with what to do next." tone="cream" />
+      <PageHero crumbs={crumbs} eyebrow="Knowledge hub" title="News &" accent="updates." intro="The developments that affect your filings and your business — summarised, with what to do next." />
 
       <section className="bg-white py-14 sm:py-20">
         <div className="container-site grid gap-12 lg:grid-cols-[1fr_340px] lg:gap-16">

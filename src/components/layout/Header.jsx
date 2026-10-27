@@ -127,7 +127,7 @@ function GlobalPanel() {
           </Link>
         ))}
       </div>
-      <div className="rounded-card bg-sun p-6">
+      <div className="rounded-card bg-texture p-6">
         <p className="text-sm font-semibold text-ink-900">Not sure where?</p>
         <p className="mt-2 font-serif text-[1.6rem] leading-[1.1] tracking-[-0.02em] text-ink-900">Compare all seven jurisdictions side by side.</p>
         <Link to="/company-registration" className="btn-dark mt-6">Compare jurisdictions</Link>
@@ -138,7 +138,7 @@ function GlobalPanel() {
 
 function KnowledgePanel() {
   return (
-    <div className="grid grid-cols-5 gap-4">
+    <div className="grid grid-cols-4 gap-4">
       {KNOWLEDGE_LINKS.map((k) => (
         <Link key={k.href} to={k.href} className="group rounded-card p-4 transition-colors hover:bg-paper">
           <span className="grid h-10 w-10 place-items-center rounded-full bg-cream text-lg text-ink-900">
@@ -259,7 +259,7 @@ export default function Header() {
   const Panel = menu ? PANELS[menu] : null;
   const isSection = (item) =>
     item.href === '/' ? location.pathname === '/' : location.pathname.startsWith(item.href) ||
-      (item.menu === 'knowledge' && ['/news', '/notifications', '/blog', '/compliance-calendar'].some((p) => location.pathname.startsWith(p)));
+      (item.menu === 'knowledge' && KNOWLEDGE_LINKS.some((k) => !NAV.some((n) => n.href === k.href) && location.pathname.startsWith(k.href)));
 
   return (
     <>
@@ -280,7 +280,7 @@ export default function Header() {
                 <li key={item.name} onMouseEnter={() => setMenu(item.menu || null)}>
                   {item.menu ? (
                     <button
-                      className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-ink-900 transition-colors hover:bg-paper ${
+                      className={`flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[0.9375rem] xl:px-3.5 font-medium text-ink-900 transition-colors hover:bg-paper ${
                         menu === item.menu || isSection(item) ? 'bg-paper' : ''
                       }`}
                       onClick={() => setMenu(menu === item.menu ? null : item.menu)}
@@ -294,7 +294,7 @@ export default function Header() {
                       to={item.href}
                       end={item.href === '/'}
                       className={({ isActive }) =>
-                        `block whitespace-nowrap rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-ink-900 transition-colors hover:bg-paper ${isActive ? 'bg-paper' : ''}`
+                        `block whitespace-nowrap rounded-full px-2.5 py-2 text-[0.9375rem] xl:px-3.5 font-medium text-ink-900 transition-colors hover:bg-paper ${isActive ? 'bg-paper' : ''}`
                       }
                     >
                       {item.name}

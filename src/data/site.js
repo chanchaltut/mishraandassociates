@@ -27,13 +27,13 @@ export const SITE = {
   email: 'contact@mishraandassociates.in',
 
   address: {
-    street: '[Office address — building, street, area]',
-    city: 'Delhi',
+    street: 'L1A/22A, Mohan Garden, Uttam Nagar',
+    city: 'New Delhi',
     region: 'Delhi',
-    postalCode: '[PIN code]',
+    postalCode: '110059',
     country: 'India',
     countryCode: 'IN',
-    mapEmbedUrl: '', // Google Maps embed URL once address is confirmed
+    mapEmbedUrl: 'https://maps.google.com/maps?q=L1A%2F22A%2C%20Mohan%20Garden%2C%20Uttam%20Nagar%2C%20New%20Delhi%20110059&z=16&output=embed',
   },
 
   hours: '[Mon – Sat, 10:00 AM – 7:00 PM]',
@@ -64,10 +64,11 @@ export const waLink = (message = `Hello ${SITE.name}, I would like to enquire ab
   `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
 
 export const NAV = [
-  { name: 'Home', href: '/' },
   { name: 'Services', href: '/services', menu: 'services' },
   { name: 'Global Setup', href: '/company-registration', menu: 'global' },
+  { name: 'Tenders', href: '/tenders' },
   { name: 'Knowledge Hub', href: '/news', menu: 'knowledge' },
+  { name: 'Clients', href: '/clients' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -78,4 +79,6 @@ export const KNOWLEDGE_LINKS = [
   { name: 'Blog & Guides', href: '/blog', icon: 'ri-quill-pen-line', desc: 'Plain-English explainers by our team' },
   { name: 'Compliance Calendar', href: '/compliance-calendar', icon: 'ri-calendar-check-line', desc: 'Upcoming statutory due dates' },
   { name: 'FAQs', href: '/faqs', icon: 'ri-question-answer-line', desc: 'Straight answers on tax, GST, ROC and global setup' },
+  { name: 'Tender Notifications', href: '/tenders', icon: 'ri-auction-line', desc: 'Government & PSU tenders with daily alerts' },
+  { name: 'Trademark Search', href: '/trademark-search', icon: 'ri-search-eye-line', desc: 'Check if your brand name is available' },
 ];

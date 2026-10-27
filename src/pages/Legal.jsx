@@ -31,7 +31,7 @@ function LegalPage({ title, path, sections, description }) {
   return (
     <>
       <Seo title={title} description={description} path={path} noindex />
-      <PageHero crumbs={[{ name: 'Home', path: '/' }, { name: title, path }]} eyebrow={`Last updated ${LEGAL_UPDATED}`} title={title} tone="cream" />
+      <PageHero crumbs={[{ name: 'Home', path: '/' }, { name: title, path }]} eyebrow={`Last updated ${LEGAL_UPDATED}`} title={title} />
       <section className="bg-white py-14 sm:py-20">
         <div className="container-site max-w-3xl">
           <ol className="space-y-10">

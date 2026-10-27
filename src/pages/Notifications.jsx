@@ -42,7 +42,6 @@ export default function Notifications() {
         title="Notifications &"
         accent="circulars."
         intro="Official releases from India’s tax and regulatory authorities, organised by issuing body. Open the source document or ask us what it means for you."
-        tone="cream"
       />
 
       <section className="bg-white py-14 sm:py-20">

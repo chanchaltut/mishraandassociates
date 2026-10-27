@@ -13,6 +13,9 @@ import { SectionHeading, Flag, SampleBadge, useReveal } from '../ui';
 import Ph from '../ui/Ph';
 import NewsletterForm from '../NewsletterForm';
 
+const NUMBER_WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'];
+const inWords = (n) => NUMBER_WORDS[n] || String(n);
+
 // Soft fills rotated across card grids
 const FILLS = ['bg-cream', 'bg-cornflower', 'bg-mint', 'bg-rose', 'bg-peach'];
 
@@ -51,9 +54,9 @@ export function PracticeAreas() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
             eyebrow="Practice areas"
-            title="Thirteen practice areas."
+            title={`${inWords(PARENT_SERVICES.length)} practice areas.`}
             accent="One accountable team."
-            intro="Over a hundred services, each with a fixed starting fee. Government fees are always shown separately, at actuals."
+            intro="Over a hundred services — from GST and income tax to trademarks, ISO certification and customs clearance — handled end to end by one team."
           />
           <Link to="/services" className="btn-outline shrink-0 self-start lg:self-auto">Browse all services</Link>
         </div>
@@ -92,12 +95,21 @@ export function PracticeAreas() {
                 <i className={p.icon} />
               </span>
               <h3 className="mt-6 font-serif text-[1.25rem] leading-[1.15] tracking-[-0.015em] group-hover:underline sm:mt-8 sm:text-[1.5rem]">{p.title}</h3>
-              <div className="hidden sm:block"><p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-800">{p.shortDesc}</p></div>
-              <p className="mt-auto pt-5 text-[0.8125rem] text-ink-800 sm:pt-6 sm:text-sm">
-                From <span className="font-semibold text-ink-900">{p.startingPrice}</span>
-              </p>
+              <div className="hidden sm:block"><p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-800">{p.shortDesc}</p></div>
             </Link>
           ))}
+
+          {/* Fills the two empty cells left in the last row of the 4-column grid */}
+          {rest.length % 4 === 2 && (
+            <Link to="/services" className="group col-span-2 flex items-center justify-between gap-6 rounded-card bg-texture p-6 sm:p-8">
+              <span className="font-serif text-[1.5rem] leading-tight tracking-[-0.02em] text-ink-900 sm:text-[1.875rem]">
+                See every service <em className="italic">in one place</em>
+              </span>
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-ink-900 text-xl text-ink-900 transition-colors group-hover:bg-ink-900 group-hover:text-white">
+                <i className="ri-arrow-right-line" />
+              </span>
+            </Link>
+          )}
         </div>
       </div>
     </section>

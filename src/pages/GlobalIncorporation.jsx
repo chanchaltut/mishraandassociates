@@ -64,7 +64,7 @@ export default function GlobalIncorporation() {
           <SectionHeading eyebrow="At a glance" title="Compare jurisdictions" accent="side by side." intro="Indicative information for the most common entity in each country. Requirements and rates change — we confirm the current position during consultation." />
           <div className="mt-12 overflow-x-auto rounded-panel border border-ink-900 bg-white">
             <table className="w-full min-w-[820px] text-left text-sm">
-              <thead className="border-b border-ink-900 bg-sun text-ink-900">
+              <thead className="border-b border-ink-900 bg-texture text-ink-900">
                 <tr>
                   {['Jurisdiction', 'Common entity', 'Typical timeline', 'Local director', 'Headline tax', 'Minimum capital'].map((h) => (
                     <th key={h} className="px-5 py-4 text-[0.8125rem] font-semibold">{h}</th>

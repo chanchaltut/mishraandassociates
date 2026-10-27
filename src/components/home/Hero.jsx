@@ -147,7 +147,7 @@ function UpdatesDesk() {
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-sun">
+    <section className="relative overflow-hidden bg-texture">
       <div className="container-site relative grid gap-14 pb-20 pt-14 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:pb-28 lg:pt-24">
         <div className="animate-rise">
           <p className="eyebrow">{HERO.eyebrow}</p>

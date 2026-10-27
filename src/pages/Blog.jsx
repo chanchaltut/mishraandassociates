@@ -38,7 +38,7 @@ export default function Blog() {
           },
         ]}
       />
-      <PageHero crumbs={crumbs} eyebrow="Blog & guides" title="Clear answers to" accent="taxing questions." intro="Practical explainers written by our team — what the law says, what it means for you, and what to do next." tone="cream" />
+      <PageHero crumbs={crumbs} eyebrow="Blog & guides" title="Clear answers to" accent="taxing questions." intro="Practical explainers written by our team — what the law says, what it means for you, and what to do next." />
 
       <section className="bg-white py-14 sm:py-20">
         <div className="container-site">

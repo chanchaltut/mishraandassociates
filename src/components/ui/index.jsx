@@ -41,10 +41,10 @@ export function SectionHeading({ eyebrow, title, accent, intro, align = 'left', 
 }
 
 // ─── Inner page hero ──────────────────────────────────────────
-// Full-bleed colour block. tone: 'sun' (yellow), 'cream' or 'white'.
-const HERO_TONES = { sun: 'bg-sun', cream: 'bg-cream', white: 'bg-white border-b border-line' };
+// Full-bleed block. tone: 'beige' (textured) or 'white'.
+const HERO_TONES = { beige: 'bg-texture', white: 'bg-white border-b border-line' };
 
-export function PageHero({ eyebrow, title, accent, intro, crumbs = [], children, aside, tone = 'sun' }) {
+export function PageHero({ eyebrow, title, accent, intro, crumbs = [], children, aside, tone = 'beige' }) {
   return (
     <section className={`relative overflow-hidden ${HERO_TONES[tone]}`}>
       <div className="container-site relative pb-14 pt-6 sm:pb-20 sm:pt-8 lg:pb-24">

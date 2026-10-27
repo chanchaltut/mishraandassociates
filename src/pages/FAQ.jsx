@@ -34,7 +34,6 @@ export default function FAQ() {
         title="Clear answers to"
         accent="common questions."
         intro={`${total} answers on tax, GST, company law and overseas incorporation — written by our team and reviewed regularly.`}
-        tone="cream"
       >
         <div className="relative mt-8 max-w-xl">
           <i className="ri-search-line pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-ink-900" aria-hidden="true" />

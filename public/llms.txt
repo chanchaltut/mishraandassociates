@@ -5,7 +5,7 @@
 - Website: https://mishraandassociates.in
 - Phone: +91 11 6926 6597
 - Email: contact@mishraandassociates.in
-- Location: Delhi, India (services delivered online across India and internationally)
+- Location: New Delhi, India (services delivered online across India and internationally)
 
 ## Practice areas
 - [Company Registration — India & Global](https://mishraandassociates.in/services?category=Company%20Registration): Incorporate in India, the USA, UAE, Singapore, Hong Kong, China or the UK — entity selection, filings, banking support and FEMA/ODI compliance for Indian promoters.
@@ -18,7 +18,9 @@
 - [Business Registration (India)](https://mishraandassociates.in/services?category=Incorporation): Pvt Ltd, LLP, OPC, Section 8, Partnership and Proprietorship — complete incorporation support in India.
 - [MCA / ROC Compliance](https://mishraandassociates.in/services?category=ROC%20%2F%20MCA): Annual filings, board minutes, director changes and all MCA / ROC compliance for companies and LLPs.
 - [Import Export (IEC)](https://mishraandassociates.in/services?category=Import%20%2F%20Export): IEC registration, DGFT services, export documentation and foreign trade compliance.
+- [Customs Clearance (CHA)](https://mishraandassociates.in/services?category=Customs%20%2F%20CHA): Custom House Agent services — import and export clearance, Bill of Entry and Shipping Bill filing, duty assessment and port coordination.
 - [Accounting & Bookkeeping](https://mishraandassociates.in/services?category=Accounting): Monthly bookkeeping, financial statements, payroll and MIS reporting for businesses.
+- [ISO Certification](https://mishraandassociates.in/services?category=ISO): ISO 9001, 14001, 45001, 27001 and 22000 — gap analysis, documentation, internal audit and certification-audit support.
 - [MSME / Udyam Registration](https://mishraandassociates.in/services?category=MSME): Udyam registration, updates and government scheme assistance for small businesses.
 - [FSSAI Food Licensing](https://mishraandassociates.in/services?category=FSSAI): FSSAI basic, state and central food licence registration, renewal and modifications.
 
@@ -42,6 +44,10 @@
 - [Certificates & Attestations](https://mishraandassociates.in/services/ca-certificates): Turnover, net worth, 15CB and other certificates for banks, tenders, visas and schemes.
 - [Loan Documentation & Bank Liaison](https://mishraandassociates.in/services/loan-documentation): Complete loan files — home, business, MSME and personal loan documentation.
 - [F&O / Capital Gain Tax](https://mishraandassociates.in/services/fno-capital-gain): ITR filing for F&O traders and investors, with turnover and capital gains computation.
+- [Trademark Registration in India](https://mishraandassociates.in/services/trademark-registration): Protect your brand name, logo or tagline — search, filing, objection replies and registration with IP India.
+- [ISO Certification Consulting](https://mishraandassociates.in/services/iso-certification): Get ISO-certified with gap analysis, documentation, internal audits and support through the certification-body audit.
+- [Custom House Agent (CHA) & Customs Clearance](https://mishraandassociates.in/services/cha-customs-clearance): Import and export customs clearance — Bill of Entry and Shipping Bill filing, duty assessment and port coordination.
+- [Accounting & Bookkeeping Services](https://mishraandassociates.in/services/accounting-bookkeeping): Monthly bookkeeping, payroll, reconciliations and MIS — books that are always ready for GST, TDS and audit.
 
 ## Articles
 - [Incorporating Abroad as an Indian Founder: Choosing a Jurisdiction and Staying FEMA-Compliant](https://mishraandassociates.in/blog/incorporating-abroad-indian-founders-fema-guide): USA, UAE, Singapore, Hong Kong, China or the UK? How Indian founders should compare jurisdictions — and the India-side overseas investment filings that most people forget.
@@ -58,6 +64,8 @@
 - [News & updates](https://mishraandassociates.in/news)
 - [Notifications & circulars](https://mishraandassociates.in/notifications): CBDT, CBIC, MCA, RBI, SEBI, DGFT
 - [Compliance calendar](https://mishraandassociates.in/compliance-calendar): upcoming statutory due dates in India
+- [Tender notifications](https://mishraandassociates.in/tenders): government, PSU and GeM tenders across India, with an annual alerts subscription
+- [Trademark search](https://mishraandassociates.in/trademark-search): free brand-name availability report across all 45 classes
 - [Frequently asked questions](https://mishraandassociates.in/faqs): income tax, GST, TDS, audit, ROC and global company registration
 
 ## Contact

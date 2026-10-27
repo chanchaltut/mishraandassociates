@@ -40,7 +40,6 @@ export default function ComplianceCalendar() {
         title="Compliance"
         accent="calendar."
         intro="Statutory due dates for the next four months. Dates shown are the default due dates — government extensions, when notified, will be reflected here."
-        tone="cream"
       />
 
       <section className="bg-white py-14 sm:py-20">
