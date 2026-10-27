@@ -1,7 +1,7 @@
 // Form controls generated from shared/schema.js. Every content screen in the
 // admin panel is built from these few components.
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
-import { emptyValue } from '../../shared/schema.js';
+import { emptyValue } from '../../../shared/schema.js';
 import { uploadFile } from './api';
 
 // path → message, filled from server validation

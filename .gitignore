@@ -5,6 +5,6 @@ dist
 CLAUDE.md
 CLAUDE.local.md
 .claude/
-src/generated/
-public/content-version.json
+client/src/generated/
+client/public/content-version.json
 server/.env

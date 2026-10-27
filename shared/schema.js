@@ -93,7 +93,7 @@ export const CONTENT = {
         x: url('X (Twitter)', { help: HIDE_HELP }),
         youtube: url('YouTube', { help: HIDE_HELP }),
       }),
-      logo: image('Logo', { help: 'SVG or transparent PNG. Leave blank to use the text logo.' }),
+      logo: image('Logo', { help: 'Wide logo on a transparent background (SVG, PNG or WebP). Leave blank to use the built-in logo.' }),
       ogImage: image('Default share image', { help: '1200 × 630 px — shown when a page is shared on WhatsApp, LinkedIn, etc.' }),
       announcement: group('Announcement bar', {
         enabled: toggle('Show announcement bar'),

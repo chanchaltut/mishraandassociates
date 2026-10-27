@@ -9,7 +9,7 @@ import { ensureContent } from './content.js';
 import { hashPassword, checkPasswordStrength } from './auth.js';
 
 // The site's data modules read the build snapshot; outside a site build it doesn't exist yet
-const snapshotFile = new URL('../../src/generated/snapshot.js', import.meta.url);
+const snapshotFile = new URL('../../client/src/generated/snapshot.js', import.meta.url);
 if (!fs.existsSync(snapshotFile)) {
   fs.mkdirSync(new URL('./', snapshotFile), { recursive: true });
   fs.writeFileSync(snapshotFile, 'export default null;\n');
@@ -46,7 +46,7 @@ async function main() {
   await mongoose.connect(config.mongoUri, { serverSelectionTimeoutMS: 15000 });
   console.log('[db] connected');
 
-  const { buildDefaults } = await import('../../src/data/defaults.js');
+  const { buildDefaults } = await import('../../client/src/data/defaults.js');
   await ensureContent(buildDefaults());
   await ensureOwner();
 

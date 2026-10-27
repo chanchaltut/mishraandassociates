@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SITE } from '../../data/site';
 import { img } from '../../lib/images';
 
+const BUILT_IN_LOGO = '/images/logo.webp';
+
 /**
- * Brand logo. Until the final artwork is supplied (SITE.logo), a typographic
- * placeholder mark is rendered. `tone` switches colours for dark backgrounds.
+ * Brand logo: the logo uploaded in the admin panel (SITE.logo), else the built-in
+ * artwork. If the image can't load, the typographic mark is shown instead.
  */
 export default function Logo({ tone = 'dark', compact = false, className = '' }) {
-  if (SITE.logo) {
-    return <img src={img(SITE.logo, 400)} alt={SITE.name} className={`h-10 w-auto ${className}`} />;
+  const src = SITE.logo || BUILT_IN_LOGO;
+  const [failed, setFailed] = useState(false);
+
+  if (!failed) {
+    return (
+      <img
+        src={img(src, 700)}
+        alt={SITE.name}
+        height="56"
+        className={`w-auto ${compact ? 'h-8' : 'h-9 sm:h-11'} ${className}`}
+        onError={() => setFailed(true)}
+      />
+    );
   }
 
   const light = tone === 'light';

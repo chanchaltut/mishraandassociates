@@ -55,7 +55,7 @@ export const SITE_DEFAULT = {
     youtube: '',
   },
 
-  logo: '', // uploaded from the admin panel; blank = typographic logo
+  logo: '', // uploaded from the admin panel; blank = built-in logo (public/images/logo.webp)
 
   ogImage: '/og-image.jpg',
 

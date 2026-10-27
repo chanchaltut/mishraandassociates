@@ -2,7 +2,7 @@
 // Save stores a draft; Publish (top bar) puts all saved drafts live.
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CONTENT } from '../../../shared/schema.js';
+import { CONTENT } from '../../../../shared/schema.js';
 import { api, formatDateTime } from '../api';
 import { Fields, ErrorsContext } from '../fields';
 import { useAdmin } from '../AdminApp';

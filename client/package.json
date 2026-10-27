@@ -1,5 +1,5 @@
 {
-  "name": "mishra-and-associates",
+  "name": "mishra-and-associates-client",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -9,8 +9,7 @@
     "prebuild": "node scripts/fetch-snapshot.mjs && node scripts/generate-seo-files.mjs",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "server": "npm run dev --prefix server"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

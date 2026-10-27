@@ -29,17 +29,27 @@ You need: the GitHub repo (pushed), access to the Vercel project, and an email a
 ## 3. Render — the API server
 
 1. Sign up at **render.com** with GitHub.
-2. **New → Blueprint** → select this repository. Render reads `render.yaml` and shows one service, **mishra-api**.
-3. Fill in the values it asks for:
+2. **New → Web Service** → select this repository, with these settings (or use **New → Blueprint**, which reads them from `render.yaml`):
+   | Setting | Value |
+   |---|---|
+   | Root Directory | `server` |
+   | Build Command | `npm install` |
+   | Start Command | `npm start` |
+   | Health Check Path | `/api/health` |
+3. **Environment** — add:
    | Key | Value |
    |---|---|
    | `MONGODB_URI` | from step 1 |
+   | `JWT_SECRET` | press *Generate*, or 40+ random letters and digits |
    | `ADMIN_EMAIL` | the email you'll sign in with |
    | `ADMIN_PASSWORD` | a strong password (10+ characters). You can change it later in the admin panel. |
    | `CLOUDINARY_URL` | from step 2 |
-4. Click **Apply**. The first deploy takes 2–4 minutes.
-5. Open **`https://mishra-api.onrender.com/api/health`**. It should show `{"ok":true,"db":"connected"}`.
-   - If Render gave the service a different URL (shown at the top of the service page), use that URL everywhere below. Also put it in **`vercel.json`** (first line under `rewrites`) and commit.
+   | `NODE_ENV` | `production` |
+   | `NODE_VERSION` | `22` |
+   | `SITE_URL` | `https://mishraandassociates.in` |
+4. Deploy. The first deploy takes 2–4 minutes.
+5. Open **`https://mishraandassociates.onrender.com/api/health`**. It should show `{"ok":true,"db":"connected"}`.
+   - If the service URL is different (shown at the top of the service page), use that URL everywhere below. Also put it in **`client/vercel.json`** (first line under `rewrites`) and commit.
    - If health shows an error, open the service's **Logs**. They say exactly which setting is wrong.
 
 On its first start, the API copies all current website content into the database and creates your admin account.
@@ -48,10 +58,12 @@ On its first start, the API copies all current website content into the database
 
 In the Vercel project:
 
-1. **Settings → Environment Variables** → add **`CONTENT_API_URL`** = `https://mishra-api.onrender.com` (Production + Preview).
-2. **Settings → Git → Deploy Hooks** → name `admin-publish`, branch `main` → **Create** → copy the URL.
-3. Back in **Render → mishra-api → Environment** → add **`VERCEL_DEPLOY_HOOK_URL`** = that URL → *Save changes* (Render restarts the API).
-4. **Vercel → Deployments** → on the latest deployment, click **⋯ → Redeploy**. Or push any commit.
+1. **Settings → Build and Deployment → Root Directory** → `client` (Framework: Vite). Save.
+2. **Settings → Environment Variables** → add **`CONTENT_API_URL`** = `https://mishraandassociates.onrender.com` (Production + Preview).
+3. **Settings → Git → Deploy Hooks** → name `admin-publish`, branch `main` → **Create** → copy the URL.
+4. Back in **Render → your service → Environment** → add **`VERCEL_DEPLOY_HOOK_URL`** = that URL → *Save changes* (Render restarts the API).
+5. **Vercel → Deployments** → on the latest deployment, click **⋯ → Redeploy**. Or push any commit.
+6. **Settings → Domains** → add `mishraandassociates.in` and `www.mishraandassociates.in`, then add the DNS records Vercel shows at your domain registrar (usually an `A` record `76.76.21.21` for the root and a `CNAME` `cname.vercel-dns.com` for `www`). Remove any parking or forwarding records there.
 
 ## 5. Test it (2 minutes)
 
@@ -63,8 +75,8 @@ In the Vercel project:
 ## 6. Keep the API awake (free) — recommended
 
 Render's free plan sleeps after 15 minutes without visitors, and the first request after that takes about 50 seconds. Forms still work, because the site waits, but it's slow. Pick one:
-- **Free:** at **uptimerobot.com**, add an *HTTP(s)* monitor for `https://mishra-api.onrender.com/api/health` every **5 minutes**. This keeps the server awake and emails you if it goes down.
-- **Paid ($7/month):** Render → mishra-api → *Settings → Instance type → Starter*. It's always on.
+- **Free:** at **uptimerobot.com**, add an *HTTP(s)* monitor for `https://mishraandassociates.onrender.com/api/health` every **5 minutes**. This keeps the server awake and emails you if it goes down.
+- **Paid ($7/month):** Render → your service → *Settings → Instance type → Starter*. It's always on.
 
 ## 7. Email alerts for new enquiries (optional, 5 minutes)
 
@@ -92,7 +104,7 @@ Without a verified domain, Resend only delivers to the email you signed up with.
 
 | Symptom | Fix |
 |---|---|
-| Admin shows "Can't reach the server" | Open `…onrender.com/api/health`. If it's asleep, wait a minute. Check `vercel.json` has the right Render URL, then redeploy Vercel. |
+| Admin shows "Can't reach the server" | Open `…onrender.com/api/health`. If it's asleep, wait a minute. Check `client/vercel.json` has the right Render URL, then redeploy Vercel. |
 | Publish says "rebuild isn't set up" | `VERCEL_DEPLOY_HOOK_URL` is missing on Render (step 4.2–4.3). |
 | A Vercel build failed after publishing | The live site is unaffected — Vercel keeps the previous version. The build log shows the reason (usually the API was down). In the admin panel → *Publish history → Rebuild website*. |
 | Owner forgot their password | Render → Environment → add `RESET_ADMIN_PASSWORD` = a new password (10+ characters), with `ADMIN_EMAIL` set to their email. Save, sign in, then **delete** `RESET_ADMIN_PASSWORD`. |

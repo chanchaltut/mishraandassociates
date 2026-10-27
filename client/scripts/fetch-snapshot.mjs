@@ -8,7 +8,7 @@
 //
 // --soft (used by `npm run dev`) never fails; it falls back to the defaults.
 import fs from 'node:fs';
-import { validateSnapshot } from '../shared/schema.js';
+import { validateSnapshot } from '../../shared/schema.js';
 
 const API = (process.env.CONTENT_API_URL || '').replace(/\/$/, '');
 const soft = process.argv.includes('--soft');

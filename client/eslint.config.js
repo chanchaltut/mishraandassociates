@@ -31,7 +31,7 @@ export default [
     },
   },
   {
-    files: ['server/**/*.js', 'scripts/**/*.{js,mjs}', 'shared/**/*.js', 'vite.config.js'],
+    files: ['scripts/**/*.{js,mjs}', 'vite.config.js'],
     languageOptions: { globals: { ...globals.node } },
   },
 ]

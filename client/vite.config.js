@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { pathToFileURL } from 'node:url'
 import { srcSetFor } from './src/lib/images.js'
 
 // Preloads the home-page hero photo — whichever one is published from the admin panel.
@@ -10,7 +9,7 @@ function heroPreload() {
     async transformIndexHtml(html) {
       let src = '/images/hero-1600.webp'
       try {
-        const url = pathToFileURL('./src/generated/snapshot.js').href + `?t=${Date.now()}`
+        const url = new URL('./src/generated/snapshot.js', import.meta.url).href + `?t=${Date.now()}`
         const snapshot = (await import(url)).default
         src = snapshot?.content?.home?.hero?.image?.src || src
       } catch {
@@ -31,6 +30,8 @@ export default defineConfig({
   server: {
     // Local API (npm run server) — same /api path the live site uses
     proxy: { '/api': 'http://localhost:4000' },
+    // The content model lives in ../shared, outside this folder
+    fs: { allow: ['..'] },
   },
   build: {
     rollupOptions: {
