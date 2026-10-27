@@ -20,7 +20,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: SITE_URL
-        value: https://mishraandassociates.in
+        value: https://www.mishranassociates.com
       - key: MONGODB_URI
         sync: false
       - key: ADMIN_EMAIL

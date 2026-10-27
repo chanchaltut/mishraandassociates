@@ -21,4 +21,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://mishraandassociates.in/sitemap.xml
+Sitemap: https://www.mishranassociates.com/sitemap.xml

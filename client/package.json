@@ -7,7 +7,7 @@
     "predev": "node scripts/fetch-snapshot.mjs --soft",
     "dev": "vite",
     "prebuild": "node scripts/fetch-snapshot.mjs && node scripts/generate-seo-files.mjs",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

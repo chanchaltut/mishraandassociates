@@ -9,7 +9,7 @@ Items marked ✅ have already been received.
 - ✅ Google Maps pin — https://maps.app.goo.gl/x2TSKaR7K1sEiTeG7 (used for “Get directions”)
 - Office hours (e.g. Mon–Sat, 10 AM – 7 PM)
 - Social media links you use: LinkedIn, Facebook, Instagram, X, YouTube (remove the rest)
-- Confirm phone **+91 11 6926 6597**, WhatsApp **+91 99116 81113** and email **contact@mishraandassociates.in**
+- Confirm phone **+91 11 6926 6597**, WhatsApp **+91 99116 81113** and email **contact@mishranassociates.com**
 
 ## 2. About the firm
 - Year established

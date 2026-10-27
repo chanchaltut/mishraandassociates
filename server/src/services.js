@@ -87,9 +87,38 @@ export async function triggerDeploy() {
   try {
     const res = await fetch(config.deployHookUrl, { method: 'POST', signal: AbortSignal.timeout(15000) });
     if (!res.ok) throw new Error(`Vercel responded ${res.status}`);
+    scheduleIndexNow();
     return { status: 'triggered', message: 'Rebuild started.' };
   } catch (err) {
     console.error('[deploy]', err.message);
     return { status: 'failed', message: err.message };
   }
+}
+
+// ─── IndexNow ────────────────────────────────────────────────
+// Once the rebuilt site is live, tells Bing (which also feeds ChatGPT search and
+// Copilot), Yandex and other IndexNow engines to recrawl every page in the sitemap.
+const INDEXNOW_DELAY_MS = 5 * 60 * 1000;
+let indexNowTimer = null;
+
+function scheduleIndexNow() {
+  const key = config.indexNowKey;
+  if (!config.production || !key || key === 'off') return;
+  clearTimeout(indexNowTimer); // several publishes in a row → one ping after the last
+  indexNowTimer = setTimeout(() => submitIndexNow(key).catch((err) => console.error('[indexnow]', err.message)), INDEXNOW_DELAY_MS);
+}
+
+async function submitIndexNow(key) {
+  const res = await fetch(`${config.siteUrl}/sitemap.xml`, { signal: AbortSignal.timeout(20000) });
+  if (!res.ok) throw new Error(`sitemap returned ${res.status}`);
+  const urlList = [...(await res.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]).slice(0, 10000);
+  if (!urlList.length) return;
+  const ping = await fetch('https://api.indexnow.org/indexnow', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: JSON.stringify({ host: new URL(config.siteUrl).host, key, keyLocation: `${config.siteUrl}/${key}.txt`, urlList }),
+    signal: AbortSignal.timeout(20000),
+  });
+  if (![200, 202].includes(ping.status)) throw new Error(`IndexNow responded ${ping.status}`);
+  console.log(`[indexnow] submitted ${urlList.length} URLs`);
 }

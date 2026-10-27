@@ -26,7 +26,7 @@ export const config = {
   port: Number(env.PORT) || 4000,
   mongoUri: env.MONGODB_URI,
   jwtSecret: env.JWT_SECRET,
-  siteUrl: (env.SITE_URL || 'https://mishraandassociates.in').replace(/\/$/, ''),
+  siteUrl: (env.SITE_URL || 'https://www.mishranassociates.com').replace(/\/$/, ''),
   // Extra origins allowed to post forms directly (only needed when VITE_API_URL is used)
   allowedOrigins: list(env.ALLOWED_ORIGINS),
   admin: {
@@ -40,6 +40,8 @@ export const config = {
     from: env.EMAIL_FROM || 'Mishra and Associates Website <onboarding@resend.dev>',
   },
   deployHookUrl: env.VERCEL_DEPLOY_HOOK_URL || '',
+  // IndexNow key; the website serves it at /<key>.txt (client/public). Set INDEXNOW_KEY=off to disable.
+  indexNowKey: env.INDEXNOW_KEY ?? '859bc29ae386a5506ba71f1cf62f7275',
 };
 
 if (env.CLOUDINARY_URL && !config.cloudinary) {

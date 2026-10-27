@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { SITE } from '../data/site';
 import { isPlaceholder } from './format';
 import { pageOverride } from '../data/pages';
+import { SHARE_IMAGE } from './site-head';
 
 export const absUrl = (path = '/') => `${SITE.url}${path.startsWith('/') ? path : `/${path}`}`;
 
@@ -49,6 +50,7 @@ export default function Seo(props) {
   const url = absUrl(path);
   const share = image || SITE.ogImage || '/og-image.jpg';
   const img = share.startsWith('http') ? share : absUrl(share);
+  const isDefaultImage = share === (SITE.ogImage || '/og-image.jpg');
   const blocks = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean);
 
   return (
@@ -64,6 +66,9 @@ export default function Seo(props) {
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={img} />
+      {isDefaultImage && <meta property="og:image:width" content={String(SHARE_IMAGE.width)} />}
+      {isDefaultImage && <meta property="og:image:height" content={String(SHARE_IMAGE.height)} />}
+      <meta property="og:image:alt" content={fullTitle} />
       <meta property="og:locale" content="en_IN" />
 
       <meta name="twitter:card" content="summary_large_image" />

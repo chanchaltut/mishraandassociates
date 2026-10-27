@@ -1,34 +1,17 @@
-// Generates public/sitemap.xml and public/llms.txt from the site data.
+// Generates public/sitemap.xml, public/robots.txt and public/llms.txt from the site data,
+// using the website address from Site settings.
 // Runs automatically before every build (see "prebuild" in package.json).
 import fs from 'node:fs';
 import { SITE } from '../src/data/site.js';
 import { PARENT_SERVICES, SERVICES } from '../src/data/services.js';
 import { COUNTRIES } from '../src/data/countries.js';
 import { BLOG_POSTS } from '../src/data/blog.js';
-import { NEWS } from '../src/data/news.js';
+import { PAGES } from './routes.mjs';
 
 const today = new Date().toISOString().slice(0, 10);
 const url = (path) => `${SITE.url}${path}`;
 
-const pages = [
-  ['/', 'weekly', '1.0'],
-  ['/services', 'weekly', '0.9'],
-  ['/company-registration', 'monthly', '0.9'],
-  ...COUNTRIES.map((c) => [`/company-registration/${c.slug}`, 'monthly', '0.9']),
-  ...SERVICES.map((s) => [`/services/${s.slug}`, 'monthly', '0.8']),
-  ['/news', 'daily', '0.8'],
-  ['/notifications', 'daily', '0.8'],
-  ['/compliance-calendar', 'weekly', '0.7'],
-  ['/tenders', 'daily', '0.8'],
-  ['/trademark-search', 'monthly', '0.8'],
-  ['/faqs', 'monthly', '0.7'],
-  ['/blog', 'weekly', '0.7'],
-  ...BLOG_POSTS.map((p) => [`/blog/${p.slug}`, 'monthly', '0.6', p.date]),
-  ...NEWS.map((n) => [`/news/${n.slug}`, 'monthly', '0.5', n.date]),
-  ['/about', 'monthly', '0.6'],
-  ['/clients', 'monthly', '0.6'],
-  ['/contact', 'yearly', '0.6'],
-];
+const pages = PAGES;
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -72,4 +55,8 @@ ${BLOG_POSTS.map((p) => `- [${p.title}](${url(`/blog/${p.slug}`)}): ${p.excerpt}
 - [Contact page](${url('/contact')})
 `;
 fs.writeFileSync(new URL('../public/llms.txt', import.meta.url), llms);
-console.log(`sitemap.xml: ${pages.length} URLs · llms.txt written`);
+const robotsFile = new URL('../public/robots.txt', import.meta.url);
+const robots = fs.readFileSync(robotsFile, 'utf8').replace(/^Sitemap: .*$/m, `Sitemap: ${url('/sitemap.xml')}`);
+fs.writeFileSync(robotsFile, robots);
+
+console.log(`sitemap.xml: ${pages.length} URLs · robots.txt · llms.txt written for ${SITE.url}`);

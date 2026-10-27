@@ -2,7 +2,7 @@
   "name": "mishra-and-associates",
   "private": true,
   "type": "module",
-  "description": "Website (client/) and website-management API (server/) for mishraandassociates.in",
+  "description": "Website (client/) and website-management API (server/) for www.mishranassociates.com",
   "scripts": {
     "install:all": "npm install --prefix client && npm install --prefix server",
     "dev": "npm run dev --prefix client",

@@ -46,7 +46,7 @@ You need: the GitHub repo (pushed), access to the Vercel project, and an email a
    | `CLOUDINARY_URL` | from step 2 |
    | `NODE_ENV` | `production` |
    | `NODE_VERSION` | `22` |
-   | `SITE_URL` | `https://mishraandassociates.in` |
+   | `SITE_URL` | `https://www.mishranassociates.com` |
 4. Deploy. The first deploy takes 2–4 minutes.
 5. Open **`https://mishraandassociates.onrender.com/api/health`**. It should show `{"ok":true,"db":"connected"}`.
    - If the service URL is different (shown at the top of the service page), use that URL everywhere below. Also put it in **`client/vercel.json`** (first line under `rewrites`) and commit.
@@ -63,11 +63,11 @@ In the Vercel project:
 3. **Settings → Git → Deploy Hooks** → name `admin-publish`, branch `main` → **Create** → copy the URL.
 4. Back in **Render → your service → Environment** → add **`VERCEL_DEPLOY_HOOK_URL`** = that URL → *Save changes* (Render restarts the API).
 5. **Vercel → Deployments** → on the latest deployment, click **⋯ → Redeploy**. Or push any commit.
-6. **Settings → Domains** → add `mishraandassociates.in` and `www.mishraandassociates.in`, then add the DNS records Vercel shows at your domain registrar (usually an `A` record `76.76.21.21` for the root and a `CNAME` `cname.vercel-dns.com` for `www`). Remove any parking or forwarding records there.
+6. **Settings → Domains** → keep `www.mishranassociates.com` as the primary domain, with `mishranassociates.com` redirecting to it. If the website address ever changes, update it in the same three places: Vercel domains, admin → *Site settings → Website address*, and `SITE_URL` on Render.
 
 ## 5. Test it (2 minutes)
 
-1. Open **https://mishraandassociates.in/admin** and sign in.
+1. Open **https://www.mishranassociates.com/admin** and sign in.
 2. **Site settings** → turn on the *Announcement bar*, type a message → **Save changes** → **Publish** (top right).
 3. Wait for *"Your changes are live on the website"* (about 1–2 minutes). Check the site, then turn the bar off and publish again.
 4. Submit the **Contact** form on the website. It appears in **Inbox**.
@@ -87,8 +87,8 @@ Everything is always saved in the admin **Inbox**. Email alerts are an extra.
 3. In the admin panel → **Form settings** → put that same email address → Save.
 
 Without a verified domain, Resend only delivers to the email you signed up with. To send alerts to other addresses as well:
-1. In Resend, go to **Domains → Add** `mishraandassociates.in` and add the DNS records it shows.
-2. On Render, set `EMAIL_FROM` = `Mishra and Associates <website@mishraandassociates.in>`.
+1. In Resend, go to **Domains → Add** `mishranassociates.com` and add the DNS records it shows.
+2. On Render, set `EMAIL_FROM` = `Mishra and Associates <website@mishranassociates.com>`.
 
 ---
 

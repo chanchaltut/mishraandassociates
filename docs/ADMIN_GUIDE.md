@@ -1,6 +1,6 @@
 # Managing your website — quick guide
 
-Sign in at **https://mishraandassociates.in/admin**.
+Sign in at **https://www.mishranassociates.com/admin**, or use **Team login** at the bottom of any page.
 
 ## The two buttons that matter
 

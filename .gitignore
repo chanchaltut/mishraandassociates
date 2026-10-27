@@ -8,3 +8,4 @@ CLAUDE.local.md
 client/src/generated/
 client/public/content-version.json
 server/.env
+dist-ssr

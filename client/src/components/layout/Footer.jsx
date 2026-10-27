@@ -130,6 +130,10 @@ export default function Footer() {
               {SITE.gstin && `GSTIN ${SITE.gstin}`}
             </p>
             <p>
+              <a href="/admin" rel="nofollow" className="underline underline-offset-2 hover:text-ink-900">
+                Team login
+              </a>
+              <span className="mx-2">·</span>
               Designed &amp; developed by{' '}
               <a href="https://codehyphen.in" target="_blank" rel="noopener noreferrer" className="font-semibold text-ink-900 underline underline-offset-2">
                 Code Hyphen

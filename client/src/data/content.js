@@ -159,7 +159,7 @@ export const FAQS_DEFAULT = [
   },
   {
     q: 'How can I contact Mishra and Associates?',
-    a: 'Call +91 11 6926 6597, WhatsApp +91 99116 81113, email contact@mishraandassociates.in, or use the enquiry form on our contact page. We respond to enquiries within one working day.',
+    a: 'Call +91 11 6926 6597, WhatsApp +91 99116 81113, email contact@mishranassociates.com, or use the enquiry form on our contact page. We respond to enquiries within one working day.',
   },
 ];
 

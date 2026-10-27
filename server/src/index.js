@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import mongoose from 'mongoose';
 import { config } from './config.js';
 import { createApp } from './app.js';
-import { User } from './models.js';
+import { Content, User } from './models.js';
 import { ensureContent } from './content.js';
 import { hashPassword, checkPasswordStrength } from './auth.js';
 
@@ -41,6 +41,35 @@ async function ensureOwner() {
   console.log(`[admin] owner account created for ${email}`);
 }
 
+// The first deployments imported a domain that isn't the firm's (mishraandassociates.in)
+// into the website address, contact email, FAQ text and alert recipients. Correct it
+// once, wherever it appears; content that never had it is left untouched.
+const WRONG_DOMAIN = [
+  ['https://mishraandassociates.in', 'https://www.mishranassociates.com'],
+  ['mishraandassociates.in', 'mishranassociates.com'],
+];
+
+async function migrateSiteAddress() {
+  const fixed = [];
+  for (const doc of await Content.find({})) {
+    let changed = false;
+    for (const field of ['draft', 'published']) {
+      if (doc[field] == null) continue;
+      const before = JSON.stringify(doc[field]);
+      const after = WRONG_DOMAIN.reduce((s, [from, to]) => s.split(from).join(to), before);
+      if (after !== before) {
+        doc[field] = JSON.parse(after);
+        changed = true;
+      }
+    }
+    if (!changed) continue;
+    doc.version += 1;
+    await doc.save();
+    fixed.push(doc.key);
+  }
+  if (fixed.length) console.log(`[content] corrected the website domain to mishranassociates.com in: ${fixed.join(', ')}`);
+}
+
 async function main() {
   mongoose.set('strictQuery', true);
   await mongoose.connect(config.mongoUri, { serverSelectionTimeoutMS: 15000 });
@@ -48,6 +77,7 @@ async function main() {
 
   const { buildDefaults } = await import('../../client/src/data/defaults.js');
   await ensureContent(buildDefaults());
+  await migrateSiteAddress();
   await ensureOwner();
 
   const app = createApp();

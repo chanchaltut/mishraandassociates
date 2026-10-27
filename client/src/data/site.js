@@ -19,8 +19,8 @@ export const SITE_DEFAULT = {
   description:
     'Mishra and Associates is a Delhi-based tax and compliance firm offering GST, income tax, TDS, audit, ROC and accounting services in India, and company registration in India, the USA, UAE, Singapore, Hong Kong, China and the UK.',
 
-  url: 'https://mishraandassociates.in',
-  domain: 'mishraandassociates.in',
+  url: 'https://www.mishranassociates.com',
+  domain: 'mishranassociates.com',
 
   phone: {
     display: '+91 11 6926 6597',
@@ -28,7 +28,7 @@ export const SITE_DEFAULT = {
   },
   whatsapp: '919911681113',
   whatsappDisplay: '+91 99116 81113',
-  email: 'contact@mishraandassociates.in',
+  email: 'contact@mishranassociates.com',
 
   address: {
     street: 'L1A/22A, Mohan Garden, Uttam Nagar',
