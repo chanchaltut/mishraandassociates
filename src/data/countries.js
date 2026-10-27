@@ -29,7 +29,7 @@ export const COUNTRIES_DEFAULT = [
     tagline: 'Private Limited, LLP or OPC — incorporated online through the MCA, with PAN, TAN and bank-ready documents.',
     intro:
       'India offers a fully online incorporation process through the Ministry of Corporate Affairs. We help you choose between a Private Limited Company, LLP and One Person Company, secure the name, prepare the charter documents and obtain the Certificate of Incorporation with PAN and TAN.',
-    startingPrice: '₹999 + Govt Fee',
+    startingPrice: '₹2,999 + Govt Fee',
     facts: [
       { label: 'Popular entity', value: 'Private Limited Company' },
       { label: 'Registrar', value: 'Ministry of Corporate Affairs (ROC)' },

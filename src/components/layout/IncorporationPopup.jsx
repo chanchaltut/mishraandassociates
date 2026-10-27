@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { COUNTRIES } from '../../data/countries';
-import { waLink } from '../../data/site';
+import { SITE, waLink } from '../../data/site';
 import { submitForm } from '../../lib/api';
 import { Flag } from '../ui';
 import Modal from '../ui/Modal';
@@ -87,9 +87,11 @@ export default function IncorporationPopup() {
           <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink-900">
             Private Limited, LLP or OPC in India — or a company in six international jurisdictions. Name approval, DSC, DIN, PAN and TAN, all handled for you.
           </p>
-          <p className="mt-6 font-serif text-[1.5rem] leading-none text-ink-900">
-            From ₹999 <span className="font-sans text-sm text-ink-800">+ govt fee</span>
-          </p>
+          {SITE.features?.incorporationPrice && (
+            <p className="mt-6 font-serif text-[1.5rem] leading-none text-ink-900">
+              {SITE.features.incorporationPrice} <span className="font-sans text-sm text-ink-800">+ govt fees</span>
+            </p>
+          )}
           <div className="mt-6 flex flex-wrap gap-1.5">
             {COUNTRIES.map((c) => (
               <span key={c.slug} className="flex items-center gap-1.5 rounded-full bg-white/70 px-2.5 py-1 text-xs font-medium text-ink-900">

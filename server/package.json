@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
+    "build": "echo \"No build step for the API\"",
     "dev": "node --watch --env-file-if-exists=.env src/index.js"
   },
   "dependencies": {

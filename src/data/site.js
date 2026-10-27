@@ -60,7 +60,7 @@ export const SITE_DEFAULT = {
   ogImage: '/og-image.jpg',
 
   announcement: { enabled: false, text: '', linkLabel: '', href: '', startsAt: '', endsAt: '' },
-  features: { ticker: true, floatingButtons: true, incorporationPopup: true },
+  features: { ticker: true, floatingButtons: true, incorporationPopup: true, incorporationPrice: '₹2,999' },
   footerDisclaimer:
     'Disclaimer: Information on this website is for general guidance only and does not constitute professional advice. Laws, rates and due dates change; please consult us before acting on any information. Government and statutory fees are charged at actuals.',
 };

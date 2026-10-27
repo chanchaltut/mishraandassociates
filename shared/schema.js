@@ -107,6 +107,7 @@ export const CONTENT = {
         ticker: toggle('“Latest updates” ticker at the top'),
         floatingButtons: toggle('Floating call & WhatsApp buttons'),
         incorporationPopup: toggle('Company-registration popup'),
+        incorporationPrice: text('Popup price', { max: 40, help: 'For example ₹2,999. “+ govt fees” is added after it. Leave blank to hide the price.' }),
       }),
       footerDisclaimer: textarea('Footer disclaimer', { max: 600 }),
       url: url('Website address', { required: true, help: 'Only change this if the domain changes.' }),

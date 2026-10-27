@@ -12,6 +12,7 @@
 - [GST Services](https://mishraandassociates.in/services?category=GST): Complete GST compliance — new registration, return filing, amendments, refunds and notices.
 - [Income Tax Return (ITR)](https://mishraandassociates.in/services?category=Income%20Tax): Accurate ITR filing for salaried individuals, businesses, professionals and NRIs, with tax planning.
 - [TDS Services](https://mishraandassociates.in/services?category=TDS): Quarterly TDS / TCS returns, Form 16 generation, lower-deduction certificates and notice resolution.
+- [Audit & Assurance](https://mishraandassociates.in/services?category=Audit): Tax audit, statutory audit of companies and LLPs, internal audit, and audits of NGOs, trusts and societies.
 - [Tax Litigation & Representation](https://mishraandassociates.in/services?category=Litigation): Appeals, scrutiny assessments, demand notices and tax dispute resolution before authorities.
 - [PF & ESIC](https://mishraandassociates.in/services?category=PF%20%2F%20ESIC): PF & ESIC registration, monthly challans, returns and employee compliance management.
 - [Trademark & IP](https://mishraandassociates.in/services?category=Trademark): Trademark registration, objection replies, copyright and design protection for your brand.
