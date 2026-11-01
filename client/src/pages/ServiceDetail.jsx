@@ -27,12 +27,14 @@ export default function ServiceDetail() {
   ].slice(0, 4);
   const faqs = SERVICE_FAQS[service.slug];
   const msg = `Hello ${SITE.name}, I need help with ${service.title}.`;
+  // "Starting from" only fits an amount; text such as "On Consultation" is shown as the fee itself
+  const fromPrice = /\d/.test(service.startingPrice || '');
 
   return (
     <>
       <Seo
         title={service.title}
-        description={`${service.shortDesc}${service.startingPrice ? ` Starting from ${service.startingPrice}.` : ''} Mishra and Associates, Delhi — serving clients across India.`}
+        description={`${service.shortDesc}${fromPrice ? ` Starting from ${service.startingPrice}.` : ''} Mishra and Associates, Delhi — serving clients across India.`}
         path={path}
         jsonLd={[
           breadcrumbLd(crumbs),
@@ -59,7 +61,7 @@ export default function ServiceDetail() {
           <div className="rounded-panel border border-ink-900 bg-white p-7">
             <dl className="grid grid-cols-2 gap-5">
               <div>
-                <dt className="label">{service.startingPrice ? 'Starting from' : 'Fee'}</dt>
+                <dt className="label">{fromPrice ? 'Starting from' : 'Fee'}</dt>
                 <dd className="mt-1 font-serif text-[1.75rem] leading-tight tracking-[-0.02em] text-ink-900">{service.startingPrice || 'On request'}</dd>
               </div>
               <div>

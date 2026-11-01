@@ -34,6 +34,21 @@ export const faqLd = (faqs) => ({
 export const clean = (obj) =>
   JSON.parse(JSON.stringify(obj, (_, val) => (isPlaceholder(val) ? undefined : val)));
 
+// Search results show about 60 characters of a title and 160 of a description.
+const TITLE_MAX = 60;
+const DESCRIPTION_MAX = 160;
+
+/** Cuts text at a word boundary so it fits in `max` characters, ending with "…". */
+function fitText(text, max) {
+  const s = String(text || '').replace(/\s+/g, ' ').trim();
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max - 1);
+  const space = cut.lastIndexOf(' ');
+  return `${(space > max * 0.6 ? cut.slice(0, space) : cut).replace(/[\s,;:.—–-]+$/, '')}…`;
+}
+
+const INDEX = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
 /**
  * Per-page SEO: title, description, canonical, Open Graph, Twitter and JSON-LD.
  * Site-wide Organization / WebSite schema lives in index.html.
@@ -43,10 +58,12 @@ export default function Seo(props) {
   // Admin → "Pages & SEO" can override the title, description and indexing of any page
   const page = pageOverride(path);
   const title = page?.title || props.title;
-  const description = page?.description || props.description || SITE.description;
+  const description = fitText(page?.description || props.description || SITE.description, DESCRIPTION_MAX);
   const noindex = Boolean(page?.noindex || props.noindex);
 
-  const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} — ${SITE.tagline}`;
+  // The firm's name is added when it fits; otherwise the page's own words get the space
+  const branded = title ? `${title} | ${SITE.name}` : `${SITE.name} — ${SITE.tagline}`;
+  const fullTitle = !title || branded.length <= TITLE_MAX ? branded : title;
   const url = absUrl(path);
   const share = image || SITE.ogImage || '/og-image.jpg';
   const img = share.startsWith('http') ? share : absUrl(share);
@@ -58,7 +75,7 @@ export default function Seo(props) {
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
-      {noindex && <meta name="robots" content="noindex, follow" />}
+      <meta name="robots" content={noindex ? 'noindex, follow' : INDEX} />
 
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content={SITE.name} />
