@@ -135,8 +135,8 @@ function PublishStatus() {
     building: 'Published. The website is rebuilding — this takes about 1–2 minutes…',
     live: 'Your changes are live on the website.',
     slow: 'The rebuild is taking longer than usual. Check the website in a few minutes; if it hasn’t changed, publish again.',
-    skipped: `Published, but the automatic rebuild isn’t set up: ${w.deploy?.message || ''}`,
-    failed: `Published, but the rebuild couldn’t be started: ${w.deploy?.message || ''}. Try publishing again.`,
+    skipped: 'Your changes are saved and published, but the website can’t update itself yet (automatic rebuild isn’t switched on). Please let your web developer know.',
+    failed: `Your changes are saved, but the website couldn’t start updating (${w.deploy?.message || 'unknown error'}). Use “Rebuild website” under “Publish history”, or publish again in a minute.`,
   }[w.state];
   return (
     <div className={`flex items-center gap-3 px-4 py-2.5 text-sm text-ink-900 sm:px-6 ${tone}`}>

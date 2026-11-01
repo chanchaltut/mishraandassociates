@@ -44,6 +44,13 @@ export const config = {
   indexNowKey: env.INDEXNOW_KEY ?? '859bc29ae386a5506ba71f1cf62f7275',
 };
 
+if (config.deployHookUrl && !/^https:\/\/api\.vercel\.com\/v1\/integrations\/deploy\//.test(config.deployHookUrl)) {
+  console.warn('[config] VERCEL_DEPLOY_HOOK_URL does not look like a Vercel deploy hook (https://api.vercel.com/v1/integrations/deploy/...).');
+}
+if (config.production && !config.deployHookUrl) {
+  console.warn('[config] VERCEL_DEPLOY_HOOK_URL is not set — publishing from the admin panel will NOT update the website.');
+}
+
 if (env.CLOUDINARY_URL && !config.cloudinary) {
   console.warn('[config] CLOUDINARY_URL is not in the form cloudinary://key:secret@cloud — uploads are disabled.');
 }

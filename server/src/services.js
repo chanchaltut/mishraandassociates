@@ -84,15 +84,26 @@ export async function triggerDeploy() {
   if (!config.deployHookUrl) {
     return { status: 'skipped', message: 'VERCEL_DEPLOY_HOOK_URL is not set — the site will update on its next deploy.' };
   }
-  try {
-    const res = await fetch(config.deployHookUrl, { method: 'POST', signal: AbortSignal.timeout(15000) });
-    if (!res.ok) throw new Error(`Vercel responded ${res.status}`);
-    scheduleIndexNow();
-    return { status: 'triggered', message: 'Rebuild started.' };
-  } catch (err) {
-    console.error('[deploy]', err.message);
-    return { status: 'failed', message: err.message };
+  // Retries cover brief network or Vercel hiccups so one blip never leaves the site stale
+  let lastError;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(config.deployHookUrl, { method: 'POST', signal: AbortSignal.timeout(15000) });
+      if (res.ok) {
+        scheduleIndexNow();
+        return { status: 'triggered', message: 'Rebuild started.' };
+      }
+      lastError = new Error(`Vercel responded ${res.status}`);
+      // 4xx means the hook URL itself is wrong or was deleted — retrying won't help
+      if (res.status >= 400 && res.status < 500 && res.status !== 429) break;
+    } catch (err) {
+      lastError = err;
+    }
+    console.warn(`[deploy] attempt ${attempt} failed: ${lastError.message}`);
+    if (attempt < 3) await new Promise((r) => setTimeout(r, attempt * 2000));
   }
+  console.error('[deploy]', lastError.message);
+  return { status: 'failed', message: lastError.message };
 }
 
 // ─── IndexNow ────────────────────────────────────────────────

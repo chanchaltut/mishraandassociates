@@ -10,7 +10,10 @@
 import fs from 'node:fs';
 import { validateSnapshot } from '../../shared/schema.js';
 
-const API = (process.env.CONTENT_API_URL || '').replace(/\/$/, '');
+// On Vercel the production API is the default, so a missing CONTENT_API_URL can
+// never quietly replace the published content with the built-in defaults.
+const PRODUCTION_API = 'https://mishraandassociates.onrender.com';
+const API = (process.env.CONTENT_API_URL || (process.env.VERCEL ? PRODUCTION_API : '')).replace(/\/$/, '');
 const soft = process.argv.includes('--soft');
 const OUT = new URL('../src/generated/snapshot.js', import.meta.url);
 const VERSION = new URL('../public/content-version.json', import.meta.url);
